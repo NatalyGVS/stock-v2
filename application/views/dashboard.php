@@ -10,7 +10,7 @@
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Inicio</a></li>
-        <li class="active">Dashboarddd</li>
+        <li class="active">Dashboard</li>
       </ol>
     </section>
 
@@ -81,23 +81,7 @@
           </div>
 
 
-          <!-- ./col -->
-     <!--      <div class="col-lg-3 col-xs-6">
-            
-            <div class="small-box bg-red">
-              <div class="inner">
-                <h3><?php echo $total_stores ?></h3>
-                  <p>
-                  <h2>Total de tiendas </h2>
-                   </p>
-              
-              </div>
-              <div class="icon">
-                <i class="ion ion-android-home"></i>
-              </div>
-              <a href="<?php echo base_url('stores/') ?>" class="small-box-footer">Mas info <i class="fa fa-arrow-circle-right"></i></a>
-            </div>
-          </div> -->
+  
 
 
 

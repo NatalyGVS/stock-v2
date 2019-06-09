@@ -11,6 +11,13 @@
           </a>
         </li>
 
+           <li id="mesasNav">
+              <a href="<?php echo base_url('mesas/') ?>">
+                <i class="fa fa-columns"></i> <span>Mesas</span>
+              </a>
+            </li>
+          
+
         <?php if($user_permission): ?>
           <?php if(in_array('createUser', $user_permission) || in_array('updateUser', $user_permission) || in_array('viewUser', $user_permission) || in_array('deleteUser', $user_permission)): ?>
             <li class="treeview" id="mainUserNav">
@@ -54,13 +61,7 @@
           <?php endif; ?>
 
 
-       <!--    <?php if(in_array('createBrand', $user_permission) || in_array('updateBrand', $user_permission) || in_array('viewBrand', $user_permission) || in_array('deleteBrand', $user_permission)): ?>
-            <li id="brandNav">
-              <a href="<?php echo base_url('brands/') ?>">
-                <i class="glyphicon glyphicon-tags"></i> <span>Las marcas</span>
-              </a>
-            </li>
-          <?php endif; ?> -->
+     
 
           <?php if(in_array('createCategory', $user_permission) || in_array('updateCategory', $user_permission) || in_array('viewCategory', $user_permission) || in_array('deleteCategory', $user_permission)): ?>
             <li id="categoryNav">

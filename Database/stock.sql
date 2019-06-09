@@ -1,6 +1,4 @@
--- phpMyAdmin SQL Dump
--- version 4.7.3
--- https://www.phpmyadmin.net/
+
 --
 -- Host: localhost:8889
 -- Generation Time: Feb 24, 2018 at 06:00 PM
@@ -13,58 +11,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `stock`
 --
-
--- --------------------------------------------------------
-
---
--- Table structure for table `attributes`
---
-
-CREATE TABLE `attributes` (
-  `id` int(11) NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `active` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `attribute_value`
---
-
-CREATE TABLE `attribute_value` (
-  `id` int(11) NOT NULL,
-  `value` varchar(255) NOT NULL,
-  `attribute_parent_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `attribute_value`
---
-
-INSERT INTO `attribute_value` (`id`, `value`, `attribute_parent_id`) VALUES
-(5, 'Blue', 2),
-(6, 'White', 2),
-(7, 'M', 3),
-(8, 'L', 3),
-(9, 'Green', 2),
-(10, 'Black', 2),
-(12, 'Grey', 2),
-(13, 'S', 3);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `brands`
---
-
-CREATE TABLE `brands` (
-  `id` int(11) NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `active` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
 
 --
 -- Table structure for table `categories`
@@ -182,16 +128,6 @@ CREATE TABLE `products` (
 
 -- --------------------------------------------------------
 
---
--- Table structure for table `stores`
---
-
-CREATE TABLE `stores` (
-  `id` int(11) NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `active` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
 -- --------------------------------------------------------
 
 --
@@ -240,29 +176,15 @@ INSERT INTO `user_group` (`id`, `user_id`, `group_id`) VALUES
 --
 
 --
--- Indexes for table `attributes`
---
-ALTER TABLE `attributes`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `attribute_value`
---
-ALTER TABLE `attribute_value`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `brands`
---
-ALTER TABLE `brands`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indexes for table `categories`
 --
 ALTER TABLE `categories`
   ADD PRIMARY KEY (`id`);
-
+--
+-- Indexes for table `mesas`
+--
+ALTER TABLE `mesas`
+  ADD PRIMARY KEY (`id`);
 --
 -- Indexes for table `company`
 --
@@ -293,11 +215,6 @@ ALTER TABLE `orders_item`
 ALTER TABLE `products`
   ADD PRIMARY KEY (`id`);
 
---
--- Indexes for table `stores`
---
-ALTER TABLE `stores`
-  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `users`
@@ -316,24 +233,15 @@ ALTER TABLE `user_group`
 --
 
 --
--- AUTO_INCREMENT for table `attributes`
---
-ALTER TABLE `attributes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
---
--- AUTO_INCREMENT for table `attribute_value`
---
-ALTER TABLE `attribute_value`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
---
--- AUTO_INCREMENT for table `brands`
---
-ALTER TABLE `brands`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
---
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+  --
+-- AUTO_INCREMENT for table `mesas`
+--
+ALTER TABLE `mesas`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `company`
@@ -361,10 +269,7 @@ ALTER TABLE `orders_item`
 ALTER TABLE `products`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
--- AUTO_INCREMENT for table `stores`
---
-ALTER TABLE `stores`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
 --
 -- AUTO_INCREMENT for table `users`
 --
@@ -377,7 +282,34 @@ ALTER TABLE `user_group`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
   
-  -- agregeueeeeeeeeeeeeeeeeeeeeee
+  -- agregeueeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `categories`
+--
+
+CREATE TABLE `mesas` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL
+  
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+-- Indexes for table `mesas`
+--
+ALTER TABLE `mesas`
+  ADD PRIMARY KEY (`id`);
+
+-- --------------------------------------------------------
+-- AUTO_INCREMENT for table `mesas`
+--
+ALTER TABLE `mesas`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+
+
+
 ALTER TABLE `products`
   DROP `attribute_value_id`,
   DROP `brand_id`,
@@ -393,9 +325,10 @@ ALTER TABLE `products`
 
   "DROP TABLE ` brands `";
   "DROP TABLE ` stores `";
-
   "ALTER TABLE `products` DROP `category_id`;"
    "ALTER TABLE `products` DROP `attribute_value_id`;"
    "ALTER TABLE `products` DROP `brand_id`;
+   
+
    
 ALTER TABLE `products` DROP `store_id`;
