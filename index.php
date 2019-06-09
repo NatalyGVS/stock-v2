@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-aagfhgf
-=======
 <?php
 /**
  * CodeIgniter
@@ -316,4 +313,3 @@ switch (ENVIRONMENT)
  * And away we go...
  */
 require_once BASEPATH.'core/CodeIgniter.php';
->>>>>>> bb185da5b09154172cba8bd556766c3e9585faa9
