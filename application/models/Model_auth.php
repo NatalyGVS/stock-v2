@@ -18,7 +18,6 @@ class Model_auth extends CI_Model
 			$result = $query->num_rows();
 			return ($result == 1) ? true : false;
 		}
-
 		return false;
 	}
 
@@ -40,8 +39,6 @@ class Model_auth extends CI_Model
 				else {
 					return false;
 				}
-
-				
 			}
 			else {
 				return false;

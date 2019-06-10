@@ -1,8 +1,7 @@
 <header class="main-header">
     <!-- Logo -->
-    <a href="index2.html" class="logo">
+    <a class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini"><b>ADN</b></span>
       <!-- logo for regular state and mobile devices -->
       <span class="logo-lg"><b>La Reserva</b></span>
     </a>
@@ -12,7 +11,6 @@
       <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
         <span class="sr-only">Menu navegacion</span>
       </a>
-
     </nav>
 </header>
   <!-- Left side column. contains the logo and sidebar -->

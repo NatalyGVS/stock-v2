@@ -2,11 +2,9 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Auth extends Admin_Controller 
-{
+class Auth extends Admin_Controller {
 
-	public function __construct()
-	{
+	public function __construct(){
 		parent::__construct();
 
 		$this->load->model('model_auth');
@@ -16,8 +14,7 @@ class Auth extends Admin_Controller
 		Check if the login form is submitted, and validates the user credential
 		If not submitted it redirects to the login page
 	*/
-	public function login()
-	{
+	public function login(){
 
 		$this->logged_in();
 
@@ -44,12 +41,12 @@ class Auth extends Admin_Controller
            			redirect('dashboard', 'refresh');
            		}
            		else {
-           			$this->data['errors'] = 'Incorrect username/password combination';
+           			$this->data['errors'] = 'El email o la contraseña son incorrectos';
            			$this->load->view('login', $this->data);
            		}
            	}
            	else {
-           		$this->data['errors'] = 'Email does not exists';
+           		$this->data['errors'] = 'El email no existe.';
 
            		$this->load->view('login', $this->data);
            	}	

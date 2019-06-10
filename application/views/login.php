@@ -30,14 +30,14 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 
 </head>
-<body class="hold-transition login-page">
+<body class="hold-transition">
 <div class="login-box">
   <div class="login-logo">
-    <a href="<?php echo base_url('auth'); ?>"><b>La Reserva</b></a>
+    <b>La Reserva</b>
   </div>
   <!-- /.login-logo -->
   <div class="login-box-body">
-    <p class="login-box-msg">Logueate para iniciar tu sesión.</p>
+    <p class="login-box-msg">Bienvenido.</p>
 
     <?php echo validation_errors(); ?>  
 
@@ -47,11 +47,11 @@
 
     <form action="<?php echo base_url('auth/login') ?>" method="post">
       <div class="form-group has-feedback">
-        <input type="email" class="form-control" name="email" id="email" placeholder="admin@admin.com" value="admin@admin.com" autocomplete="off">
+        <input type="email" class="form-control" name="email" id="email" placeholder="admin@admin.com" required autocomplete="off">
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
-        <input type="password" class="form-control" name="password" id="password" placeholder="password" value="password" autocomplete="off">
+        <input type="password" class="form-control" name="password" id="password" placeholder="password" required autocomplete="off">
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
       </div>
       <div class="row">
@@ -65,7 +65,7 @@
         </div>
         <!-- /.col -->
         <div class="col-xs-4">
-          <button type="submit" class="btn btn-primary btn-block btn-flat">Ingresar</button>
+          <button type="submit" class="btn btn-primary btn-block btn-flat">Iniciar sesión</button>
 
 
 

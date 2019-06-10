@@ -11,12 +11,13 @@
           </a>
         </li>
 
-           <li id="mesasNav">
+           <?php if(in_array('createMesas', $user_permission) || in_array('updateMesas', $user_permission) || in_array('viewCategory', $user_permission) || in_array('deleteMesas', $user_permission)): ?>
+            <li id="mesasNav">
               <a href="<?php echo base_url('mesas/') ?>">
                 <i class="fa fa-columns"></i> <span>Mesas</span>
               </a>
             </li>
-          
+          <?php endif;?>
 
         <?php if($user_permission): ?>
           <?php if(in_array('createUser', $user_permission) || in_array('updateUser', $user_permission) || in_array('viewUser', $user_permission) || in_array('deleteUser', $user_permission)): ?>

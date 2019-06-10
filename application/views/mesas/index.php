@@ -69,7 +69,7 @@
 </div>
 <!-- /.content-wrapper -->
 
-<?php if(in_array('createMesas', $user_permission)): ?>
+<!--<?php if(in_array('createMesas', $user_permission)): ?>-->
 <!-- create brand modal -->
 <div class="modal fade" tabindex="-1" role="dialog" id="addModal">
   <div class="modal-dialog" role="document">
@@ -101,9 +101,9 @@
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
-<?php endif; ?>
+<!--<?php endif; ?>-->
 
-<?php if(in_array('updateMesas', $user_permission)): ?>
+<!--<?php if(in_array('updateMesas', $user_permission)): ?>-->
 <!-- edit brand modal -->
 <div class="modal fade" tabindex="-1" role="dialog" id="editModal">
   <div class="modal-dialog" role="document">
@@ -134,9 +134,9 @@
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
-<?php endif; ?>
+<!--<?php endif; ?>-->
 
-<?php if(in_array('deleteMesas', $user_permission)): ?>
+<!--<?php if(in_array('deleteMesas', $user_permission)): ?>-->
 <!-- remove brand modal -->
 <div class="modal fade" tabindex="-1" role="dialog" id="removeModal">
   <div class="modal-dialog" role="document">
@@ -160,7 +160,7 @@
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
-<?php endif; ?>
+<!-- <?php endif; ?> -->
 
 
 <script type="text/javascript">

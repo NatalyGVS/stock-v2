@@ -67,11 +67,11 @@ modelo de mesas y devuelve los datos en formato json.
 			}
 				
 
-			// $status = ($value['active'] == 1) ? '<span class="label label-success">Active</span>' : '<span class="label label-warning">Inactive</span>';
+			$status = ($value['active'] == 1) ? '<span class="label label-success">Active</span>' : '<span class="label label-warning">Inactive</span>';
 
 			$result['data'][$key] = array(
 				$value['name'],
-				// $status,////////////////////////////////////////////////////////////////////////////////////////
+				$status,
 				$buttons
 			);
 		} // /foreach
@@ -100,7 +100,6 @@ correctamente, inserta los datos en la base de datos y devuelve los mensajes de
         if ($this->form_validation->run() == TRUE) {
         	$data = array(
         		'name' => $this->input->post('mesas_name')
-        		// 'active' => $this->input->post('active'),	
         	);
 
         	$create = $this->model_mesas->create($data);
@@ -118,7 +117,7 @@ correctamente, inserta los datos en la base de datos y devuelve los mensajes de
         	foreach ($_POST as $key => $value) {
         		$response['messages'][$key] = form_error($key);
         	}
-        }
+        }	
 
         echo json_encode($response);
 	}

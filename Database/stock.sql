@@ -181,10 +181,7 @@ INSERT INTO `user_group` (`id`, `user_id`, `group_id`) VALUES
 ALTER TABLE `categories`
   ADD PRIMARY KEY (`id`);
 --
--- Indexes for table `mesas`
---
-ALTER TABLE `mesas`
-  ADD PRIMARY KEY (`id`);
+
 --
 -- Indexes for table `company`
 --
@@ -238,11 +235,7 @@ ALTER TABLE `user_group`
 ALTER TABLE `categories`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
-  --
--- AUTO_INCREMENT for table `mesas`
---
-ALTER TABLE `mesas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+ 
 --
 -- AUTO_INCREMENT for table `company`
 --
@@ -301,34 +294,9 @@ CREATE TABLE `mesas` (
 ALTER TABLE `mesas`
   ADD PRIMARY KEY (`id`);
 
+-- Indexes for table `mesas`
 -- --------------------------------------------------------
 -- AUTO_INCREMENT for table `mesas`
 --
 ALTER TABLE `mesas`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
-
-
-
-ALTER TABLE `products`
-  DROP `attribute_value_id`,
-  DROP `brand_id`,
-  DROP `store_id`;
-
-
-  ALTER TABLE `products`
-  DROP `attribute_value_id`,
-  DROP `brand_id`,
-  DROP `store_id`;
-  "DROP TABLE ` attribute `";  -- creooooooooooooo xd 
-  "DROP TABLE ` attribute_value `";
-
-  "DROP TABLE ` brands `";
-  "DROP TABLE ` stores `";
-  "ALTER TABLE `products` DROP `category_id`;"
-   "ALTER TABLE `products` DROP `attribute_value_id`;"
-   "ALTER TABLE `products` DROP `brand_id`;
-   
-
-   
-ALTER TABLE `products` DROP `store_id`;
