@@ -27,7 +27,7 @@
                 <h3><?php echo $total_products ?></h3>
 
                 <p>
-                  <h2>Productos totales </h2>
+                  <h2>Productos totales</h2>
                 
               </p>
               </div>
@@ -47,7 +47,7 @@
               <div class="inner">
                 <h3><?php echo $total_paid_orders ?></h3>
                 <p>
-                  <h2>Total de órdenes pagadas </h2>
+                  <h2>Total de órdenes pagadas</h2>
                 
               </p>
               
