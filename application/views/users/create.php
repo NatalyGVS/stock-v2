@@ -40,7 +40,8 @@
 
                 <?php echo validation_errors(); ?>
 
-                <div class="form-group">
+                <div class="row">
+                <div class="form-group col-xs-4">
                   <label for="groups">Los grupos</label>
                   <select class="form-control" id="groups" name="groups">
                     <option value="">Seleccionar grupos</option>
@@ -49,40 +50,46 @@
                     <?php endforeach ?>
                   </select>
                 </div>
+              </div>
 
-                <div class="form-group">
+              <div class="row">
+                  <div class="form-group col-xs-4">
+                    <label for="fname">Nombre </label>
+                    <input type="text" class="form-control" id="fname" name="fname" placeholder="Nombre " required>
+                  </div>
+
+                  <div class="form-group col-xs-3">
+                    <label for="lname">Apellido</label>
+                    <input type="text" class="form-control" id="lname" name="lname" placeholder="Apellido" required>
+                  </div>
+
+                  <div class="form-group col-xs-3">
                   <label for="username">Nombre de usuario</label>
-                  <input type="text" class="form-control" id="username" name="username" placeholder="Nombre de usuario" autocomplete="off">
+                  <input type="text" class="form-control" id="username" name="username" placeholder="Nombre de usuario" required>
+                </div>
                 </div>
 
-                <div class="form-group">
-                  <label for="email">Email</label>
-                  <input type="email" class="form-control" id="email" name="email" placeholder="Email" autocomplete="off">
+              <div class="row">
+                  <div class="form-group col-xs-4">
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control" id="email" name="email" placeholder="Email" required>
+                  </div>
+
+                  <div class="form-group col-xs-3" >
+                    <label for="password">Password</label>
+                    <input type="text" class="form-control" id="password" name="password" placeholder="Password" required>
+                  </div>
+
+                  <div class="form-group col-xs-3">
+                    <label for="cpassword">Confirme password</label>
+                    <input type="password" class="form-control" id="cpassword" name="cpassword" placeholder="Confirme Password" required>
+                  </div>
                 </div>
 
-                <div class="form-group">
-                  <label for="password">Password</label>
-                  <input type="text" class="form-control" id="password" name="password" placeholder="Password" autocomplete="off">
-                </div>
-
-                <div class="form-group">
-                  <label for="cpassword">Confirme password</label>
-                  <input type="password" class="form-control" id="cpassword" name="cpassword" placeholder="Confirme Password" autocomplete="off">
-                </div>
-
-                <div class="form-group">
-                  <label for="fname">Nombre </label>
-                  <input type="text" class="form-control" id="fname" name="fname" placeholder="Nombre " autocomplete="off">
-                </div>
-
-                <div class="form-group">
-                  <label for="lname">Apellido</label>
-                  <input type="text" class="form-control" id="lname" name="lname" placeholder="Apellido" autocomplete="off">
-                </div>
-
-                <div class="form-group">
+                <div class="row">
+                  <div class="form-group col-xs-3">
                   <label for="phone">Teléfono</label>
-                  <input type="text" class="form-control" id="phone" name="phone" placeholder="Teléfono" autocomplete="off">
+                  <input type="text" class="form-control" id="phone" name="phone" placeholder="Teléfono" required>
                 </div>
 
                 <div class="form-group">
@@ -97,6 +104,7 @@
                      Femenino
                     </label>
                   </div>
+                </div>
                 </div>
 
               </div>

@@ -30,48 +30,48 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 
 </head>
-<body class="hold-transition">
-<div class="login-box">
-  <div class="login-logo">
-    <b>La Reserva</b>
-  </div>
+<body style=
+	   "background:url('/stock-v2/assets/images/background_image/background.jpg'); 
+		background-position: center;
+  		background-repeat: no-repeat;
+  		background-size: cover;">
+<div style=
+	   "width: 40%;
+	   	position: absolute; 
+		top: 25%; 
+		left: 30%; 
+		margin: 0px 0 0 0px;">
+  
   <!-- /.login-logo -->
-  <div class="login-box-body">
-    <p class="login-box-msg">Bienvenido.</p>
+  <div style="color:#ffffff; background-color: #ffffff; position: relative;" align="center">
+    <p class="login-logo" style="background-color: #000000; opacity: .9"><b>La Reserva</b></p>
 
     <?php echo validation_errors(); ?>  
-
     <?php if(!empty($errors)) {
       echo $errors;
     } ?>
-
-    <form action="<?php echo base_url('auth/login') ?>" method="post">
-      <div class="form-group has-feedback">
-        <input type="email" class="form-control" name="email" id="email" placeholder="admin@admin.com" required autocomplete="off">
+    <form action="<?php echo base_url('auth/login') ?>" method="post" style="opacity: 1; width: 80%;">
+     <div class="login-box-body" >
+     	<b>Bienvenido, ingresa con tu cuenta!</b>
+ <div class="form-group has-feedback">
+        <input type="email" class="form-control" name="email" id="email" placeholder="ejemplo@gmail.com" required>
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
-        <input type="password" class="form-control" name="password" id="password" placeholder="password" required autocomplete="off">
+        <input type="password" class="form-control" name="password" id="password" placeholder="password" required>
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
       </div>
       <div class="row">
-        <div class="col-xs-6">
-          <div class="checkbox icheck">
-            <label>
-              <input type="checkbox"> Recuérdame
-
-            </label>
-          </div>
-        </div>
         <!-- /.col -->
-        <div class="col-xs-6">
+        <div class="col-xs-6" style=
+	   "width: 100%;
+	   	position: relative; 
+		margin: 0px 0 0 0px;">
           <button type="submit" class="btn btn-primary btn-block btn-flat">Iniciar sesión</button>
-
-
-
         </div>
         <!-- /.col -->
       </div>
+     </div>
     </form>
 
   </div>

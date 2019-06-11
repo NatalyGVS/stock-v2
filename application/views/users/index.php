@@ -109,8 +109,11 @@
 
   <script type="text/javascript">
     $(document).ready(function() {
-      $('#userTable').DataTable();
-
+      $('#userTable').DataTable({
+        "language": {
+            "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+        }
+      });
       $("#mainUserNav").addClass('active');
       $("#manageUserNav").addClass('active');
     });

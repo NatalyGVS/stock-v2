@@ -90,7 +90,11 @@
 
   <script type="text/javascript">
     $(document).ready(function() {
-      $('#groupTable').DataTable();
+      $('#groupTable').DataTable({
+        "language": {
+            "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+        }
+      });
 
       $("#mainGroupNav").addClass('active');
       $("#manageGroupNav").addClass('active');
