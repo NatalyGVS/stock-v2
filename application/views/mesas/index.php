@@ -45,8 +45,8 @@
             <table id="manageTable" class="table table-bordered table-striped">
               <thead>
               <tr>
-                <th>Identificador de la Mesa</th>
-                
+                <th>Nombre de la Mesa</th>
+                <th>Estado</th>
                 <!--<?php //if(in_array('updateMesas', $user_permission) || in_array('deleteMesas', $user_permission)): ?>-->
                   <th>Action</th>
                 <!--<?php //endif; ?>-->
@@ -87,6 +87,14 @@
             <label for="brand_name">Nombre de la mesa</label>
             <input type="text" class="form-control" id="mesas_name" name="mesas_name" placeholder="Escribe el nombre de la mesa" autocomplete="off">
           </div>
+
+          <div class="form-group">
+            <label for="active">Estado</label>
+            <select class="form-control" id="active" name="active">
+              <option value="1">Activo</option>
+              <option value="2">Inactivo</option>
+            </select>
+          </div>
           
         </div>
 
@@ -122,7 +130,14 @@
             <label for="edit_brand_name">Nombre de la Mesa</label>
             <input type="text" class="form-control" id="edit_mesas_name" name="edit_mesas_name" placeholder="Enter mesa name" autocomplete="off">
           </div>
-          
+
+          <div class="form-group">
+            <label for="edit_active">Estado</label>
+            <select class="form-control" id="edit_active" name="edit_active">
+              <option value="1">Activo</option>
+              <option value="2">Inactivo</option>
+            </select>
+          </div>
         </div>
 
         <div class="modal-footer">

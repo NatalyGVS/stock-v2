@@ -60,8 +60,9 @@
       <?php echo validation_errors(); ?>  
     <?php if(!empty($errors)) {
       //header("Location:login");
-      echo $errors;
-    } ?>  <i class="ion ion-android-alert"></i> 
+      echo $errors; 
+      echo '<i class="ion ion-android-alert"></i>';
+    } ?>  
     </p>
       <div class="row">
         <!-- /.col -->

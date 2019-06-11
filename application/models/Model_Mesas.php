@@ -7,8 +7,14 @@ class Model_mesas extends CI_Model
 		parent::__construct();
 	}
 
-	
 	/* get datos de mesas */
+	public function getActiveCategroy()
+	{
+		$sql = "SELECT * FROM mesas WHERE active = ?";
+		$query = $this->db->query($sql, array(1));
+		return $query->result_array();
+	}
+
 	public function getMesasData($id = null)
 	{
 		if($id) {

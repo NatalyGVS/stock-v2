@@ -59,13 +59,13 @@ modelo de mesas y devuelve los datos en formato json.
 			// button
 			$buttons = '';
 
-			if(in_array('updateMesas', $this->permission)) {
+			//if(in_array('updateMesas', $this->permission)) {
 				$buttons .= '<button type="button" class="btn btn-default" onclick="editFunc('.$value['id'].')" data-toggle="modal" data-target="#editModal"><i class="fa fa-pencil"></i></button>';
-			}
+			//}
 
-			if(in_array('deleteMesas', $this->permission)) {
+			//if(in_array('deleteMesas', $this->permission)) {
 				$buttons .= ' <button type="button" class="btn btn-default" onclick="removeFunc('.$value['id'].')" data-toggle="modal" data-target="#removeModal"><i class="fa fa-trash"></i></button>';
-			}
+			//}
 				
 
 			$status = ($value['active'] == 1) ? '<span class="label label-success">Active</span>' : '<span class="label label-warning">Inactive</span>';
@@ -87,20 +87,21 @@ correctamente, inserta los datos en la base de datos y devuelve los mensajes de
 	*/
 	public function create()
 	{
-		if(!in_array('createMesas', $this->permission)) {
+		/*if(!in_array('createMesas', $this->permission)) {
 			redirect('dashboard', 'refresh');
-		}
+		}*/
 
 		$response = array();
      /////////////////////////////////////////////////////////////////////////////////////////
 		$this->form_validation->set_rules('mesas_name', 'Mesas name', 'trim|required');
-		// $this->form_validation->set_rules('active', 'Active', 'trim|required');
+		$this->form_validation->set_rules('active', 'Active', 'trim|required');
 
 		$this->form_validation->set_error_delimiters('<p class="text-danger">','</p>');
 
         if ($this->form_validation->run() == TRUE) {
         	$data = array(
-        		'name' => $this->input->post('mesas_name')
+        		'name' => $this->input->post('mesas_name'),
+        		'active' => $this->input->post('active')
         	);
 
         	$create = $this->model_mesas->create($data);
@@ -131,9 +132,9 @@ Comprueba la validación del formulario de mesas y si la validación se realiza
 	public function update($id)
 	{
 
-		if(!in_array('updateMesas', $this->permission)) {
+		/*if(!in_array('updateMesas', $this->permission)) {
 			redirect('dashboard', 'refresh');
-		}
+		}*/
 
 		$response = array();
 
@@ -180,9 +181,9 @@ los mensajes de operación de formato json
 	*/
 	public function remove()
 	{
-		if(!in_array('deleteMesas', $this->permission)) {
+		/*if(!in_array('deleteMesas', $this->permission)) {
 			redirect('dashboard', 'refresh');
-		}
+		}*/
 		
 		$mesas_id = $this->input->post('mesas_id');
 

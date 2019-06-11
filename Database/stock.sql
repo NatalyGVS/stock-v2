@@ -284,7 +284,8 @@ ALTER TABLE `user_group`
 
 CREATE TABLE `mesas` (
   `id` int(11) NOT NULL,
-  `name` varchar(255) NOT NULL
+  `name` varchar(255) NOT NULL,
+  `active` int(11)
   
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
