@@ -22,9 +22,9 @@ class Mesas extends Admin_Controller
 	public function index()
 	{
 
-		//if(!in_array('viewMesas', $this->permission)) {
-			//redirect('dashboard', 'refresh');
-		//}
+			/*if(!in_array('viewMesas', $this->permission)) {
+			redirect('dashboard', 'refresh');
+		}*/
 
 		$this->render_template('mesas/index', $this->data);	
 	}	

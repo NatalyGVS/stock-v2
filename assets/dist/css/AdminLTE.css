@@ -5066,6 +5066,7 @@ table.text-center th {
 .description-block > .description-text {
   text-transform: uppercase;
 }
+
 .bg-red,
 .bg-yellow,
 .bg-aqua,
@@ -5131,6 +5132,7 @@ table.text-center th {
   color: #000;
   background-color: #d2d6de !important;
 }
+
 .bg-gray-light {
   background-color: #f7f7f7;
 }

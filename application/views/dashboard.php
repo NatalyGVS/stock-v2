@@ -1,6 +1,9 @@
 
   <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
+  <div class="content-wrapper" style=
+     "background:url('/stock-v2/assets/images/background_image/bg.jpg'); 
+    background-position: center;
+      background-repeat: repeat;">
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
@@ -134,7 +137,7 @@
           <div class="col-lg-4 col-xs-6">
           	<a href="<?php echo base_url('reports/') ?>" class="small-box-footer"> 
             <!-- small box -->
-            <div class="small-box bg-navy">
+            <div class="small-box bg-black">
               <div class="inner">
                 <h3>20%</h3>
                  <p>
