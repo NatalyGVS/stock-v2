@@ -41,7 +41,7 @@
                 <?php echo validation_errors(); ?>
 
                 <div class="row">
-                <div class="form-group col-xs-4">
+                <div class="form-group col-lg-4 col-xs-4">
                   <label for="groups">Los grupos</label>
                   <select class="form-control" id="groups" name="groups">
                     <option value="">Seleccionar grupos</option>
@@ -58,7 +58,7 @@
                     <input type="text" class="form-control" id="fname" name="fname" placeholder="Nombre " required>
                   </div>
 
-                  <div class="form-group col-xs-3">
+                  <div class="form-group col-xs-3 ">
                     <label for="lname">Apellido</label>
                     <input type="text" class="form-control" id="lname" name="lname" placeholder="Apellido" required>
                   </div>
@@ -77,7 +77,7 @@
 
                   <div class="form-group col-xs-3" >
                     <label for="password">Password</label>
-                    <input type="text" class="form-control" id="password" name="password" placeholder="Password" required>
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
                   </div>
 
                   <div class="form-group col-xs-3">
@@ -87,22 +87,27 @@
                 </div>
 
                 <div class="row">
-                  <div class="form-group col-xs-3">
+                  <div class="form-group col-xs-2">
                   <label for="phone">Teléfono</label>
                   <input type="text" class="form-control" id="phone" name="phone" placeholder="Teléfono" required>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group col-xs-4">
                   <label for="gender">Género</label>
                   <div class="radio">
-                    <label>
+                    <div class= "col-xs-3">
+                      <label>
                       <input type="radio" name="gender" id="male" value="1">
                       Masculino
                     </label>
+                  </div>
+                  <div class= "col-xs-3">
                     <label>
                       <input type="radio" name="gender" id="female" value="2">
                      Femenino
                     </label>
+                    </div>
+                    
                   </div>
                 </div>
                 </div>

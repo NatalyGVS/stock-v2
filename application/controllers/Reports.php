@@ -9,6 +9,7 @@ class Reports extends Admin_Controller
 		parent::__construct();
 		$this->data['page_title'] = 'Stores';
 		$this->load->model('model_reports');
+		$this->load->model('model_users');
 	}
 
 	/* 

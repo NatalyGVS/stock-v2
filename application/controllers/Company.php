@@ -13,6 +13,7 @@ class Company extends Admin_Controller
 		$this->data['page_title'] = 'Company';
 
 		$this->load->model('model_company');
+        $this->load->model('model_users');
 	}
 
     /* 

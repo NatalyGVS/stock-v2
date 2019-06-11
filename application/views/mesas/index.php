@@ -31,10 +31,10 @@
           </div>
         <?php endif; ?>
 
-        <?php if(in_array('createMesas', $user_permission)): ?>
+        <!-- <?php //if(in_array('createMesas', $user_permission)): ?> -->
           <button class="btn btn-primary" data-toggle="modal" data-target="#addModal">Añadir Mesa</button>
           <br /> <br />
-        <?php endif; ?>
+        <!-- ?php endif; ?> -->
 
         <div class="box">
           <div class="box-header">
@@ -47,9 +47,9 @@
               <tr>
                 <th>Identificador de la Mesa</th>
                 
-                <?php if(in_array('updateMesas', $user_permission) || in_array('deleteMesas', $user_permission)): ?>
+                <!--<?php //if(in_array('updateMesas', $user_permission) || in_array('deleteMesas', $user_permission)): ?>-->
                   <th>Action</th>
-                <?php endif; ?>
+                <!--<?php //endif; ?>-->
               </tr>
               </thead>
 
@@ -69,7 +69,7 @@
 </div>
 <!-- /.content-wrapper -->
 
-<!--<?php if(in_array('createMesas', $user_permission)): ?>-->
+<!--<?php //if(in_array('createMesas', $user_permission)): ?>-->
 <!-- create brand modal -->
 <div class="modal fade" tabindex="-1" role="dialog" id="addModal">
   <div class="modal-dialog" role="document">
@@ -101,9 +101,9 @@
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
-<!--<?php endif; ?>-->
+<!--<?php //endif; ?>-->
 
-<!--<?php if(in_array('updateMesas', $user_permission)): ?>-->
+<!--<?php //if(in_array('updateMesas', $user_permission)): ?>-->
 <!-- edit brand modal -->
 <div class="modal fade" tabindex="-1" role="dialog" id="editModal">
   <div class="modal-dialog" role="document">
@@ -134,9 +134,9 @@
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
-<!--<?php endif; ?>-->
+<!--<?php //endif; ?>-->
 
-<!--<?php if(in_array('deleteMesas', $user_permission)): ?>-->
+<!--<?php //if(in_array('deleteMesas', $user_permission)): ?>-->
 <!-- remove brand modal -->
 <div class="modal fade" tabindex="-1" role="dialog" id="removeModal">
   <div class="modal-dialog" role="document">
@@ -160,7 +160,7 @@
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
-<!-- <?php endif; ?> -->
+<!-- <?php //endif; ?> -->
 
 
 <script type="text/javascript">
@@ -172,7 +172,10 @@ $(document).ready(function() {
   // initialize the datatable  /////////////////////////////////////////////////////////////////////////////////////////////////////////////
   manageTable = $('#manageTable').DataTable({
     'ajax': 'fetchMesasData',
-    'order': []
+    'order': [],
+    "language": {
+            "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+    }
   });
 
   // submit the create from 

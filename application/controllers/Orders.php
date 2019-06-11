@@ -15,6 +15,7 @@ class Orders extends Admin_Controller
 		$this->load->model('model_orders');
 		$this->load->model('model_products');
 		$this->load->model('model_company');
+		$this->load->model('model_users');
 	}
 
 	/* 

@@ -21,26 +21,29 @@
         <div class="row">
           <div class="col-lg-4 col-xs-6">
             <!-- small box -->
-            <div class="small-box bg-aqua">  <!-- color celeste -->
+            <a href="<?php echo base_url('products/') ?>" class="small-box-footer"> 
+            <div class="small-box bg-aqua">
+            	
+              <!-- color celeste -->
               <div class="inner">  <!-- como centrarlo  -->
                 <h3><?php echo $total_products ?></h3>
-
-                <p>
                   <h2>Productos totales</h2>
-                
-              </p>
+
               </div>
               <div class="icon">
                 <i class="ion ion-bag"></i>   <!-- icono -->
               </div>
-              <a href="<?php echo base_url('products/') ?>" class="small-box-footer">Mas info <i class="fa fa-arrow-circle-right"></i></a>
+               <label class="small-box-footer">Más información <i class="fa fa-arrow-circle-right"></i></label>
+          
             </div>
+            </a>
           </div>
 
 
 
           <!-- ./col -->
           <div class="col-lg-4 col-xs-6">
+          	<a href="<?php echo base_url('orders/') ?>" class="small-box-footer"> 
             <!-- small box -->
             <div class="small-box bg-green">
               <div class="inner">
@@ -54,8 +57,9 @@
               <div class="icon">
                 <i class="ion ion-stats-bars"></i>
               </div>
-              <a href="<?php echo base_url('orders/') ?>" class="small-box-footer">Mas info <i class="fa fa-arrow-circle-right"></i></a>
+              <label class="small-box-footer">Más información <i class="fa fa-arrow-circle-right"></i></label>
             </div>
+        </a>
           </div>
 
 
@@ -63,6 +67,7 @@
 
           <!-- ./col -->
           <div class="col-lg-4 col-xs-6">
+          	<a href="<?php echo base_url('users/') ?>" class="small-box-footer"> 
             <!-- small box -->
             <div class="small-box bg-yellow">
               <div class="inner">
@@ -75,18 +80,81 @@
               <div class="icon">
                 <i class="ion ion-android-people"></i>
               </div>
-              <a href="<?php echo base_url('users/') ?>" class="small-box-footer">Mas info <i class="fa fa-arrow-circle-right"></i></a>
+              <label class="small-box-footer">Más información <i class="fa fa-arrow-circle-right"></i></label>
             </div>
+        </a>
           </div>
 
+          <!-- ./col -->
 
-  
+          <!-- ./col -->
+          <div class="col-lg-4 col-xs-6">
+          	<a href="<?php echo base_url('mesas/') ?>" class="small-box-footer"> 
+            <!-- small box -->
+            <div class="small-box bg-red">
+              <div class="inner">
+                <h3><?php echo $total_users; ?></h3>
+                 <p>
+                  <h2>Mesas disponibles</h2>
+                 </p>
+              
+              </div>
+              <div class="icon">
+                <i class="ion ion-android-apps"></i>
+              </div>
+              <label class="small-box-footer">Más información <i class="fa fa-arrow-circle-right"></i></label>
+            </div>
+        </a>
+          </div>
 
+          <!-- ./col -->
 
+          <!-- ./col -->
+          <div class="col-lg-4 col-xs-6">
+          	<a href="<?php echo base_url('category/') ?>" class="small-box-footer"> 
+            <!-- small box -->
+            <div class="small-box bg-primary">
+              <div class="inner">
+                <h3><?php echo $total_users; ?></h3>
+                 <p>
+                  <h2>Categorías</h2>
+                 </p>
+              
+              </div>
+              <div class="icon">
+                <i class="ion ion-android-bookmark"></i>
+              </div>
+              <label class="small-box-footer">Más información <i class="fa fa-arrow-circle-right"></i></label>
+            </div>
+        </a>
+          </div>
+
+          <!-- ./col -->
+
+          <div class="col-lg-4 col-xs-6">
+          	<a href="<?php echo base_url('reports/') ?>" class="small-box-footer"> 
+            <!-- small box -->
+            <div class="small-box bg-navy">
+              <div class="inner">
+                <h3>20%</h3>
+                 <p>
+                  <h2>Estadísticas</h2>
+                 </p>
+              
+              </div>
+              <div class="icon">
+                <i class="ion ion-stats-bars"></i>
+              </div>
+              <label class="small-box-footer">Más información <i class="fa fa-arrow-circle-right"></i></label>
+            </div>
+        </a>
+          </div>
 
           <!-- ./col -->
         </div>
         <!-- /.row -->
+      <?php else: ?>
+        
       <?php endif; ?>
       
 

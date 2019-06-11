@@ -15,6 +15,7 @@ class Products extends Admin_Controller
 		$this->load->model('model_products');
 		// $this->load->model('model_brands');
 		$this->load->model('model_category');
+        $this->load->model('model_users');
 		// $this->load->model('model_stores');
 		// $this->load->model('model_attributes');
 	}

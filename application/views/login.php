@@ -45,11 +45,6 @@
   <!-- /.login-logo -->
   <div style="color:#ffffff; background-color: #ffffff; position: relative;" align="center">
     <p class="login-logo" style="background-color: #000000; opacity: .9"><b>La Reserva</b></p>
-
-    <?php echo validation_errors(); ?>  
-    <?php if(!empty($errors)) {
-      echo $errors;
-    } ?>
     <form action="<?php echo base_url('auth/login') ?>" method="post" style="opacity: 1; width: 80%;">
      <div class="login-box-body" >
      	<b>Bienvenido, ingresa con tu cuenta!</b>
@@ -61,6 +56,13 @@
         <input type="password" class="form-control" name="password" id="password" placeholder="password" required>
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
       </div>
+      <p style="color:#000000;">
+      <?php echo validation_errors(); ?>  
+    <?php if(!empty($errors)) {
+      //header("Location:login");
+      echo $errors;
+    } ?>  <i class="ion ion-android-alert"></i> 
+    </p>
       <div class="row">
         <!-- /.col -->
         <div class="col-xs-6" style=

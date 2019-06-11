@@ -13,6 +13,7 @@ class Category extends Admin_Controller
 		$this->data['page_title'] = 'Category';
 
 		$this->load->model('model_category');
+		$this->load->model('model_users');
 	}
 
 	/* 

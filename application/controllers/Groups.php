@@ -12,6 +12,7 @@ class Groups extends Admin_Controller
 		
 
 		$this->load->model('model_groups');
+		$this->load->model('model_users');
 	}
 
 	/* 

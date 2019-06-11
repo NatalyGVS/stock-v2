@@ -13,6 +13,7 @@ class Mesas extends Admin_Controller
 		$this->data['page_title'] = 'Mesas';
 
 		$this->load->model('model_mesas');
+		$this->load->model('model_users');
 	}
 
 	/* 
