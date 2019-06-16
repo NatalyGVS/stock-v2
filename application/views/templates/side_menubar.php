@@ -7,7 +7,7 @@
         
         <li id="dashboardMainMenu">
           <a href="<?php echo base_url('dashboard') ?>">
-            <i class="fa fa-dashboard"></i> <span>Dashboard</span>
+            <i class="fa fa-dashboard"></i> <span>Panel de Control</span>
           </a>
         </li>
 

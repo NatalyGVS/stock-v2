@@ -17,6 +17,10 @@
   <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
   <link rel="stylesheet" href="<?php echo base_url('assets/dist/css/skins/_all-skins.min.css') ?>">
+
+  <link rel="stylesheet" href="<?php echo base_url('assets/dist/css/sidermenu.css') ?>">
+  <link rel="stylesheet" href="<?php echo base_url('assets/dist/css/list_line.css') ?>">
+  
   <!-- Morris chart -->
   <link rel="stylesheet" href="<?php echo base_url('assets/bower_components/morris.js/morris.css') ?>">
   <!-- jvectormap -->
@@ -97,7 +101,7 @@
 <script src="<?php echo base_url('assets/bower_components/datatables.net/js/jquery.dataTables.min.js') ?>"></script>
 <script src="<?php echo base_url('assets/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js') ?>"></script>
 </head>
-<body class="hold-transition skin-blue sidebar-mini">
+<body class="hold-transition skin-blue sidebar-mini" style="font-family: Roboto;">
 <div class="wrapper">
 
   

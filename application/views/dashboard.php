@@ -1,19 +1,21 @@
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper" style=
-     "background:url('/stock-v2/assets/images/background_image/bg.jpg'); 
+     "background-color: #ffffff; 
     background-position: center;
       background-repeat: repeat;">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-      <h1>
-        Dashboard
+      <h2>
+        <label style="font-size: 35px;">
+        Panel de Control</label>
         <!-- <small>Panel de control</small> -->
-      </h1>
-      <ol class="breadcrumb">
+      </h2>
+      <ol class="breadcrumb" style="font-size: 15px;">
         <li><a href="#"><i class="fa fa-dashboard"></i> Inicio</a></li>
-        <li class="active">Dashboard</li>
+        <li class="active">Panel de Control</li>
       </ol>
+      <hr>
     </section>
 
     <!-- Main content -->
