@@ -301,3 +301,13 @@ ALTER TABLE `mesas`
 --
 ALTER TABLE `mesas`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+CREATE TABLE `caja` (
+  `id` int(11) NOT NULL,
+  `monto_ini` int(11) NOT NULL,
+  `monto_fin` int(11) NOT NULL,
+  `active` int(11)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+ALTER TABLE `caja`
+  ADD PRIMARY KEY (`id`);

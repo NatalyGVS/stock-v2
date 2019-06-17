@@ -160,6 +160,7 @@
               </li>
           <?php endif; ?>
 
+      
         <?php endif; ?>
 
 
@@ -167,3 +168,51 @@
     </section>
     <!-- /.sidebar -->
   </aside>
+
+  <div class="modal fade" tabindex="-1" role="dialog" id="addModal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Aperturar/Cerrar Caja</h4>
+      </div>
+
+      <form role="form" action="/stock-v2/application/views/prueba.php" method="post" id="createForm">
+
+        <div class="modal-body">
+
+          <div class="form-group">
+            <label for="brand_name">Monto Inicial</label>
+            <input type="number" class="form-control" id="mesas_name" name="monto_ini" placeholder="Monto inicial del día" autocomplete="off">
+          </div>
+
+          <div class="form-group">
+            <label for="brand_name">Monto Final</label>
+            <input type="number" class="form-control" id="mesas_name" name="monto_fin" placeholder="Monto final del día" autocomplete="off">
+          </div>
+
+          <div class="form-group">
+            <label for="brand_name">ingrese contraseña:</label>
+            <label for="active" class="label label-info"><?php $user_id = $this->session->userdata('id');
+                                          $user_data = $this->model_users->getUserData($user_id);
+                                          $this->data['user_data'] = $user_data;
+
+                                          $user_group = $this->model_users->getUserGroup($user_id);
+                                          $this->data['user_group'] = $user_group;echo $user_data['username'];?></label>
+            
+            <input type="text" disabled="" class="form-control" id="mesas_name" name="active" value="0" placeholder="Contraseña" autocomplete="off">
+          </div>
+          
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+          <button type="submit" class="btn bg-red">Aperturar Caja</button>
+        </div>
+
+      </form>
+
+
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
