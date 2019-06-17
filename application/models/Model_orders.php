@@ -36,13 +36,13 @@ class Model_orders extends CI_Model
 	public function create()
 	{
 		$user_id = $this->session->userdata('id');
-		$bill_no = 'BILPR-'.strtoupper(substr(md5(uniqid(mt_rand(), true)), 0, 4));
+		$bill_no = 'FISI-'.strtoupper(substr(md5(uniqid(mt_rand(), true)), 0, 4));
     	$data = array(
     		'bill_no' => $bill_no,
     		'customer_name' => $this->input->post('customer_name'),
     		'customer_address' => $this->input->post('customer_address'),
     		'customer_phone' => $this->input->post('customer_phone'),
-    		'date_time' => strtotime(date('Y-m-d h:i:s a')),
+    		'date_time' => strtotime(date('d-m-Y h:i:s a')),
     		'gross_amount' => $this->input->post('gross_amount_value'),
     		'service_charge_rate' => $this->input->post('service_charge_rate'),
     		'service_charge' => ($this->input->post('service_charge_value') > 0) ?$this->input->post('service_charge_value'):0,

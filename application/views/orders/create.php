@@ -5,10 +5,8 @@
   <!-- Content Header (Page header) -->
   <section class="content-header">
     <h1>
-      Gestionar
+      Gestionar Pedidos
 
-      <small>Pedidos
-</small>
     </h1>
     <ol class="breadcrumb">
       <li><a href="#"><i class="fa fa-dashboard"></i> Inicio</a></li>
@@ -40,41 +38,46 @@
 
         <div class="box">
           <div class="box-header">
-            <h3 class="box-title">Añadir orden</h3>
+            <h3 class="box-title">Añadir orden </h3>
           </div>
+
+          <div class="box-header">
+            <h1 class="display-3" style="background-color: #FF6467 ; text-align: center; " > Mesa x </h1>
+          </div>
+
           <!-- /.box-header -->
           <form role="form" action="<?php base_url('orders/create') ?>" method="post" class="form-horizontal">
               <div class="box-body">
 
                 <?php echo validation_errors(); ?>
+                
 
                 <div class="form-group">
-                  <label for="gross_amount" class="col-sm-12 control-label">Fecha: <?php echo date('Y-m-d') ?></label>
+                   <label for="gross_amount" class="col-sm-12 control-label">Fecha: <?php date_default_timezone_set("America/Lima"); 
+                                                                                            echo date("d/m/Y  , h:i a" ) ?></label> 
                 </div>
-                <div class="form-group">
-                  <label for="gross_amount" class="col-sm-12 control-label">Fecha: <?php echo date('h:i a') ?></label>
-                </div>
+             
 
                 <div class="col-md-4 col-xs-12 pull pull-left">
 
                   <div class="form-group">
                     <label for="gross_amount" class="col-sm-5 control-label" style="text-align:left;">Nombre del cliente</label>
                     <div class="col-sm-7">
-                      <input type="text" class="form-control" id="customer_name" name="customer_name" placeholder="Enter Customer Name" autocomplete="off" />
+                      <input type="text" class="form-control" id="customer_name" name="customer_name" placeholder="Ingresar Nombre del Cliente" autocomplete="off" />
                     </div>
                   </div>
 
                   <div class="form-group">
                     <label for="gross_amount" class="col-sm-5 control-label" style="text-align:left;">Dirección del cliente</label>
                     <div class="col-sm-7">
-                      <input type="text" class="form-control" id="customer_address" name="customer_address" placeholder="Enter Customer Address" autocomplete="off">
+                      <input type="text" class="form-control" id="customer_address" name="customer_address" placeholder="Ingresar Direccion del Cliente" autocomplete="off">
                     </div>
                   </div>
 
                   <div class="form-group">
-                    <label for="gross_amount" class="col-sm-5 control-label" style="text-align:left;">Telefono del cliente</label>
+                    <label for="gross_amount" class="col-sm-5 control-label" style="text-align:left;">Celular del cliente</label>
                     <div class="col-sm-7">
-                      <input type="text" class="form-control" id="customer_phone" name="customer_phone" placeholder="Enter Customer Phone" autocomplete="off">
+                      <input type="text" class="form-control" id="customer_phone" name="customer_phone" placeholder="Ingresar Celular del Cliente" autocomplete="off">
                     </div>
                   </div>
                 </div>
@@ -84,10 +87,10 @@
                 <table class="table table-bordered" id="product_info_table">
                   <thead>
                     <tr>
-                      <th style="width:50%">Producto</th>
+                      <th style="width:40%">Producto</th>
                       <th style="width:10%">Cantidad</th>
                       <th style="width:10%">Precio Unidad</th>
-                      <th style="width:20%">Monto</th>
+                      <th style="width:10%">Monto</th>
                       <th style="width:10%"><button type="button" id="add_row" class="btn btn-default"><i class="fa fa-plus"></i></button></th>
                     </tr>
                   </thead>
