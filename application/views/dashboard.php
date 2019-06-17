@@ -1,20 +1,12 @@
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper" style=
-     "background-color: #ffffff; 
-    background-position: center;
-      background-repeat: repeat;">
+     "background-color: #ffffff; ">
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h2>
         <label style="font-size: 35px;">
         Panel de Control</label>
-
-                  <a >
-                      <span style="margin-left: 15px;">
-                          <button class="btn btn-primary" data-toggle="modal" data-target="#addModal">Aperturar/Cerrar caja</button>
-                      </span>
-                  </a>
         <!-- <small>Panel de control</small> -->
       </h2>
       <ol class="breadcrumb" style="font-size: 15px;">
