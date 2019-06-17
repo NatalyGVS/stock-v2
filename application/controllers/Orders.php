@@ -247,6 +247,11 @@ class Orders extends Admin_Controller
 	* It gets the product id and fetch the order data. 
 	* The order print logic is done here 
 	*/
+
+
+	/*IMPRIMIRRRRRRRRRRRR */
+
+
 	public function printDiv($id)
 	{
 		if(!in_array('viewOrder', $this->permission)) {

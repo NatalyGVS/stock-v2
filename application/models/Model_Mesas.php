@@ -8,7 +8,7 @@ class Model_mesas extends CI_Model
 	}
 
 	/* get datos de mesas */
-	public function getActiveCategroy()
+	public function getActiveCategory()
 	{
 		$sql = "SELECT * FROM mesas WHERE active = ?";
 		$query = $this->db->query($sql, array(1));
@@ -28,6 +28,18 @@ class Model_mesas extends CI_Model
 		return $query->result_array();
 	}
 
+	public function getMesasName($id = null)
+	{
+		if($id) {
+			$sql = "SELECT name FROM mesas WHERE id = ?";
+			$query = $this->db->query($sql, array($id));
+			return $query->row_array();
+		}
+
+		$sql = "SELECT name FROM mesas";
+		$query = $this->db->query($sql);
+		return $query->result_array();
+	}
 	public function create($data)
 	{
 		if($data) {

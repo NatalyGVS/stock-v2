@@ -19,6 +19,14 @@
             </li>
           <?php endif;?>
 
+          <?php if(in_array('createMesas', $user_permission) || in_array('updateMesas', $user_permission) || in_array('viewCategory', $user_permission) || in_array('deleteMesas', $user_permission)): ?>
+            <li id="ordenesNav">
+              <a href="<?php echo base_url('ordenes/') ?>">
+                <i class="fa fa-columns"></i> <span>Gestion Ordenes
+              </a>
+            </li>
+          <?php endif;?>
+
         <?php if($user_permission): ?>
           <?php if(in_array('createUser', $user_permission) || in_array('updateUser', $user_permission) || in_array('viewUser', $user_permission) || in_array('deleteUser', $user_permission)): ?>
             <li class="treeview" id="mainUserNav">
