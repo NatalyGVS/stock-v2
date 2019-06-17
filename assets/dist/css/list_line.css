@@ -1,39 +1,42 @@
 .ul {
     float: right !important;
-
 }
 
 .licreated{
 	display:inline !important;
     padding-left:13px !important;
-    padding-right:53px !important;
+    padding-right:10px !important;
     padding-top: 13px !important;
     font-size: 20px !important;
+    height: 100% !important;
 }
 
 .lili{
 	background-color: #434343 !important;
 	display:inline !important;
 	 position: absolute!important;
-  top: 9px !important;
-  right: 7px !important;
-  text-align: center !important;
-  font-size: 9px !important;
-  padding: 2px 3px!important;
-  line-height: .9 !important;
+	  top: 9px !important;
+	  right: 7px !important;
+	  text-align: center !important;
+	  font-size: 9px !important;
+	  padding: 2px 3px!important;
+	  line-height: .9 !important;
 }
 
 .abg{
-	background-color: #434343 !important;
+	background-color: #f39c12!important;
 }
 
 .ul2{
+	background-color: #434343 !important;
 	padding: 5px !important;
 }
+
 .abg2{
 	background-color: #434343 !important;
 	font-size: 15px;
 }
+
 .headera {
 				margin:auto !important;
 				width:500px !important;
@@ -57,7 +60,7 @@
 			}
 			
 			.nava li a:hover {
-				background-color:#434343 !important;
+				background-color:#636262 !important;
 			}
 			
 			.nava li ul {
@@ -76,4 +79,5 @@
 			
 			.nava li ul li ul {
 				top:0px !important;
+				
 			}

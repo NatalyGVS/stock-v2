@@ -15,7 +15,7 @@
           <di>
             <nav>
                 <ul class="nava ul">
-                  <li class="licreated"><a class="label-info label abg" href=""><span><?php $user_id = $this->session->userdata('id');
+                  <li class="licreated"><a class="label-info label abg"><span><?php $user_id = $this->session->userdata('id');
                                           $user_data = $this->model_users->getUserData($user_id);
                                           $this->data['user_data'] = $user_data;
 
@@ -24,15 +24,33 @@
                        
                       </span></a>
                       <ul class="ul2">
-                        <li><a class="abg2" href=""><label style="margin-left: 5px; font-size: 13px;">Mi perfil</label></a></li>
-                        <li><a class="abg2" href=""><label style="margin-left: 5px; font-size: 13px;">Editar datos</label></a></li>
-                        <li><a class="abg2" href="<?php echo base_url('auth/logout') ?>"><label style="margin-left: 5px; font-size: 13px;">Cerra Sesión</label></a></li>
+                        <li>
+                            <a class="abg2" href="<?php echo base_url('users/profile/') ?>">
+                                <p>
+                                    <i class="fa fa-user-o" style="margin-right: 5px;">
+                                    </i>
+                                  Mi perfil
+                                </p>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a class="abg2" href="<?php echo base_url('users/setting/') ?>">
+                                <p> 
+                                    <i class="fa fa-wrench" style="margin-right: 5px;">
+                                    </i>
+                                  Editar datos
+                                </p>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="abg2" href="<?php echo base_url('auth/logout') ?>"><p><i class="glyphicon glyphicon-log-out" style="margin-right: 5px;"></i>Cerra Sesión</p></a></li>
                       </ul>
                   </li>
                 </ul> 
             </nav>
     </nav>
-     <div class="bg-orange" style="font-size: 5px;" align="right"> <label> </label></div>
+     <div class="bg-orange" style="font-size: 5px; background-color: #f39c12 !important;" align="right"> <label> </label></div>
 </header>
   <!-- Left side column. contains the logo and sidebar -->
   
