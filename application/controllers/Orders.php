@@ -11,8 +11,10 @@ class Orders extends Admin_Controller
 		$this->not_logged_in();
 
 		$this->data['page_title'] = 'Orders';
-
+		$this->load->model('model_mesas');
 		$this->load->model('model_orders');
+
+		
 		$this->load->model('model_products');
 		$this->load->model('model_company');
 		$this->load->model('model_users');
@@ -118,7 +120,7 @@ class Orders extends Admin_Controller
         else {
             // false case
         	$company = $this->model_company->getCompanyData(1);
-        	$this->data['company_data'] = $company;
+        	$this->data['company_data'] = $company; 
         	$this->data['is_vat_enabled'] = ($company['vat_charge_value'] > 0) ? true : false;
         	$this->data['is_service_enabled'] = ($company['service_charge_value'] > 0) ? true : false;
 
@@ -134,11 +136,21 @@ class Orders extends Admin_Controller
 	* and return the data into the json format.
 	*/
 	public function getProductValueById()
-	{
-		$product_id = $this->input->post('product_id');
+	{   $product_id = $this->input->post('product_id');
+		
 		if($product_id) {
 			$product_data = $this->model_products->getProductData($product_id);
 			echo json_encode($product_data);
+		}
+	}
+
+	public function getMesaValueById()
+	{   
+		$mesa_id = $this->input->post('mesa_id');
+		// $product_id = $this->input->post('product_id');
+		if($mesa_id) {
+			$mesas_data = $this->model_products->getMesasData($mesa_id);
+			echo json_encode($mesas_data);
 		}
 	}
 
@@ -151,6 +163,12 @@ class Orders extends Admin_Controller
 	{
 		$products = $this->model_products->getActiveProductData();
 		echo json_encode($products);
+	}
+
+	public function getTableMesasRow()
+	{
+		$mesas = $this->model_mesas->getActiveCategory();
+		echo json_encode($mesas);
 	}
 
 	/*

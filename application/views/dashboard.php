@@ -4,6 +4,9 @@
      "background-color: #ffffff; 
     background-position: center;
       background-repeat: repeat;">
+
+<!-- "background-color: #ffffff; "> -->
+
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h2>

@@ -1,5 +1,3 @@
-
-
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
@@ -45,16 +43,51 @@
             <h1 class="display-3" style="background-color: #FF6467 ; text-align: center; " > Mesa x </h1>
           </div>
 
-          <!-- /.box-header -->
-          <form role="form" action="<?php base_url('orders/create') ?>" method="post" class="form-horizontal">
-              <div class="box-body">
 
-                <?php echo validation_errors(); ?>
+
+
+
+
+          <div>
+                        <div class=" " data-row-id="row_1" id="product_1" name="product[]" style="width:100%;" onchange="getProductData(1)" required>
+                            <!-- <option value=""></option> -->
+                            <?php foreach ($products as $k => $v): ?>
+                              <input  value="<?php echo $v['name'] ?>" type="submit" />   
+                            <?php endforeach ?>
+                          </div>
+                 </div>      
+
+
+                 <div>
+                        <div class=" " data-row-id="row_1" id="mesa_1" name="mesa[]" style="width:100%;" onchange="getMesaData(1)" required>
+                            <!-- <option value=""></option> -->
+                            <?php foreach ($mesas as $k => $v): ?>
+                              <input  value="<?php echo $v['name'] ?>" type="submit" />   
+                            <?php endforeach ?>
+                          </div>
+                 </div>  
+
+
+
+
+
+
+
+
+
+
+
+          <!-- /.box-header -->
+<!--
+          <form role="form" action="<?php // base_url('orders/create') ?>" method="post" class="form-horizontal">
+               <div class="box-body">
+
+                <?php //echo validation_errors(); ?>
                 
 
                 <div class="form-group">
-                   <label for="gross_amount" class="col-sm-12 control-label">Fecha: <?php date_default_timezone_set("America/Lima"); 
-                                                                                            echo date("d/m/Y  , h:i a" ) ?></label> 
+                   <label for="gross_amount" class="col-sm-12 control-label">Fecha: <?php// date_default_timezone_set("America/Lima"); 
+                                                                                         //   echo date("d/m/Y  , h:i a" ) ?></label> 
                 </div>
              
 
@@ -100,9 +133,9 @@
                        <td>
                         <select class="form-control select_group product" data-row-id="row_1" id="product_1" name="product[]" style="width:100%;" onchange="getProductData(1)" required>
                             <option value=""></option>
-                            <?php foreach ($products as $k => $v): ?>
-                              <option value="<?php echo $v['id'] ?>"><?php echo $v['name'] ?></option>
-                            <?php endforeach ?>
+                            <?php //foreach ($products as $k => $v): ?>
+                              <option value="<?php //echo $v['id'] ?>"><?php //echo $v['name'] ?></option>
+                            <?php// endforeach ?>
                           </select>
                         </td>
                         <td><input type="text" name="qty[]" id="qty_1" class="form-control" required onkeyup="getTotal(1)"></td>
@@ -121,6 +154,7 @@
 
                 <br /> <br/>
 
+
                 <div class="col-md-6 col-xs-12 pull pull-right">
 
                   <div class="form-group">
@@ -130,24 +164,24 @@
                       <input type="hidden" class="form-control" id="gross_amount_value" name="gross_amount_value" autocomplete="off">
                     </div>
                   </div>
-                  <?php if($is_service_enabled == true): ?>
+                  <?php //if($is_service_enabled == true): ?>
                   <div class="form-group">
-                    <label for="service_charge" class="col-sm-5 control-label">S de carga<?php echo $company_data['service_charge_value'] ?> %</label>
+                    <label for="service_charge" class="col-sm-5 control-label"> % carga por Servicio<?php// echo $company_data['service_charge_value'] ?> %</label>
                     <div class="col-sm-7">
                       <input type="text" class="form-control" id="service_charge" name="service_charge" disabled autocomplete="off">
                       <input type="hidden" class="form-control" id="service_charge_value" name="service_charge_value" autocomplete="off">
                     </div>
                   </div>
-                  <?php endif; ?>
-                  <?php if($is_vat_enabled == true): ?>
+                  <?php //endif; ?>
+                  <?php //if($is_vat_enabled == true): ?>
                   <div class="form-group">
-                    <label for="vat_charge" class="col-sm-5 control-label">Vat <?php echo $company_data['vat_charge_value'] ?> %</label>
+                    <label for="vat_charge" class="col-sm-5 control-label">Vat <?php// echo $company_data['vat_charge_value'] ?> %</label>
                     <div class="col-sm-7">
                       <input type="text" class="form-control" id="vat_charge" name="vat_charge" disabled autocomplete="off">
                       <input type="hidden" class="form-control" id="vat_charge_value" name="vat_charge_value" autocomplete="off">
                     </div>
                   </div>
-                  <?php endif; ?>
+                  <?php //endif; ?>
                   <div class="form-group">
                     <label for="discount" class="col-sm-5 control-label">Descuento</label>
                     <div class="col-sm-7">
@@ -163,16 +197,16 @@
                   </div>
 
                 </div>
-              </div>
+              </div> -->
               <!-- /.box-body -->
 
-              <div class="box-footer">
-                <input type="hidden" name="service_charge_rate" value="<?php echo $company_data['service_charge_value'] ?>" autocomplete="off">
-                <input type="hidden" name="vat_charge_rate" value="<?php echo $company_data['vat_charge_value'] ?>" autocomplete="off">
+              <!-- <div class="box-footer">
+                <input type="hidden" name="service_charge_rate" value="<?php// echo $company_data['service_charge_value'] ?>" autocomplete="off">
+                <input type="hidden" name="vat_charge_rate" value="<?php //echo $company_data['vat_charge_value'] ?>" autocomplete="off">
                 <button type="submit" class="btn btn-primary">Crear orden</button>
-                <a href="<?php echo base_url('orders/') ?>" class="btn btn-warning">Atras</a>
+                <a href="<?php // echo base_url('orders/') ?>" class="btn btn-warning">Atras</a>
               </div>
-            </form>
+            </form> -->
           <!-- /.box-body -->
         </div>
         <!-- /.box -->
@@ -187,6 +221,9 @@
 </div>
 <!-- /.content-wrapper -->
 
+
+
+<!-- **********************************************  SCRIPTT  ******************************************************************************* -->
 <script type="text/javascript">
   var base_url = "<?php echo base_url(); ?>";
 
@@ -203,6 +240,7 @@
         '</button>'; 
   
     // Add new row in the table 
+      /*  
     $("#add_row").unbind('click').bind('click', function() {
       var table = $("#product_info_table");
       var count_table_tbody_tr = $("#product_info_table tbody tr").length;
@@ -213,7 +251,7 @@
           type: 'post',
           dataType: 'json',
           success:function(response) {
-            
+        
               // console.log(reponse.x);
                var html = '<tr id="row_'+row_id+'">'+
                    '<td>'+ 
@@ -244,10 +282,12 @@
         });
 
       return false;
-    });
+    }); */
 
   }); // /document
+    // ===========================================================================
 
+    /*
   function getTotal(row = null) {
     if(row) {
       var total = Number($("#rate_value_"+row).val()) * Number($("#qty_"+row).val());
@@ -260,7 +300,47 @@
     } else {
       alert('no row !! please refresh the page');
     }
+  }*/
+
+
+  function getMesaData(row_id)
+  {
+    var mesa_id = $("#mesa_"+row_id).val();    
+    if(mesa_id == "") {   /** por editarrrrr */
+     $("#rate_"+row_id).val("");
+     $("#rate_value_"+row_id).val("");
+
+      $("#qty_"+row_id).val("");           
+
+      $("#amount_"+row_id).val("");
+      $("#amount_value_"+row_id).val("");
+
+    } else {
+      $.ajax({
+        url: base_url + 'orders/getMesaValueById',
+        type: 'post',
+        data: {mesa_id : mesa_id},
+        dataType: 'json',
+        success:function(response) {
+          // setting the rate value into the rate input field
+          
+                        $("#rate_"+row_id).val(response.price);
+                        $("#rate_value_"+row_id).val(response.price);
+
+                        $("#qty_"+row_id).val(1);
+                        $("#qty_value_"+row_id).val(1);
+
+                        var total = Number(response.price) * 1;
+                        total = total.toFixed(2);
+                        $("#amount_"+row_id).val(total);
+                        $("#amount_value_"+row_id).val(total);
+                        
+                        // subAmount();
+        } // /success
+      }); // /ajax function to fetch the product data 
+    }
   }
+
 
   // get the product information from the server
   function getProductData(row_id)
@@ -295,16 +375,19 @@
           $("#amount_"+row_id).val(total);
           $("#amount_value_"+row_id).val(total);
           
-          subAmount();
+          // subAmount();
         } // /success
       }); // /ajax function to fetch the product data 
     }
   }
 
+
+    
+/*
   // calculate the total amount of the order
   function subAmount() {
-    var service_charge = <?php echo ($company_data['service_charge_value'] > 0) ? $company_data['service_charge_value']:0; ?>;
-    var vat_charge = <?php echo ($company_data['vat_charge_value'] > 0) ? $company_data['vat_charge_value']:0; ?>;
+    var service_charge = <?php //echo ($company_data['service_charge_value'] > 0) ? $company_data['service_charge_value']:0; ?>;
+    var vat_charge = <?php //echo ($company_data['vat_charge_value'] > 0) ? $company_data['vat_charge_value']:0; ?>;
 
     var tableProductLength = $("#product_info_table tbody tr").length;
     var totalSubAmount = 0;
@@ -352,11 +435,11 @@
       
     } // /else discount 
 
-  } // /sub total amount
-
+  } // /sub total amount  */
+/*
   function removeRow(tr_id)
   {
     $("#product_info_table tbody tr#row_"+tr_id).remove();
     subAmount();
-  }
+  }*/
 </script>
