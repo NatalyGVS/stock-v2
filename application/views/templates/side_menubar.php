@@ -5,16 +5,13 @@
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu" style="background-color: #34393a; font-size: 15px; margin-top:15px ; " data-widget="tree">
         
-      
-            
             <li id="cajasNav" >
                 <a href="<?php echo base_url('cajas/')?>">
                     <img class="fa" src="/stock-v2/assets/images/icons/atm.png"> 
                     <span style="margin-left: 15px;">Control de Cajas</span>
                 </a>
             </li>
-
-                       
+               
                      
             <li id="dashboardMainMenu" >
 
@@ -183,6 +180,7 @@
               </li>
           <?php endif; ?>
 
+      
         <?php endif; ?>
 
 
@@ -190,3 +188,5 @@
     </section>
     <!-- /.sidebar -->
   </aside>
+
+ 
