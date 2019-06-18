@@ -119,10 +119,7 @@ CREATE TABLE `products` (
   `qty` varchar(255) NOT NULL,
   `image` text NOT NULL,
   `description` text NOT NULL,
-  `attribute_value_id` text,
-  `brand_id` text NOT NULL,
   `category_id` text NOT NULL,
-  `store_id` int(11) NOT NULL,
   `availability` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -209,7 +206,7 @@ ALTER TABLE `orders_item`
 --
 -- Indexes for table `products`
 --
-ALTER TABLE `products`
+ALTER TABLE `s`
   ADD PRIMARY KEY (`id`);
 
 
