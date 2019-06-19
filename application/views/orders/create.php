@@ -84,10 +84,10 @@
                 
                 
                 <br /> <br/>
-                <table class="table table-bordered" id="product_info_table">
+                <table class="table table-bordered" id="mesa_info_table">
                   <thead>
                     <tr>
-                      <th style="width:40%">Producto</th>
+                      <th style="width:40%">Mesao</th>
                       <th style="width:10%">Cantidad</th>
                       <th style="width:10%">Precio Unidad</th>
                       <th style="width:10%">Monto</th>
@@ -98,9 +98,9 @@
                    <tbody>
                      <tr id="row_1">
                        <td>
-                        <select class="form-control select_group product" data-row-id="row_1" id="product_1" name="product[]" style="width:100%;" onchange="getProductData(1)" required>
+                        <select class="form-control select_group mesa" data-row-id="row_1" id="mesa_1" name="mesa[]" style="width:100%;" onchange="getMesaData(1)" required>
                             <option value=""></option>
-                            <?php foreach ($products as $k => $v): ?>
+                            <?php foreach ($mesas as $k => $v): ?>
                               <option value="<?php echo $v['id'] ?>"><?php echo $v['name'] ?></option>
                             <?php endforeach ?>
                           </select>
@@ -204,12 +204,12 @@
   
     // Add new row in the table 
     $("#add_row").unbind('click').bind('click', function() {
-      var table = $("#product_info_table");
-      var count_table_tbody_tr = $("#product_info_table tbody tr").length;
+      var table = $("#mesa_info_table");
+      var count_table_tbody_tr = $("#mesa_info_table tbody tr").length;
       var row_id = count_table_tbody_tr + 1;
 
       $.ajax({
-          url: base_url + '/orders/getTableProductRow/',
+          url: base_url + '/orders/getTableMesaRow/',
           type: 'post',
           dataType: 'json',
           success:function(response) {
@@ -217,7 +217,7 @@
               // console.log(reponse.x);
                var html = '<tr id="row_'+row_id+'">'+
                    '<td>'+ 
-                    '<select class="form-control select_group product" data-row-id="'+row_id+'" id="product_'+row_id+'" name="product[]" style="width:100%;" onchange="getProductData('+row_id+')">'+
+                    '<select class="form-control select_group mesa" data-row-id="'+row_id+'" id="mesa_'+row_id+'" name="mesa[]" style="width:100%;" onchange="getMesaData('+row_id+')">'+
                         '<option value=""></option>';
                         $.each(response, function(index, value) {
                           html += '<option value="'+value.id+'">'+value.name+'</option>';             
@@ -232,13 +232,13 @@
                     '</tr>';
 
                 if(count_table_tbody_tr >= 1) {
-                $("#product_info_table tbody tr:last").after(html);  
+                $("#mesa_info_table tbody tr:last").after(html);  
               }
               else {
-                $("#product_info_table tbody").html(html);
+                $("#mesa_info_table tbody").html(html);
               }
 
-              $(".product").select2();
+              $(".mesa").select2();
 
           }
         });
@@ -262,11 +262,11 @@
     }
   }
 
-  // get the product information from the server
-  function getProductData(row_id)
+  // get the mesa information from the server
+  function getMesaData(row_id)
   {
-    var product_id = $("#product_"+row_id).val();    
-    if(product_id == "") {
+    var mesa_id = $("#mesa_"+row_id).val();    
+    if(mesa_id == "") {
       $("#rate_"+row_id).val("");
       $("#rate_value_"+row_id).val("");
 
@@ -277,9 +277,9 @@
 
     } else {
       $.ajax({
-        url: base_url + 'orders/getProductValueById',
+        url: base_url + 'orders/getMesaValueById',
         type: 'post',
-        data: {product_id : product_id},
+        data: {mesa_id : mesa_id},
         dataType: 'json',
         success:function(response) {
           // setting the rate value into the rate input field
@@ -297,7 +297,7 @@
           
           subAmount();
         } // /success
-      }); // /ajax function to fetch the product data 
+      }); // /ajax function to fetch the mesa data 
     }
   }
 
@@ -306,10 +306,10 @@
     var service_charge = <?php echo ($company_data['service_charge_value'] > 0) ? $company_data['service_charge_value']:0; ?>;
     var vat_charge = <?php echo ($company_data['vat_charge_value'] > 0) ? $company_data['vat_charge_value']:0; ?>;
 
-    var tableProductLength = $("#product_info_table tbody tr").length;
+    var tableMesaLength = $("#mesa_info_table tbody tr").length;
     var totalSubAmount = 0;
-    for(x = 0; x < tableProductLength; x++) {
-      var tr = $("#product_info_table tbody tr")[x];
+    for(x = 0; x < tableMesaLength; x++) {
+      var tr = $("#mesa_info_table tbody tr")[x];
       var count = $(tr).attr('id');
       count = count.substring(4);
 
@@ -356,7 +356,7 @@
 
   function removeRow(tr_id)
   {
-    $("#product_info_table tbody tr#row_"+tr_id).remove();
+    $("#mesa_info_table tbody tr#row_"+tr_id).remove();
     subAmount();
   }
 </script>

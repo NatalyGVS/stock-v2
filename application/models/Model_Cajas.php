@@ -40,6 +40,20 @@ class Model_cajas extends CI_Model
 		$query = $this->db->query($sql);
 		return $query->result_array();
 	}
+
+	public function getCajasActive($id = null)
+	{
+		if($id) {
+			$sql = "SELECT active FROM caja WHERE id = ?";
+			$query = $this->db->query($sql, array($id));
+			return $query->row_array();
+		}
+
+		$sql = "SELECT active FROM caja";
+		$query = $this->db->query($sql);
+		return $query->result_array();
+	}
+	
 	public function create($data)
 	{
 		if($data) {

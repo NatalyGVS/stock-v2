@@ -131,22 +131,23 @@
           <div id="messages"></div>
 
           <div class="form-group">
-            <label for="edit_brand_name">Nombre de la Caja</label>
-            <input type="hidden" class="form-control" id="edit_cajas_name" name="edit_cajas_name" placeholder="Enter caja name" autocomplete="off">
+            <input type="text" class="form-control" id="edit_cajas_name" name="edit_cajas_name" placeholder="Enter caja name" autocomplete="off">
           </div>
 
           <div class="form-group">
-            <label for="edit_active">Estado</label>
-            <select class="form-control" id="edit_active" name="edit_active">
-              <option value="1">Activo</option>
-              <option value="2">Inactivo</option>
-            </select>
+            <input type="text" class="form-control" id="edit_cajas_active" name="edit_cajas_active" placeholder="Enter caja name" autocomplete="off">
+            <input type="text" class="form-control" id="action_button" name="action_button" placeholder="Enter caja name" autocomplete="off">
           </div>
         </div>
 
         <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-          <button type="submit" class="btn btn-primary">Guardar cambios</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+          
+            <?php if($edit_cajas_active=="2"){
+              echo '<button type="submit" class="btn btn-primary bg-red">CERRAR CAJA</button>';
+            }else{
+              echo '<button type="submit" class="btn btn-primary bg-blue">APERTURAR CAJA</button>';
+            }?></button>
         </div>
 
       </form>
@@ -266,6 +267,8 @@ function editFunc(id)
     success:function(response) {
 
       $("#edit_cajas_name").val(response.name);
+       $("#edit_cajas_active").val(response.active);
+       $('#action_button').val(response.active);
       
 
       // submit the edit from 

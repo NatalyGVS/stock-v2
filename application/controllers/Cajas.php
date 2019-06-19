@@ -137,14 +137,14 @@ Comprueba la validación del formulario de cajas y si la validación se realiza
 
 		if($id) {
 			$this->form_validation->set_rules('edit_cajas_name', 'Cajas name', 'trim|required');
-		 	$this->form_validation->set_rules('edit_active', 'Active', 'trim|required');
+		 	$this->form_validation->set_rules('edit_cajas_active', 'Cajas active', 'trim|required');
 
 			$this->form_validation->set_error_delimiters('<p class="text-danger">','</p>');
 
 	        if ($this->form_validation->run() == TRUE) {
 	        	$data = array(
 	        		'name' => $this->input->post('edit_cajas_name'),
-	        		'active' => $this->input->post('edit_active'),	
+	        		'active' => $this->input->post('edit_cajas_active'),	
 	        	);
 
 	        	$update = $this->model_cajas->update($data, $id);

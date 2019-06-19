@@ -18,7 +18,7 @@
 
     <!-- Main content -->
     <section class="content">
-      <!-- Small boxes (Stat box) -->
+      <!-- Small boxes (Stat box) --> 
       <?php if($is_admin == true): ?>
 
         <div class="row">

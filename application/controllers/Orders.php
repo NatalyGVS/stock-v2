@@ -13,9 +13,10 @@ class Orders extends Admin_Controller
 		$this->data['page_title'] = 'Orders';
 
 		$this->load->model('model_orders');
-		$this->load->model('model_products');
+		$this->load->model('model_mesas');
 		$this->load->model('model_company');
 		$this->load->model('model_users');
+		$this->load->model('model_mesas');
 	}
 
 	/* 
@@ -99,7 +100,7 @@ class Orders extends Admin_Controller
 
 		$this->data['page_title'] = 'Add Order';
 
-		$this->form_validation->set_rules('product[]', 'Product name', 'trim|required');
+		$this->form_validation->set_rules('mesa[]', 'Mesa name', 'trim|required');
 		
 	
         if ($this->form_validation->run() == TRUE) {        	
@@ -122,35 +123,35 @@ class Orders extends Admin_Controller
         	$this->data['is_vat_enabled'] = ($company['vat_charge_value'] > 0) ? true : false;
         	$this->data['is_service_enabled'] = ($company['service_charge_value'] > 0) ? true : false;
 
-        	$this->data['products'] = $this->model_products->getActiveProductData();      	
+        	$this->data['mesas'] = $this->model_mesas->getActiveMesaData();      	
 
             $this->render_template('orders/create', $this->data);
         }	
 	}
 
 	/*
-	* It gets the product id passed from the ajax method.
-	* It checks retrieves the particular product data from the product id 
+	* It gets the mesa id passed from the ajax method.
+	* It checks retrieves the particular mesa data from the mesa id 
 	* and return the data into the json format.
 	*/
-	public function getProductValueById()
+	public function getMesaValueById()
 	{
-		$product_id = $this->input->post('product_id');
-		if($product_id) {
-			$product_data = $this->model_products->getProductData($product_id);
-			echo json_encode($product_data);
+		$mesa_id = $this->input->post('mesa_id');
+		if($mesa_id) {
+			$mesa_data = $this->model_mesas->getMesaData($mesa_id);
+			echo json_encode($mesa_data);
 		}
 	}
 
 	/*
-	* It gets the all the active product inforamtion from the product table 
-	* This function is used in the order page, for the product selection in the table
+	* It gets the all the active mesa inforamtion from the mesa table 
+	* This function is used in the order page, for the mesa selection in the table
 	* The response is return on the json format.
 	*/
-	public function getTableProductRow()
+	public function getTableMesaRow()
 	{
-		$products = $this->model_products->getActiveProductData();
-		echo json_encode($products);
+		$mesas = $this->model_mesas->getActiveMesaData();
+		echo json_encode($mesas);
 	}
 
 	/*
@@ -170,7 +171,7 @@ class Orders extends Admin_Controller
 
 		$this->data['page_title'] = 'Update Order';
 
-		$this->form_validation->set_rules('product[]', 'Product name', 'trim|required');
+		$this->form_validation->set_rules('mesa[]', 'Mesa name', 'trim|required');
 		
 	
         if ($this->form_validation->run() == TRUE) {        	
@@ -205,7 +206,7 @@ class Orders extends Admin_Controller
 
     		$this->data['order_data'] = $result;
 
-        	$this->data['products'] = $this->model_products->getActiveProductData();      	
+        	$this->data['mesas'] = $this->model_mesas->getActiveMesaData();      	
 
             $this->render_template('orders/edit', $this->data);
         }
@@ -232,7 +233,7 @@ class Orders extends Admin_Controller
             }
             else {
                 $response['success'] = false;
-                $response['messages'] = "Error in the database while removing the product information";
+                $response['messages'] = "Error in the database while removing the mesa information";
             }
         }
         else {
@@ -244,7 +245,7 @@ class Orders extends Admin_Controller
 	}
 
 	/*
-	* It gets the product id and fetch the order data. 
+	* It gets the mesa id and fetch the order data. 
 	* The order print logic is done here 
 	*/
 
@@ -315,7 +316,7 @@ class Orders extends Admin_Controller
 			        <table class="table table-striped">
 			          <thead>
 			          <tr>
-			            <th>Product name</th>
+			            <th>Mesa name</th>
 			            <th>Price</th>
 			            <th>Qty</th>
 			            <th>Amount</th>
@@ -325,10 +326,10 @@ class Orders extends Admin_Controller
 
 			          foreach ($orders_items as $k => $v) {
 
-			          	$product_data = $this->model_products->getProductData($v['product_id']); 
+			          	$mesa_data = $this->model_mesas->getMesaData($v['mesa_id']); 
 			          	
 			          	$html .= '<tr>
-				            <td>'.$product_data['name'].'</td>
+				            <td>'.$mesa_data['name'].'</td>
 				            <td>'.$v['rate'].'</td>
 				            <td>'.$v['qty'].'</td>
 				            <td>'.$v['amount'].'</td>
