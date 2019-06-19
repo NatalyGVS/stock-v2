@@ -6,7 +6,7 @@ class Caja extends Admin_Controller
 	{
 		parent::__construct();
 		$this->not_logged_in();
-		$this->data['page_title'] = 'Cajaaaaaaaa';
+		$this->data['page_title'] = 'Caja';
 		$this->load->model('model_caja');
 		$this->load->model('model_users');
 	}
@@ -60,7 +60,7 @@ modelo de caja y devuelve los datos en formato json.
 		} // /foreach
 		echo json_encode($result);
 	}
-	public function update( true )
+	public function update(true)
 	{
 		/*if(!in_array('updateCaja', $this->permission)) {
 			redirect('dashboard', 'refresh');

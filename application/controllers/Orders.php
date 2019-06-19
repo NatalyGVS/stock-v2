@@ -101,7 +101,7 @@ class Orders extends Admin_Controller
 
 		$this->data['page_title'] = 'Add Order';
 
-		$this->form_validation->set_rules('product[]', 'Product name', 'trim|required');
+		$this->form_validation->set_rules('mesa[]', 'Mesa name', 'trim|required');
 		
 	
         if ($this->form_validation->run() == TRUE) {        	
@@ -124,7 +124,7 @@ class Orders extends Admin_Controller
         	$this->data['is_vat_enabled'] = ($company['vat_charge_value'] > 0) ? true : false;
         	$this->data['is_service_enabled'] = ($company['service_charge_value'] > 0) ? true : false;
 
-        	$this->data['products'] = $this->model_products->getActiveProductData();      	
+        	$this->data['mesas'] = $this->model_mesas->getActiveMesas();      	
 
             $this->render_template('orders/create', $this->data);
         }	
@@ -149,7 +149,7 @@ class Orders extends Admin_Controller
 		$mesa_id = $this->input->post('mesa_id');
 		// $product_id = $this->input->post('product_id');
 		if($mesa_id) {
-			$mesas_data = $this->model_products->getMesasData($mesa_id);
+			$mesas_data = $this->model_mesas->getMesasData($mesa_id);
 			echo json_encode($mesas_data);
 		}
 	}
@@ -165,10 +165,14 @@ class Orders extends Admin_Controller
 		echo json_encode($products);
 	}
 
-	public function getTableMesasRow()
+	public function getTableMesaRow()
 	{
-		$mesas = $this->model_mesas->getActiveCategory();
+
+		$mesas = $this->model_mesas->getActiveMesas();
 		echo json_encode($mesas);
+
+		// $mesas = $this->model_mesas->getActiveCategory();
+		// echo json_encode($mesas);
 	}
 
 	/*
@@ -188,7 +192,7 @@ class Orders extends Admin_Controller
 
 		$this->data['page_title'] = 'Update Order';
 
-		$this->form_validation->set_rules('product[]', 'Product name', 'trim|required');
+		$this->form_validation->set_rules('mesa[]', 'Mesa name', 'trim|required');
 		
 	
         if ($this->form_validation->run() == TRUE) {        	
@@ -223,7 +227,7 @@ class Orders extends Admin_Controller
 
     		$this->data['order_data'] = $result;
 
-        	$this->data['products'] = $this->model_products->getActiveProductData();      	
+        	$this->data['mesas'] = $this->model_mesas->getActiveMesaData();      	
 
             $this->render_template('orders/edit', $this->data);
         }

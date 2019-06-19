@@ -5,6 +5,9 @@
     <h1>
       Gestionar Mesas
     </h1>
+
+   
+
     <ol class="breadcrumb">
       <li><a href="#"><i class="fa fa-dashboard"></i> Inicio</a></li>
       <li class="active">Mesas</li>
@@ -263,6 +266,7 @@ function editFunc(id)
     success:function(response) {
 
       $("#edit_mesas_name").val(response.name);
+      
       
 
       // submit the edit from 

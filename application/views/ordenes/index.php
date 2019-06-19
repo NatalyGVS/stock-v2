@@ -31,22 +31,13 @@
           </div>
         <?php endif; ?>
 
-
-
- <!-- <?php //if(in_array('createMesas', $user_permission)): ?> -->
- <!-- <button class="btn btn-primary" data-toggle="modal" data-target="#addModal">Añadir Orden </button> -->
-          <!-- <br /> <br /> -->
-        <!-- ?php endif; ?> -->
-
-
-
         <div class="box">
           <div class="box-header">
             <h3 class="box-title">Gestionar Mesas</h3>
           </div>
           <!-- /.box-header -->
           <div class="box-body">
-            <table id="manageTable" class="table table-bordered table-striped">
+            <table id="manageTable" class="table table-bordered table-striped table-hover ">
               <thead>
               <tr>
                 <th>Nombre de la Mesa</th>
@@ -80,31 +71,26 @@
 
 
 <!--<?php //if(in_array('createMesas', $user_permission)): ?>-->
-<!-- create brand modal -->
+<!-- create brand modal --
 <div class="modal fade" tabindex="-1" role="dialog" id="addModal">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
 
-
-
-
-
-
-
-
-    <form role="form" action="<?php base_url('ordenes/create') ?>" method="post" class="form-horizontal">
-              <div class="box-body">
-
-                <?php echo validation_errors(); ?>
-
-
-                <div class="form-group">
+                    <?php echo validation_errors(); ?>
+                 <div class="form-group">
                    <label for="gross_amount" class="col-sm-12 control-label">Fecha: <?php date_default_timezone_set("America/Lima");
-                                                                                            echo date("d/m/Y  , h:i a" ) ?></label>
+                               echo date("d/m/Y  , h:i a" ) ?></label>
                 </div>
 
+       <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Añadir Orden a la Mesa </h4>
+      </div>
+                                            <!-- orders/create -->
+      <form role="form" action=" <? php echo base_url('order/create') ?>" method="post" id="createForm" >
 
-                <div class="col-md-4 col-xs-12 pull pull-left">
+        <div class="modal-body">
+
 
                   <div class="form-group">
                     <label for="gross_amount" class="col-sm-5 control-label" style="text-align:left;">Nombre del cliente</label>
@@ -112,14 +98,14 @@
                       <input type="text" class="form-control" id="customer_name" name="customer_name" placeholder="Ingresar Nombre del Cliente" autocomplete="off" />
                     </div>
                   </div>
-
+                  <br/><br/>
                   <div class="form-group">
                     <label for="gross_amount" class="col-sm-5 control-label" style="text-align:left;">Dirección del cliente</label>
                     <div class="col-sm-7">
                       <input type="text" class="form-control" id="customer_address" name="customer_address" placeholder="Ingresar Direccion del Cliente" autocomplete="off">
                     </div>
                   </div>
-
+                  <br/><br/>
                   <div class="form-group">
                     <label for="gross_amount" class="col-sm-5 control-label" style="text-align:left;">Celular del cliente</label>
                     <div class="col-sm-7">
@@ -127,12 +113,10 @@
                     </div>
                   </div>
                 </div>
-
-
                 <br /> <br/>
 
 
-                 <table class="table table-bordered" id="product_info_table">
+                <table class="table table-bordered" id="product_info_table">
                   <thead>
                     <tr>
                       <th style="width:40%">Producto</th>
@@ -148,7 +132,9 @@
                        <td>
                         <select class="form-control select_group product" data-row-id="row_1" id="product_1" name="product[]" style="width:100%;" onchange="getProductData(1)" required>
                             <option value=""></option>
-                            <?php  foreach ($products as $k => $v): ?>
+                            <?php
+                            print_r($products);
+                            foreach ($products as $k => $v): ?>
                               <option value="<?php  echo $v['id'] ?>"><?php  echo $v['name'] ?></option>
                             <?php  endforeach ?>
                           </select>
@@ -167,85 +153,10 @@
                    </tbody>
                 </table> 
 
-                <br /> <br/>
-
-                <div class="col-md-6 col-xs-12 pull pull-right">
-
-                  <div class="form-group">
-                    <label for="gross_amount" class="col-sm-5 control-label">Cantidad bruta</label>
-                    <div class="col-sm-7">
-                      <input type="text" class="form-control" id="gross_amount" name="gross_amount" disabled autocomplete="off">
-                      <input type="hidden" class="form-control" id="gross_amount_value" name="gross_amount_value" autocomplete="off">
-                    </div>
-                  </div>
-                  <?php //if($is_service_enabled == true): ?>
-                  <div class="form-group">
-                    <label for="service_charge" class="col-sm-5 control-label"> % carga por Servicio<?php echo $company_data['service_charge_value'] ?> %</label>
-                    <div class="col-sm-7">
-                      <input type="text" class="form-control" id="service_charge" name="service_charge" disabled autocomplete="off">
-                      <input type="hidden" class="form-control" id="service_charge_value" name="service_charge_value" autocomplete="off">
-                    </div>
-                  </div>
-                  <?php// endif; ?>
-                  <?php //if($is_vat_enabled == true): ?>
-                  <div class="form-group">
-                    <label for="vat_charge" class="col-sm-5 control-label">Vat <?php echo $company_data['vat_charge_value'] ?> %</label>
-                    <div class="col-sm-7">
-                      <input type="text" class="form-control" id="vat_charge" name="vat_charge" disabled autocomplete="off">
-                      <input type="hidden" class="form-control" id="vat_charge_value" name="vat_charge_value" autocomplete="off">
-                    </div>
-                  </div>
-                  <?php //endif; ?>
-                  <div class="form-group">
-                    <label for="discount" class="col-sm-5 control-label">Descuento</label>
-                    <div class="col-sm-7">
-                      <input type="text" class="form-control" id="discount" name="discount" placeholder="Descuento" onkeyup="subAmount()" autocomplete="off">
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="net_amount" class="col-sm-5 control-label">Importe neto</label>
-                    <div class="col-sm-7">
-                      <input type="text" class="form-control" id="net_amount" name="net_amount" disabled autocomplete="off">
-                      <input type="hidden" class="form-control" id="net_amount_value" name="net_amount_value" autocomplete="off">
-                    </div>
-                  </div> 
-
-                </div>
-              </div>
-              <!-- /.box-body -->
-
-               <div class="box-footer">
-                <input type="hidden" name="service_charge_rate" value="<?php //echo $company_data['service_charge_value'] ?>" autocomplete="off">
-                <input type="hidden" name="vat_charge_rate" value="<?php// echo $company_data['vat_charge_value'] ?>" autocomplete="off">
-                <button type="submit" class="btn btn-primary">Crear orden</button>
-                <a href="<?php echo base_url('ordenes/') ?>" class="btn btn-warning">Atras</a>
-              </div> 
-            </form>
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-      <!-- <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">Añadir Orden a la Mesa </h4>
-      </div>
-
-      <form role="form" action=" <?// php echo base_url('mesas/create') ?>" method="post" id="createForm">
-
-        <div class="modal-body">
 
           <div class="form-group">
             <label for="brand_name">Nombre de la mesa</label>
@@ -267,7 +178,10 @@
           <button type="submit" class="btn btn-primary">Guardar cambios</button>
         </div>
 
-      </form> -->
+      </form> 
+
+
+
 
 
     </div><!-- /.modal-content -->
@@ -324,7 +238,7 @@
 <!--   ===========================================    SCRIPT   ================================================ -->
 <script type="text/javascript">
 var manageTable;
-// var base_url = "<?php echo base_url(); ?>";
+ var base_url = "<?php echo base_url(); ?>";
 
 
 $(document).ready(function() {
@@ -345,62 +259,65 @@ $(document).ready(function() {
     }
   });
 
-  // submit the create from
-  // $("#createForm").unbind('submit').on('submit', function() {
-  //   var form = $(this);
+  //  submit the create from
+   $("#createForm").unbind('submit').on('submit', function() {
+    var form = $(this);
 
-  //   // remove the text-danger
+     // remove the text-danger
   //   $(".text-danger").remove();
 
-  //   $.ajax({
-  //     url: form.attr('action'),
-  //     type: form.attr('method'),
-  //     data: form.serialize(), // /converting the form data into array and sending it to server
-  //     dataType: 'json',
-  //     success:function(response) {
+     $.ajax({
+       url: form.attr('action'),
+       type: form.attr('method'),
+       data: form.serialize(), // /converting the form data into array and sending it to server
+       dataType: 'json',
+       success:function(response) {
 
-  //       manageTable.ajax.reload(null, false);
+         manageTable.ajax.reload(null, false);
 
-  //       if(response.success === true) {
-  //         $("#messages").html('<div class="alert alert-success alert-dismissible" role="alert">'+
-  //           '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>'+
-  //           '<strong> <span class="glyphicon glyphicon-ok-sign"></span> </strong>'+response.messages+
-  //         '</div>');
+         if(response.success === true) {
+           $("#messages").html('<div class="alert alert-success alert-dismissible" role="alert">'+
+             '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>'+
+             '<strong> <span class="glyphicon glyphicon-ok-sign"></span> </strong>'+response.messages+
+           '</div>');
 
 
-  //         // hide the modal
-  //         $("#addModal").modal('hide');
+           // hide the modal
+           $("#addModal").modal('hide');
 
-  //         // reset the form
-  //         $("#createForm")[0].reset();
-  //         $("#createForm .form-group").removeClass('has-error').removeClass('has-success');
+           // reset the form
+          $("#createForm")[0].reset();
+           $("#createForm .form-group").removeClass('has-error').removeClass('has-success');
 
-  //       } else {
+         } else {
 
-  //         if(response.messages instanceof Object) {
-  //           $.each(response.messages, function(index, value) {
-  //             var id = $("#"+index);
+           if(response.messages instanceof Object) {
+             $.each(response.messages, function(index, value) {
+               var id = $("#"+index);
 
-  //             id.closest('.form-group')
-  //             .removeClass('has-error')
-  //             .removeClass('has-success')
-  //             .addClass(value.length > 0 ? 'has-error' : 'has-success');
+               id.closest('.form-group')
+               .removeClass('has-error')
+               .removeClass('has-success')
+               .addClass(value.length > 0 ? 'has-error' : 'has-success');
 
-  //             id.after(value);
+               id.after(value);
 
-  //           });
-  //         } else {
-  //           $("#messages").html('<div class="alert alert-warning alert-dismissible" role="alert">'+
-  //             '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>'+
-  //             '<strong> <span class="glyphicon glyphicon-exclamation-sign"></span> </strong>'+response.messages+
-  //           '</div>');
-  //         }
-  //       }
-  //     }
-  //   });
+             });
+           } else {
+             $("#messages").html('<div class="alert alert-warning alert-dismissible" role="alert">'+
+               '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>'+
+               '<strong> <span class="glyphicon glyphicon-exclamation-sign"></span> </strong>'+response.messages+
+             '</div>');
+           }
+         }
+       }
+     });
 
-  //   return false;
-  // });
+     return false;
+   });
+
+
+
 
   var btnCust = '<button type="button" class="btn btn-secondary" title="Add picture tags" ' +
         'onclick="alert(\'Call your custom code here.\')">' +
@@ -550,15 +467,23 @@ function getProductData(row_id)
 
 
   
+  function removeRow(tr_id)
+  {
+    $("#product_info_table tbody tr#row_"+tr_id).remove();
+    subAmount();
+  }
 
+
+
+/*
   // calculate the total amount of the order
   function subAmount() {
     //aa
-    <?php echo $company_data['service_charge_value']   ?>
+    <?php //echo $company_data['service_charge_value']   ?>
     //vvv
     
-    var service_charge = <?php echo ($company_data['service_charge_value'] > 0) ? $company_data['service_charge_value']: 0 ; ?> ;
-    var vat_charge = <?php echo ($company_data['vat_charge_value'] > 0) ? $company_data['vat_charge_value']:0; ?>;
+    var service_charge = <?php //echo ($company_data['service_charge_value'] > 0) ? $company_data['service_charge_value']: 0 ; ?> ;
+    var vat_charge = <?php// echo ($company_data['vat_charge_value'] > 0) ? $company_data['vat_charge_value']:0; ?>;
 
     var tableProductLength = $("#product_info_table tbody tr").length;
     var totalSubAmount = 0;
@@ -606,15 +531,8 @@ function getProductData(row_id)
       
     } // /else discount 
 
-  } // /sub total amount
 
-  function removeRow(tr_id)
-  {
-    $("#product_info_table tbody tr#row_"+tr_id).remove();
-    subAmount();
-  }
-
-
+  } // /sub total amount */
 
 
     

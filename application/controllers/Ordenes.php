@@ -107,7 +107,7 @@ modelo de mesas y devuelve los datos en formato json.
 		  
 			/*  $nombre =  '<input value="<?php echo $value['name'] ?>"></input>  '  ;  */ 
 
-			$status = ($value['active'] == 1) ? '<span class="label label-success">Libre</span>' : '<span class="label label-warning">Ocupado</span>';
+			$status = ($value['active'] == 1) ? '<span class=" label label-success">Libre</span>' : '<span class="label label-warning">Ocupado</span>';
 
 			$result['data'][$key] = array(
 			    $value['name'],
