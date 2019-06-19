@@ -12,7 +12,7 @@
           <a href="#" class="sidebar-toggle navegador" data-toggle="push-menu" role="button">
             <span class="sr-only">Menu navegacion</span>
           </a>
-          <di>
+          
             <nav>
                 <ul class="nava ul">
                   <li class="licreated"><a class="label-info label abg"><span><?php $user_id = $this->session->userdata('id');
@@ -44,7 +44,7 @@
                             </a>
                         </li>
                         <li>
-                            <a class="abg2" href="<?php echo base_url('auth/logout') ?>"><p><i class="glyphicon glyphicon-log-out" style="margin-right: 5px;"></i>Cerra Sesión</p></a></li>
+                            <a class="abg2" href="<?php echo base_url('auth/logout') ?>"><p><i class="glyphicon glyphicon-log-out" style="margin-right: 5px;"></i>Cerrar Sesión</p></a></li>
                       </ul>
                   </li>
                 </ul> 

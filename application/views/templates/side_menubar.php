@@ -3,16 +3,18 @@
     <section class="sidebar" >
       
       <!-- sidebar menu: : style can be found in sidebar.less -->
-      <ul class="sidebar-menu" style="background-color: #34393a; font-size: 15px; margin-top: 15px;" data-widget="tree">
+      <ul class="sidebar-menu" style="background-color: #34393a; font-size: 15px; margin-top:15px ; " data-widget="tree">
         
-        <li id="cajasNav" >
+            <li id="cajasNav" >
                 <a href="<?php echo base_url('cajas/')?>">
                     <img class="fa" src="/stock-v2/assets/images/icons/atm.png"> 
                     <span style="margin-left: 15px;">Control de Cajas</span>
                 </a>
             </li>
+               
+                     
+            <li id="dashboardMainMenu" >
 
-            <li id="dashboardMainMenu">
                 <a href="<?php echo base_url('dashboard')?>">
                     <img class="fa" src="/stock-v2/assets/images/icons/dashboard.png"> 
                     <span style="margin-left: 15px;">Panel de Control</span>
@@ -20,7 +22,7 @@
             </li>
 
             <?php if(in_array('createMesas', $user_permission) || in_array('updateMesas', $user_permission) || in_array('viewCategory', $user_permission) || in_array('deleteMesas', $user_permission)): ?>
-                <li id="mesasNav">
+                <li id="mesasNav" >
                     <a href="<?php echo base_url('mesas/') ?>">
                       <img class="fa" src="/stock-v2/assets/images/icons/table.png">
                       <span style="margin-left: 15px;">
@@ -29,6 +31,17 @@
                     </a>
                 </li>
             <?php endif;?>
+
+            <?php //if(in_array('createMesas', $user_permission) || in_array('updateMesas', $user_permission) || in_array('viewCategory', $user_permission) || in_array('deleteMesas', $user_permission)): ?>
+                <li id="ordenesNav" class="activar">
+                    <a href="<?php echo base_url('ordenes/') ?>">
+                      <img class="fa" src="/stock-v2/assets/images/icons/table.png">
+                      <span style="margin-left: 15px;">
+                        Ordenes Mesa
+                      </span>
+                    </a>
+                </li>
+            <?php //endif;?>
 
 
             <?php if($user_permission): ?>

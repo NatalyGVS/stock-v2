@@ -1,12 +1,10 @@
 <?php 
-
 class Model_cajas extends CI_Model
 {
 	public function __construct()
 	{
 		parent::__construct();
 	}
-
 	/* get datos de cajas */
 	public function getActiveCategory()
 	{
@@ -14,7 +12,6 @@ class Model_cajas extends CI_Model
 		$query = $this->db->query($sql, array(1));
 		return $query->result_array();
 	}
-
 	public function getCajasData($id = null)
 	{
 		if($id) {
@@ -22,12 +19,10 @@ class Model_cajas extends CI_Model
 			$query = $this->db->query($sql, array($id));
 			return $query->row_array();
 		}
-
 		$sql = "SELECT * FROM caja";
 		$query = $this->db->query($sql);
 		return $query->result_array();
 	}
-
 	public function getCajasName($id = null)
 	{
 		if($id) {
@@ -35,7 +30,6 @@ class Model_cajas extends CI_Model
 			$query = $this->db->query($sql, array($id));
 			return $query->row_array();
 		}
-
 		$sql = "SELECT name FROM caja";
 		$query = $this->db->query($sql);
 		return $query->result_array();
@@ -61,7 +55,6 @@ class Model_cajas extends CI_Model
 			return ($insert == true) ? true : false;
 		}
 	}
-
 	public function update($data, $id)
 	{
 		if($data && $id) {
@@ -70,7 +63,6 @@ class Model_cajas extends CI_Model
 			return ($update == true) ? true : false;
 		}
 	}
-
 	public function remove($id)
 	{
 		if($id) {
@@ -79,5 +71,4 @@ class Model_cajas extends CI_Model
 			return ($delete == true) ? true : false;
 		}
 	}
-
-}
+} 
