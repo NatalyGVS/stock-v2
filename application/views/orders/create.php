@@ -7,10 +7,8 @@
 
     </h1>
 
-    
 
-      
-    <div class="d-flex">
+    
 
       <?php foreach ($mesas as $k => $v): ?>
       <?php
@@ -18,44 +16,24 @@
           
            echo 
            '  
-           <div class="p-2 bg-info flex-fill"  }">
-                    <button onclick="editFunc('.$v['id'].')"   class="btn btn-success btn-lg  ">   <h3 > '.$v['name'].' </h3>      </button >
-          </div>
+           
+                    <button onclick="editFunc('.$v['id'].')"   class="btn btn-success btn-lg  " style= "  margin: 15px;  ">   <h3 > '.$v['name'].' </h3>      </button >
+         
            ';
            
         }else{
            echo '
-           <div class="p-2 bg-info flex-fill">
-               <button onclick="editFunc('.$v['id'].')"   class="btn btn-danger btn-lg ">   <h3 > '.$v['name'].' </h3>   </button>
-          </div>
+               <button onclick="editFunc('.$v['id'].')"   class="btn btn-danger btn-lg  " style= "  margin: 15px;  ">   <h3 > '.$v['name'].' </h3>      </button >
+           
+               
            ';
       
         }?>
         <?php endforeach ?>
 
-        </div>
         
-
-
-        <!-- if($v['active']==1){
-          
-          echo 
-          '  
-          <div class="p-2 bg-info flex-fill"  }">
-                    <button onclick="editFunc('.$v['id'].')"   class="btn btn-success btn-lg  ">'.$v['name'].'</button >
-          </div>
-          ';
-          
-       }else{
-          echo '
-          <div class="p-2 bg-info flex-fill">
-               <button onclick="editFunc('.$v['id'].')"   class="btn btn-danger btn-lg ">'.$v['name'].'</button>
-          </div>
-          ';
-     
-       } -->
-
-       
+        
+ 
 
 <!--<?php //if(in_array('updateMesas', $user_permission)): ?>-->
 <!-- edit brand modal -->
