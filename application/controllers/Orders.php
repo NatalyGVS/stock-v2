@@ -29,12 +29,58 @@ class Orders extends Admin_Controller
 	* Fetches the orders data from the orders table 
 	* this function is called from the datatable ajax function
 	*/
+
+	public function fetchMesasDataById($id) 
+	{
+		if($id) {
+			$data = $this->model_mesas->getMesasData($id);
+			echo json_encode($data);
+		}
+
+		return false;
+	}
+
+	public function fetchMesasData()
+	{
+		$result = array('data' => array());
+
+		$data = $this->model_mesas->getMesasData();
+
+		foreach ($data as $key => $value) {
+
+			// button
+			$buttons = '';
+
+			//if(in_array('updateMesas', $this->permission)) {
+				$buttons .= '<button type="button" class="btn btn-default" onclick="editFunc('.$value['id'].')" data-toggle="modal" data-target="#editModal"><i class="fa fa-pencil"></i></button>';
+			//}
+
+			//if(in_array('deleteMesas', $this->permission)) {
+				$buttons .= ' <button type="button" class="btn btn-default" onclick="removeFunc('.$value['id'].')" data-toggle="modal" data-target="#removeModal"><i class="fa fa-trash"></i></button>';
+			//}
+				
+
+			$status = ($value['active'] == 1) ? '<span class="label label-success">Active</span>' : '<span class="label label-warning">Inactive</span>';
+
+			$result['data'][$key] = array(
+				$value['name'],
+				$status,
+				$buttons
+			);
+		} // /foreach
+
+		echo json_encode($result);
+	}
+
+
 	public function fetchOrdersData()
 	{
 		$result = array('data' => array());
 		$data = $this->model_orders->getOrdersData();
 		foreach ($data as $key => $value) {
 			$count_total_item = $this->model_orders->countOrderItem($value['id']);
+
+			date_default_timezone_set("America/Lima");   
 			$date = date('d-m-Y', $value['date_time']);
 			$time = date('h:i a', $value['date_time']);
 			$date_time = $date . ' ' . $time;
@@ -79,7 +125,7 @@ class Orders extends Admin_Controller
             redirect('dashboard', 'refresh');
         }
 		$this->data['page_title'] = 'Add Order';
-		$this->form_validation->set_rules('mesa[]', 'Mesa name', 'trim|required');
+		$this->form_validation->set_rules('product[]', 'Product name', 'trim|required');
 		
 	
         if ($this->form_validation->run() == TRUE) {        	
@@ -87,8 +133,8 @@ class Orders extends Admin_Controller
         	$order_id = $this->model_orders->create();
         	
         	if($order_id) {
-        		$this->session->set_flashdata('success', 'Successfully created');
-        		redirect('orders/update/'.$order_id, 'refresh');
+				$this->session->set_flashdata('success', 'Successfully created');
+				redirect('orders', 'refresh');
         	}
         	else {
         		$this->session->set_flashdata('errors', 'Error occurred!!');
@@ -101,10 +147,13 @@ class Orders extends Admin_Controller
         	$this->data['company_data'] = $company; 
         	$this->data['is_vat_enabled'] = ($company['vat_charge_value'] > 0) ? true : false;
         	$this->data['is_service_enabled'] = ($company['service_charge_value'] > 0) ? true : false;
-        	$this->data['mesas'] = $this->model_mesas->getActiveMesas();      	
+			$this->data['products'] = $this->model_products->getActiveProductData();   
+			$this->data['mesas'] = $this->model_mesas->getActiveMesas();   	
             $this->render_template('orders/create', $this->data);
         }	
 	}
+
+
 	/*
 	* It gets the product id passed from the ajax method.
 	* It checks retrieves the particular product data from the product id 
@@ -118,15 +167,7 @@ class Orders extends Admin_Controller
 			echo json_encode($product_data);
 		}
 	}
-	public function getMesaValueById()
-	{   
-		$mesa_id = $this->input->post('mesa_id');
-		// $product_id = $this->input->post('product_id');
-		if($mesa_id) {
-			$mesas_data = $this->model_mesas->getMesasData($mesa_id);
-			echo json_encode($mesas_data);
-		}
-	}
+
 	/*
 	* It gets the all the active product inforamtion from the product table 
 	* This function is used in the order page, for the product selection in the table
@@ -158,7 +199,7 @@ class Orders extends Admin_Controller
 			redirect('dashboard', 'refresh');
 		}
 		$this->data['page_title'] = 'Update Order';
-		$this->form_validation->set_rules('mesa[]', 'Mesa name', 'trim|required');
+		$this->form_validation->set_rules('product[]', 'Product name', 'trim|required');
 		
 	
         if ($this->form_validation->run() == TRUE) {        	
@@ -188,10 +229,12 @@ class Orders extends Admin_Controller
     			$result['order_item'][] = $v;
     		}
     		$this->data['order_data'] = $result;
-        	$this->data['mesas'] = $this->model_mesas->getActiveMesaData();      	
+        	$this->data['products'] =  $this->model_products->getActiveProductData();      	
             $this->render_template('orders/edit', $this->data);
         }
 	}
+
+
 	/*
 	* It removes the data from the database
 	* and it returns the response into the json format
