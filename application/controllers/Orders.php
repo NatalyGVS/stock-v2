@@ -1,25 +1,19 @@
 <?php
-
 defined('BASEPATH') OR exit('No direct script access allowed');
-
 class Orders extends Admin_Controller 
 {
 	public function __construct()
 	{
 		parent::__construct();
-
 		$this->not_logged_in();
-
 		$this->data['page_title'] = 'Orders';
 		$this->load->model('model_mesas');
 		$this->load->model('model_orders');
-
 		
 		$this->load->model('model_products');
 		$this->load->model('model_company');
 		$this->load->model('model_users');
 	}
-
 	/* 
 	* It only redirects to the manage order page
 	*/
@@ -28,11 +22,9 @@ class Orders extends Admin_Controller
 		if(!in_array('viewOrder', $this->permission)) {
             redirect('dashboard', 'refresh');
         }
-
 		$this->data['page_title'] = 'Manage Orders';
 		$this->render_template('orders/index', $this->data);		
 	}
-
 	/*
 	* Fetches the orders data from the orders table 
 	* this function is called from the datatable ajax function
@@ -40,39 +32,29 @@ class Orders extends Admin_Controller
 	public function fetchOrdersData()
 	{
 		$result = array('data' => array());
-
 		$data = $this->model_orders->getOrdersData();
-
 		foreach ($data as $key => $value) {
-
 			$count_total_item = $this->model_orders->countOrderItem($value['id']);
 			$date = date('d-m-Y', $value['date_time']);
 			$time = date('h:i a', $value['date_time']);
-
 			$date_time = $date . ' ' . $time;
-
 			// button
 			$buttons = '';
-
 			if(in_array('viewOrder', $this->permission)) {
 				$buttons .= '<a target="__blank" href="'.base_url('orders/printDiv/'.$value['id']).'" class="btn btn-default"><i class="fa fa-print"></i></a>';
 			}
-
 			if(in_array('updateOrder', $this->permission)) {
 				$buttons .= ' <a href="'.base_url('orders/update/'.$value['id']).'" class="btn btn-default"><i class="fa fa-pencil"></i></a>';
 			}
-
 			if(in_array('deleteOrder', $this->permission)) {
 				$buttons .= ' <button type="button" class="btn btn-default" onclick="removeFunc('.$value['id'].')" data-toggle="modal" data-target="#removeModal"><i class="fa fa-trash"></i></button>';
 			}
-
 			if($value['paid_status'] == 1) {
 				$paid_status = '<span class="label label-success">Paid</span>';	
 			}
 			else {
 				$paid_status = '<span class="label label-warning">Not Paid</span>';
 			}
-
 			$result['data'][$key] = array(
 				$value['bill_no'],
 				$value['customer_name'],
@@ -84,10 +66,8 @@ class Orders extends Admin_Controller
 				$buttons
 			);
 		} // /foreach
-
 		echo json_encode($result);
 	}
-
 	/*
 	* If the validation is not valid, then it redirects to the create page.
 	* If the validation for each input field is valid then it inserts the data into the database 
@@ -98,9 +78,7 @@ class Orders extends Admin_Controller
 		if(!in_array('createOrder', $this->permission)) {
             redirect('dashboard', 'refresh');
         }
-
 		$this->data['page_title'] = 'Add Order';
-
 		$this->form_validation->set_rules('mesa[]', 'Mesa name', 'trim|required');
 		
 	
@@ -123,13 +101,10 @@ class Orders extends Admin_Controller
         	$this->data['company_data'] = $company; 
         	$this->data['is_vat_enabled'] = ($company['vat_charge_value'] > 0) ? true : false;
         	$this->data['is_service_enabled'] = ($company['service_charge_value'] > 0) ? true : false;
-
         	$this->data['mesas'] = $this->model_mesas->getActiveMesas();      	
-
             $this->render_template('orders/create', $this->data);
         }	
 	}
-
 	/*
 	* It gets the product id passed from the ajax method.
 	* It checks retrieves the particular product data from the product id 
@@ -143,7 +118,6 @@ class Orders extends Admin_Controller
 			echo json_encode($product_data);
 		}
 	}
-
 	public function getMesaValueById()
 	{   
 		$mesa_id = $this->input->post('mesa_id');
@@ -153,7 +127,6 @@ class Orders extends Admin_Controller
 			echo json_encode($mesas_data);
 		}
 	}
-
 	/*
 	* It gets the all the active product inforamtion from the product table 
 	* This function is used in the order page, for the product selection in the table
@@ -164,17 +137,13 @@ class Orders extends Admin_Controller
 		$products = $this->model_products->getActiveProductData();
 		echo json_encode($products);
 	}
-
 	public function getTableMesaRow()
 	{
-
 		$mesas = $this->model_mesas->getActiveMesas();
 		echo json_encode($mesas);
-
 		// $mesas = $this->model_mesas->getActiveCategory();
 		// echo json_encode($mesas);
 	}
-
 	/*
 	* If the validation is not valid, then it redirects to the edit orders page 
 	* If the validation is successfully then it updates the data into the database 
@@ -185,13 +154,10 @@ class Orders extends Admin_Controller
 		if(!in_array('updateOrder', $this->permission)) {
             redirect('dashboard', 'refresh');
         }
-
 		if(!$id) {
 			redirect('dashboard', 'refresh');
 		}
-
 		$this->data['page_title'] = 'Update Order';
-
 		$this->form_validation->set_rules('mesa[]', 'Mesa name', 'trim|required');
 		
 	
@@ -214,25 +180,18 @@ class Orders extends Admin_Controller
         	$this->data['company_data'] = $company;
         	$this->data['is_vat_enabled'] = ($company['vat_charge_value'] > 0) ? true : false;
         	$this->data['is_service_enabled'] = ($company['service_charge_value'] > 0) ? true : false;
-
         	$result = array();
         	$orders_data = $this->model_orders->getOrdersData($id);
-
     		$result['order'] = $orders_data;
     		$orders_item = $this->model_orders->getOrdersItemData($orders_data['id']);
-
     		foreach($orders_item as $k => $v) {
     			$result['order_item'][] = $v;
     		}
-
     		$this->data['order_data'] = $result;
-
         	$this->data['mesas'] = $this->model_mesas->getActiveMesaData();      	
-
             $this->render_template('orders/edit', $this->data);
         }
 	}
-
 	/*
 	* It removes the data from the database
 	* and it returns the response into the json format
@@ -242,9 +201,7 @@ class Orders extends Admin_Controller
 		if(!in_array('deleteOrder', $this->permission)) {
             redirect('dashboard', 'refresh');
         }
-
 		$order_id = $this->input->post('order_id');
-
         $response = array();
         if($order_id) {
             $delete = $this->model_orders->remove($order_id);
@@ -261,19 +218,13 @@ class Orders extends Admin_Controller
             $response['success'] = false;
             $response['messages'] = "Refersh the page again!!";
         }
-
         echo json_encode($response); 
 	}
-
 	/*
 	* It gets the product id and fetch the order data. 
 	* The order print logic is done here 
 	*/
-
-
 	/*IMPRIMIRRRRRRRRRRRR */
-
-
 	public function printDiv($id)
 	{
 		if(!in_array('viewOrder', $this->permission)) {
@@ -284,10 +235,8 @@ class Orders extends Admin_Controller
 			$order_data = $this->model_orders->getOrdersData($id);
 			$orders_items = $this->model_orders->getOrdersItemData($id);
 			$company_info = $this->model_company->getCompanyData(1);
-
 			$order_date = date('d/m/Y', $order_data['date_time']);
 			$paid_status = ($order_data['paid_status'] == 1) ? "Paid" : "Unpaid";
-
 			$html = '<!-- Main content -->
 			<!DOCTYPE html>
 			<html>
@@ -330,7 +279,6 @@ class Orders extends Admin_Controller
 			      <!-- /.col -->
 			    </div>
 			    <!-- /.row -->
-
 			    <!-- Table row -->
 			    <div class="row">
 			      <div class="col-xs-12 table-responsive">
@@ -344,9 +292,7 @@ class Orders extends Admin_Controller
 			          </tr>
 			          </thead>
 			          <tbody>'; 
-
 			          foreach ($orders_items as $k => $v) {
-
 			          	$product_data = $this->model_products->getProductData($v['product_id']); 
 			          	
 			          	$html .= '<tr>
@@ -363,25 +309,21 @@ class Orders extends Admin_Controller
 			      <!-- /.col -->
 			    </div>
 			    <!-- /.row -->
-
 			    <div class="row">
 			      
 			      <div class="col-xs-6 pull pull-right">
-
 			        <div class="table-responsive">
 			          <table class="table">
 			            <tr>
 			              <th style="width:50%">Gross Amount:</th>
 			              <td>'.$order_data['gross_amount'].'</td>
 			            </tr>';
-
 			            if($order_data['service_charge'] > 0) {
 			            	$html .= '<tr>
 				              <th>Service Charge ('.$order_data['service_charge_rate'].'%)</th>
 				              <td>'.$order_data['service_charge'].'</td>
 				            </tr>';
 			            }
-
 			            if($order_data['vat_charge'] > 0) {
 			            	$html .= '<tr>
 				              <th>Vat Charge ('.$order_data['vat_charge_rate'].'%)</th>
@@ -413,9 +355,7 @@ class Orders extends Admin_Controller
 			</div>
 		</body>
 	</html>';
-
 			  echo $html;
 		}
 	}
-
 }

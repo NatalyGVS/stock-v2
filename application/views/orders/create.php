@@ -256,11 +256,9 @@
 <!-- **********************************************  SCRIPTT  ******************************************************************************* -->
 <script type="text/javascript">
   var base_url = "<?php echo base_url(); ?>";
-
   $(document).ready(function() {
     $(".select_group").select2();
     //  $("#description").wysihtml5();
-
     $("#mainOrdersNav").addClass('active');
     $("#addOrderNav").addClass('active');
     
@@ -276,7 +274,6 @@
       var table = $("#product_info_table");
       var count_table_tbody_tr = $("#product_info_table tbody tr").length;
       var row_id = count_table_tbody_tr + 1;
-
       $.ajax({
           url: base_url + '/orders/getTableMesasRow/',
           type: 'post',
@@ -299,25 +296,19 @@
                     // '<td><input type="text" name="amount[]" id="amount_'+row_id+'" class="form-control" disabled><input type="hidden" name="amount_value[]" id="amount_value_'+row_id+'" class="form-control"></td>'+
                     // '<td><button type="button" class="btn btn-default" onclick="removeRow(\''+row_id+'\')"><i class="fa fa-close"></i></button></td>'+
                     // '</tr>';
-
                 if(count_table_tbody_tr >= 1) {
                 $("#product_info_table tbody tr:last").after(html);  
               }
               else {
                 $("#product_info_table tbody").html(html);
               }
-
               $(".mesa").select2();
-
           }
         });
-
       return false;
     }); 
-
   }); // /document
     // ===========================================================================
-
     
   function getTotal(row = null) {
     if(row) {
@@ -327,24 +318,19 @@
       $("#amount_value_"+row).val(total);
       
       subAmount();
-
     } else {
       alert('no row !! please refresh the page');
     }
   }
-
   function getMesaData(row_id)
   {
     var mesa_id = $("#mesa_"+row_id).val();    
     if(mesa_id == "") {
       // $("#rate_"+row_id).val("");
       // $("#rate_value_"+row_id).val("");
-
       // $("#qty_"+row_id).val("");           
-
       // $("#amount_"+row_id).val("");
       // $("#amount_value_"+row_id).val("");
-
     } else {
       // $.ajax({
       //   url: base_url + 'orders/getMesaalueById',
@@ -356,10 +342,8 @@
           
       //     $("#rate_"+row_id).val(response.price);
       //     $("#rate_value_"+row_id).val(response.price);
-
       //     $("#qty_"+row_id).val(1);
       //     $("#qty_value_"+row_id).val(1);
-
       //     var total = Number(response.price) * 1;
       //     total = total.toFixed(2);
       //     $("#amount_"+row_id).val(total);
@@ -370,36 +354,28 @@
       // }); // /ajax function to fetch the product data 
     }
   }
-
     
-
   // calculate the total amount of the order
   function subAmount() {
     var service_charge = <?php echo ($company_data['service_charge_value'] > 0) ? $company_data['service_charge_value']:0; ?>;
     var vat_charge = <?php echo ($company_data['vat_charge_value'] > 0) ? $company_data['vat_charge_value']:0; ?>;
-
     var tableProductLength = $("#product_info_table tbody tr").length;
     var totalSubAmount = 0;
     for(x = 0; x < tableProductLength; x++) {
       var tr = $("#product_info_table tbody tr")[x];
       var count = $(tr).attr('id');
       count = count.substring(4);
-
       totalSubAmount = Number(totalSubAmount) + Number($("#amount_"+count).val());
     } // /for
-
     totalSubAmount = totalSubAmount.toFixed(2);
-
     // sub total
     $("#gross_amount").val(totalSubAmount);
     $("#gross_amount_value").val(totalSubAmount);
-
     // vat
     var vat = (Number($("#gross_amount").val())/100) * vat_charge;
     vat = vat.toFixed(2);
     $("#vat_charge").val(vat);
     $("#vat_charge_value").val(vat);
-
     // service
     var service = (Number($("#gross_amount").val())/100) * service_charge;
     service = service.toFixed(2);
@@ -411,7 +387,6 @@
     totalAmount = totalAmount.toFixed(2);
     // $("#net_amount").val(totalAmount);
     // $("#totalAmountValue").val(totalAmount);
-
     var discount = $("#discount").val();
     if(discount) {
       var grandTotal = Number(totalAmount) - Number(discount);
@@ -423,18 +398,12 @@
       $("#net_amount_value").val(totalAmount);
       
     } // /else discount 
-
   } // /sub total amount
-
   function removeRow(tr_id)
   {
     $("#product_info_table tbody tr#row_"+tr_id).remove();
     subAmount();
   }
-
-
-
-
   
 // edit function
 function editFunc(id)
@@ -444,58 +413,41 @@ function editFunc(id)
     type: 'post',
     dataType: 'json',
     success:function(response) {
-
       $("#edit_mesas_name").val(response.name);
       
       
-
-
-
-
-
       
-
       // submit the edit from 
       $("#updateForm").unbind('submit').bind('submit', function() {
         var form = $(this);
-
         // remove the text-danger
         $(".text-danger").remove();
-
         $.ajax({
           url: form.attr('action') + '/' + id,
           type: form.attr('method'),
           data: form.serialize(), // /converting the form data into array and sending it to server
           dataType: 'json',
           success:function(response) {
-
             manageTable.ajax.reload(null, false); 
-
             if(response.success === true) {
               $("#messages").html('<div class="alert alert-success alert-dismissible" role="alert">'+
                 '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>'+
                 '<strong> <span class="glyphicon glyphicon-ok-sign"></span> </strong>'+response.messages+
               '</div>');
-
-
               // hide the modal
               $("#editModal").modal('hide');
               // reset the form 
               $("#updateForm .form-group").removeClass('has-error').removeClass('has-success');
-
             } else {
-
               if(response.messages instanceof Object) {
                 $.each(response.messages, function(index, value) {
                   var id = $("#"+index);
-
                   id.closest('.form-group')
                   .removeClass('has-error')
                   .removeClass('has-success')
                   .addClass(value.length > 0 ? 'has-error' : 'has-success');
                   
                   id.after(value);
-
                 });
               } else {
                 $("#messages").html('<div class="alert alert-warning alert-dismissible" role="alert">'+
@@ -506,17 +458,11 @@ function editFunc(id)
             }
           }
         }); 
-
         return false;
       });
-
     }
   });
 }
-
-
-
-
 // edit function
 function editFunc(id)
 { 
@@ -525,52 +471,40 @@ function editFunc(id)
     type: 'post',
     dataType: 'json',
     success:function(response) {
-
       $("#edit_mesas_name").val(response.name);
       
       
-
       // submit the edit from 
       $("#updateForm").unbind('submit').bind('submit', function() {
         var form = $(this);
-
         // remove the text-danger
         $(".text-danger").remove();
-
         $.ajax({
           url: form.attr('action') + '/' + id,
           type: form.attr('method'),
           data: form.serialize(), // /converting the form data into array and sending it to server
           dataType: 'json',
           success:function(response) {
-
             manageTable.ajax.reload(null, false); 
-
             if(response.success === true) {
               $("#messages").html('<div class="alert alert-success alert-dismissible" role="alert">'+
                 '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>'+
                 '<strong> <span class="glyphicon glyphicon-ok-sign"></span> </strong>'+response.messages+
               '</div>');
-
-
               // hide the modal
               $("#editModal").modal('hide');
               // reset the form 
               $("#updateForm .form-group").removeClass('has-error').removeClass('has-success');
-
             } else {
-
               if(response.messages instanceof Object) {
                 $.each(response.messages, function(index, value) {
                   var id = $("#"+index);
-
                   id.closest('.form-group')
                   .removeClass('has-error')
                   .removeClass('has-success')
                   .addClass(value.length > 0 ? 'has-error' : 'has-success');
                   
                   id.after(value);
-
                 });
               } else {
                 $("#messages").html('<div class="alert alert-warning alert-dismissible" role="alert">'+
@@ -581,14 +515,9 @@ function editFunc(id)
             }
           }
         }); 
-
         return false;
       });
-
     }
   });
 }
-
-
-
 </script>
