@@ -47,10 +47,8 @@
                 <?php echo validation_errors(); ?>
 
                 <div class="form-group">
-                  <label for="date" class="col-sm-12 control-label">Fecha: <?php echo date('Y-m-d') ?></label>
-                </div>
-                <div class="form-group">
-                  <label for="time" class="col-sm-12 control-label">Fecha: <?php echo date('h:i a') ?></label>
+                   <label for="gross_amount" class="col-sm-12 control-label">Fecha: <?php date_default_timezone_set("America/Lima"); 
+                                                                                           echo date("d/m/Y  , h:i a" ) ?></label> 
                 </div>
 
                 <div class="col-md-4 col-xs-12 pull pull-left">
