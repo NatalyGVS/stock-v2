@@ -113,50 +113,32 @@
           <?php endif; ?>
 
 
-
+           <!--Menu Productos totales-->
           <?php if(in_array('createProduct', $user_permission) || in_array('updateProduct', $user_permission) || in_array('viewProduct', $user_permission) || in_array('deleteProduct', $user_permission)): ?>
-            <li class="treeview" id="mainProductNav">
-              <a href="#">
+            <li id="mainProductNav">
+              <a href="<?php echo base_url('products') ?>">
                 <img class="fa" src="/stock-v2/assets/images/icons/products.png">
                 <span style="margin-left: 15px;">Productos Totales</span>
-                <span class="pull-right-container">
-                  <i class="fa fa-angle-left pull-right"></i>
-                </span>
               </a>
-              <ul class="treeview-menu">
-                <?php if(in_array('createProduct', $user_permission)): ?>
-                  <li id="addProductNav"><a href="<?php echo base_url('products/create') ?>"><i class="fa fa-circle-o"></i> Añadir Producto</a></li>
-                <?php endif; ?>
-                <?php if(in_array('updateProduct', $user_permission) || in_array('viewProduct', $user_permission) || in_array('deleteProduct', $user_permission)): ?>
-                <li id="manageProductNav"><a href="<?php echo base_url('products') ?>"><i class="fa fa-circle-o"></i> Gestionar Productos</a></li>
-                <?php endif; ?>
-              </ul>
             </li>
           <?php endif; ?>
+          <!--Menu Productos totales-->
 
 
+          <!--Menu Pedidos y Ordenes-->
           <?php if(in_array('createOrder', $user_permission) || in_array('updateOrder', $user_permission) || in_array('viewOrder', $user_permission) || in_array('deleteOrder', $user_permission)): ?>
-            <li class="treeview" id="mainOrdersNav">
-              <a href="#">
+            <li class="manageOrdersNav" id="mainOrdersNav">
+              <a href="<?php echo base_url('orders') ?>">
                 <img  class="fa" src="/stock-v2/assets/images/icons/orders.png">
                 <span style="margin-left: 15px;">
                   Pedidos y Ordenes
                 </span>
-                <span class="pull-right-container">
-                  <i class="fa fa-angle-left pull-right"></i>
-                </span>
               </a>
-              <ul class="treeview-menu">
-                <?php if(in_array('createOrder', $user_permission)): ?>
-                  <li id="addOrderNav"><a href="<?php echo base_url('orders/create') ?>"><i class="fa fa-circle-o"></i>Añadir orden</a></li>
-                <?php endif; ?>
-                <?php if(in_array('updateOrder', $user_permission) || in_array('viewOrder', $user_permission) || in_array('deleteOrder', $user_permission)): ?>
-                <li id="manageOrdersNav"><a href="<?php echo base_url('orders') ?>"><i class="fa fa-circle-o"></i>Gestionar pedidos</a></li>
-                <?php endif; ?>
-              </ul>
             </li>
           <?php endif; ?>
+          <!--Menu Pedidos y Ordenes-->
 
+          <!--Menu Reportes e Informes-->
           <?php if(in_array('viewReports', $user_permission)): ?>
               <li id="reportNav">
                   <a href="<?php echo base_url('reports/') ?>">
@@ -167,8 +149,9 @@
                   </a>
               </li>
           <?php endif; ?>
+          <!--Menu Reportes e Informes-->
 
-
+          <!--Menu Restaurant-->
           <?php if(in_array('updateCompany', $user_permission)): ?>
               <li id="companyNav">
                   <a href="<?php echo base_url('company/') ?>">
@@ -179,14 +162,10 @@
                   </a>
               </li>
           <?php endif; ?>
-
-      
+          <!--Menu Restaurant-->
         <?php endif; ?>
-
-
       </ul>
     </section>
-    <!-- /.sidebar -->
   </aside>
 
  
