@@ -1,49 +1,49 @@
 <?php 
-class Model_cajas extends CI_Model
+class Model_client extends CI_Model
 {
 	public function __construct()
 	{
 		parent::__construct();
 	}
-	/* get datos de cajas */
+	/* get datos de Clientes */
 	public function getActiveCategory()
 	{
-		$sql = "SELECT * FROM caja WHERE active = ?";
+		$sql = "SELECT * FROM mesas WHERE active = ?";
 		$query = $this->db->query($sql, array(1));
 		return $query->result_array();
 	}
-	public function getCajasData($id = null)
+	public function getClientesData($id = null)
 	{
 		if($id) {
-			$sql = "SELECT * FROM caja WHERE id = ?";
+			$sql = "SELECT * FROM mesas WHERE id = ?";
 			$query = $this->db->query($sql, array($id));
 			return $query->row_array();
 		}
-		$sql = "SELECT * FROM caja";
+		$sql = "SELECT * FROM Cliente";
 		$query = $this->db->query($sql);
 		return $query->result_array();
 	}
-	public function getCajasName($id = null)
+	public function getClientesName($id = null)
 	{
 		if($id) {
-			$sql = "SELECT name FROM caja WHERE id = ?";
+			$sql = "SELECT name FROM mesas WHERE id = ?";
 			$query = $this->db->query($sql, array($id));
 			return $query->row_array();
 		}
-		$sql = "SELECT name FROM caja";
+		$sql = "SELECT name FROM mesas";
 		$query = $this->db->query($sql);
 		return $query->result_array();
 	}
 
-	public function getCajasActive($id = null)
+	public function getClientesActive($id = null)
 	{
 		if($id) {
-			$sql = "SELECT active FROM caja WHERE id = ?";
+			$sql = "SELECT active FROM mesas WHERE id = ?";
 			$query = $this->db->query($sql, array($id));
 			return $query->row_array();
 		}
 
-		$sql = "SELECT active FROM caja";
+		$sql = "SELECT active FROM mesas";
 		$query = $this->db->query($sql);
 		return $query->result_array();
 	}
@@ -51,7 +51,7 @@ class Model_cajas extends CI_Model
 	public function create($data)
 	{
 		if($data) {
-			$insert = $this->db->insert('caja', $data);
+			$insert = $this->db->insert('Cliente', $data);
 			return ($insert == true) ? true : false;
 		}
 	}
@@ -59,7 +59,7 @@ class Model_cajas extends CI_Model
 	{
 		if($data && $id) {
 			$this->db->where('id', $id);
-			$update = $this->db->update('caja', $data);
+			$update = $this->db->update('Cliente', $data);
 			return ($update == true) ? true : false;
 		}
 	}
@@ -67,7 +67,7 @@ class Model_cajas extends CI_Model
 	{
 		if($id) {
 			$this->db->where('id', $id);
-			$delete = $this->db->delete('caja');
+			$delete = $this->db->delete('Cliente');
 			return ($delete == true) ? true : false;
 		}
 	}
