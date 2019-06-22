@@ -51,7 +51,10 @@ class Model_orders extends CI_Model
     		'net_amount' => $this->input->post('net_amount_value'),
     		'discount' => $this->input->post('discount'),
     		'paid_status' => 2,
-    		'user_id' => $user_id
+			'user_id' => $user_id,
+			'id_mesa' =>  $this->input->post('id_mesa'),
+    		'estado_orden' => 0
+			
     	);
 
 		$insert = $this->db->insert('orders', $data);

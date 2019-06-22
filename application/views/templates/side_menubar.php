@@ -157,9 +157,24 @@
             </li>
           <?php endif; ?>
 
+
+        
+          <?php //if(in_array('viewReports', $user_permission)): ?>
+              <li id="manageOrdersNav">
+                  <a href="<?php echo base_url('orders/estado') ?>">
+                      <img  class="fa" src="/stock-v2/assets/images/icons/reports.png">
+                      <span style="margin-left: 15px;">
+                          Estado Pedido
+                      </span>
+                  </a>
+              </li>
+          <?php// endif; ?>
+
+
+
           <?php if(in_array('viewReports', $user_permission)): ?>
               <li id="reportNav">
-                  <a href="<?php echo base_url('reports/') ?>">
+                  <a href="<?php echo base_url('orders/') ?>">
                       <img  class="fa" src="/stock-v2/assets/images/icons/reports.png">
                       <span style="margin-left: 15px;">
                           Informes/Reportes

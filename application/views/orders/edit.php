@@ -38,7 +38,7 @@
 
         <div class="box">
           <div class="box-header">
-            <h3 class="box-title">Editar Orden</h3>
+            <h3 class="box-title">Editar Ordennn</h3>
           </div>
           <!-- /.box-header -->
           <form role="form" action="<?php base_url('orders/create') ?>" method="post" class="form-horizontal">
@@ -52,6 +52,36 @@
                 </div>
 
                 <div class="col-md-4 col-xs-12 pull pull-left">
+
+
+                  <div class="form-group">
+                    <label for="gross_amount" class="col-sm-5 control-label" style="text-align:left;" >Nombre de Mesa</label>
+                    <div class="col-sm-7">
+                      <input type="text" class="form-control" id="id_mesa" name="id_mesa"  value="<?php echo $order_data['order']['id_mesa'] ?>" autocomplete="off" disabled/>
+                    </div>
+                  </div>
+
+
+
+                  <div class="form-group">
+                    <label for="estado_orden" class="col-sm-5 control-label">Estado pagado</label>
+                    <div class="col-sm-7">
+                      <select type="text" class="form-control" id="estado_orden" name="estado_orden" disabled>
+                        <option value="0">En espera</option>
+                        <option value="1">En Preparacion</option>
+                        <option value="1">Despachado</option>
+                      </select>
+                    </div>
+                  </div>
+
+
+                  <!-- <div class="form-group">
+                    <label for="gross_amount" class="col-sm-5 control-label" style="text-align:left;">Nombre de Mesa</label>
+                    <div class="col-sm-7">
+                      <input type="text" class="form-control" id="estado_orden" name="estado_orden" placeholder="Enter Customer Name" value="<?php //echo $order_data['order']['estado_orden'] ?>" autocomplete="off"/>
+                    </div>
+                  </div> -->
+
 
                   <div class="form-group">
                     <label for="gross_amount" class="col-sm-5 control-label" style="text-align:left;">Nombre del cliente</label>
@@ -166,7 +196,7 @@
                   <div class="form-group">
                     <label for="paid_status" class="col-sm-5 control-label">Estado pagado</label>
                     <div class="col-sm-7">
-                      <select type="text" class="form-control" id="paid_status" name="paid_status">
+                      <select type="text" class="form-control" id="paid_status" name="paid_status" disabled>
                         <option value="1">Pagado</option>
                         <option value="2">No pagado</option>
                       </select>

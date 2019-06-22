@@ -76,10 +76,7 @@
         <!-- Modal body -->
        <div class="modal-body">
         <div class="form-group">
-            <input type="text" class="form-control input-lg text-white bg-dark" id="edit_mesas_name" name="edit_mesas_name"  placeholder=".input-lg" autocomplete="off"
-            
-            style="background-color: #FF6467 ;  font-weight: bold; font-size: 30px; text-align: center;" disabled>
-
+        
             
           </div> 
 
@@ -88,6 +85,21 @@
               <div class="box-body">
 
                 <?php echo validation_errors(); ?>
+                 <input type="text" class="form-control input-lg text-white bg-dark" id="id_mesa" name="id_mesa"     autocomplete="off"
+            
+                 style="background-color: #FF6467 ;  font-weight: bold; font-size: 30px; text-align: center;" disabled> 
+               
+                 <!-- <div class="form-group">
+                    <label for="gross_amount" class="col-sm-5 control-label">Cantidad bruta</label>
+                    <div class="col-sm-7">
+                      <input type="text" class="form-control" id="id_mesa" name="id_mesa" disabled autocomplete="off">
+                      <input type="hidden" class="form-control" id="id_mesa_value" name="id_mesa_value" autocomplete="off">
+                    </div>
+                  </div> -->
+
+                 
+
+                 <!-- value="<?php echo $order_data['order']['id_mesa'] ?>"  -->
 
                 <div class="form-group">
                    <label for="gross_amount" class="col-sm-12 control-label">Fecha: <?php date_default_timezone_set("America/Lima"); 
@@ -321,9 +333,14 @@ function editFunc(id)
     dataType: 'json',
     success:function(response) {
 
-      $("#edit_mesas_name").val(response.name);
-      
+      $("#id_mesa").val(response.name);
+     $("#id_mesa_value").val(response.name);
 
+
+      var valor_mesa = response.name;   
+        //  alert(valor_mesa);              
+               
+                       
       
 
     }

@@ -114,6 +114,75 @@ class Orders extends Admin_Controller
 		} // /foreach
 		echo json_encode($result);
 	}
+
+
+	public function fetchOrdersDataE()
+	{
+		$result = array('data' => array());
+		$data = $this->model_orders->getOrdersData();
+		foreach ($data as $key => $value) {
+			$count_total_item = $this->model_orders->countOrderItem($value['id']);
+
+			date_default_timezone_set("America/Lima");   
+			$date = date('d-m-Y', $value['date_time']);
+			$time = date('h:i a', $value['date_time']);
+			$date_time = $date . ' ' . $time;
+			// button
+			$buttons = '';
+			if(in_array('viewOrder', $this->permission)) {
+				$buttons .= '<a target="__blank" href="'.base_url('orders/printDiv/'.$value['id']).'" class="btn btn-default"><i class="fa fa-print"></i></a>';
+			}
+			if(in_array('updateOrder', $this->permission)) {
+				$buttons .= ' <a href="'.base_url('orders/update/'.$value['id']).'" class="btn btn-default"><i class="fa fa-pencil"></i></a>';
+			}
+			if(in_array('deleteOrder', $this->permission)) {
+				$buttons .= ' <button type="button" class="btn btn-default" onclick="removeFunc('.$value['id'].')" data-toggle="modal" data-target="#removeModal"><i class="fa fa-trash"></i></button>';
+			}
+			if($value['paid_status'] == 1) {
+				$paid_status = '<span class="label label-success">Pagado</span>';	
+			}
+			else {
+				$paid_status = '<span class="label label-warning">No Pago</span>';
+			}
+
+
+
+		    if($value['estado_orden'] == 0) {
+				$estado_orden = '<span class="label label-warning">En Espera</span>';	
+			}
+			else  
+
+				if($value['estado_orden'] == 1) {
+					$estado_orden = '<span class="label label-success">En Preparacion</span>';	
+				}
+			   else {
+				if($value['estado_orden'] == 1) {
+					$estado_orden = '<span class="label label-primary">En Despacho</span>';	
+				} else  {
+					$estado_orden = '<span class="label label-danger">NO IDENTIFICADO</span>';	
+				}
+			   }
+			
+			
+			$result['data'][$key] = array(
+				$value['bill_no'],  
+				$value['customer_name'],
+				$value['customer_phone'],
+				$date_time,
+				$count_total_item,
+				$value['net_amount'],
+				$paid_status,
+				$value['user_id'],  
+				$estado_orden,
+				$value['id_mesa'], 
+				$buttons
+			);
+		} // /foreach
+		echo json_encode($result);
+	}
+
+
+	
 	/*
 	* If the validation is not valid, then it redirects to the create page.
 	* If the validation for each input field is valid then it inserts the data into the database 
@@ -208,7 +277,7 @@ class Orders extends Admin_Controller
         	
         	if($update == true) {
         		$this->session->set_flashdata('success', 'Successfully updated');
-        		redirect('orders/update/'.$id, 'refresh');
+        		redirect('orders', 'refresh');
         	}
         	else {
         		$this->session->set_flashdata('errors', 'Error occurred!!');

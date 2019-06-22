@@ -75,6 +75,8 @@ INSERT INTO `groups` (`id`, `group_name`, `permission`) VALUES
 CREATE TABLE `orders` (
   `id` int(11) NOT NULL,
   `bill_no` varchar(255) NOT NULL,
+  `id_mesa` int(11) NOT NULL,
+  `estado_orden` int(11) NOT NULL,
   `customer_name` varchar(255) NOT NULL,
   `customer_address` varchar(255) NOT NULL,
   `customer_phone` varchar(255) NOT NULL,
@@ -308,3 +310,7 @@ ALTER TABLE `mesas`
 
 ALTER TABLE `caja`
   ADD PRIMARY KEY (`id`);
+
+  ALTER TABLE orders ADD id_mesa int(11) NULL;
+ALTER TABLE orders ADD estado_orden int(11) NOT NULL;
+ 
