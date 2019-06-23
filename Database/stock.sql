@@ -311,6 +311,6 @@ ALTER TABLE `mesas`
 ALTER TABLE `caja`
   ADD PRIMARY KEY (`id`);
 
-  ALTER TABLE orders ADD id_mesa int(11) NULL;
+ALTER TABLE orders ADD id_mesa int(11) NOT NULL;
 ALTER TABLE orders ADD estado_orden int(11) NOT NULL;
  

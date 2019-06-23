@@ -9,7 +9,6 @@ class Orders extends Admin_Controller
 		$this->data['page_title'] = 'Orders';
 		$this->load->model('model_mesas');
 		$this->load->model('model_orders');
-		
 		$this->load->model('model_products');
 		$this->load->model('model_company');
 		$this->load->model('model_users');
@@ -96,19 +95,48 @@ class Orders extends Admin_Controller
 				$buttons .= ' <button type="button" class="btn btn-default" onclick="removeFunc('.$value['id'].')" data-toggle="modal" data-target="#removeModal"><i class="fa fa-trash"></i></button>';
 			}
 			if($value['paid_status'] == 1) {
-				$paid_status = '<span class="label label-success">Paid</span>';	
+				$paid_status = '<span class="label label-success">Pagado</span>';	
 			}
 			else {
-				$paid_status = '<span class="label label-warning">Not Paid</span>';
+				$paid_status = '<span class="label label-warning">No Pagado</span>';
 			}
+
+			if($value['estado_orden'] == 0) {
+				$estado_orden = '<span class="label label-default">En Espera</span>';	
+			}
+			else  
+
+			{
+				if($value['estado_orden'] == 1) {
+					$estado_orden = '<span class="label label-warning">En Preparacion</span>';	
+				}
+			   else {
+				if($value['estado_orden'] == 2) {
+					$estado_orden = '<span class="label label-primary">En Despacho</span>';	
+				} else  {
+					$estado_orden = '<span class="label label-danger">NO IDENTIFICADO</span>';	
+				}
+			   }
+			}
+
+            $mesa = $this->model_mesas->getMesasData($value['id_mesa']) ;
+
+			$usuario = $this->model_users->getUserData($value['user_id']) ;
+
+			
+		
+
 			$result['data'][$key] = array(
 				$value['bill_no'],
+				
+				$mesa['name'],
+				$usuario['username'],
 				$value['customer_name'],
-				$value['customer_phone'],
 				$date_time,
 				$count_total_item,
 				$value['net_amount'],
 				$paid_status,
+				$estado_orden ,
 				$buttons
 			);
 		} // /foreach
@@ -147,21 +175,7 @@ class Orders extends Admin_Controller
 
 
 
-		    if($value['estado_orden'] == 0) {
-				$estado_orden = '<span class="label label-warning">En Espera</span>';	
-			}
-			else  
-
-				if($value['estado_orden'] == 1) {
-					$estado_orden = '<span class="label label-success">En Preparacion</span>';	
-				}
-			   else {
-				if($value['estado_orden'] == 1) {
-					$estado_orden = '<span class="label label-primary">En Despacho</span>';	
-				} else  {
-					$estado_orden = '<span class="label label-danger">NO IDENTIFICADO</span>';	
-				}
-			   }
+		
 			
 			
 			$result['data'][$key] = array(
@@ -193,7 +207,7 @@ class Orders extends Admin_Controller
 		if(!in_array('createOrder', $this->permission)) {
             redirect('dashboard', 'refresh');
         }
-		$this->data['page_title'] = 'Add Order';
+		$this->data['page_title'] = 'Agregar Orden';
 		$this->form_validation->set_rules('product[]', 'Product name', 'trim|required');
 		
 	

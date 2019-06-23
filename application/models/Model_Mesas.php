@@ -19,21 +19,23 @@ class Model_mesas extends CI_Model
 			$query = $this->db->query($sql, array($id));
 			return $query->row_array();
 		}
-		$sql = "SELECT * FROM mesas";
-		$query = $this->db->query($sql);
-		return $query->result_array();
+		// $sql = "SELECT * FROM mesas";
+		// $query = $this->db->query($sql);
+		// return $query->result_array();
 	}
-	public function getMesasName($id = null)
+
+	public function getMesaforName($nameM)
 	{
-		if($id) {
-			$sql = "SELECT name FROM mesas WHERE id = ?";
-			$query = $this->db->query($sql, array($id));
+		if($nameM) {
+			$sql = "SELECT * FROM mesas WHERE name = ?";
+			$query = $this->db->query($sql, array($nameM));
 			return $query->row_array();
 		}
-		$sql = "SELECT name FROM mesas";
-		$query = $this->db->query($sql);
-		return $query->result_array();
+		// $sql = "SELECT * FROM mesas";
+		// $query = $this->db->query($sql);
+		// return $query->result_array();
 	}
+
 	public function create($data)
 	{
 		if($data) {

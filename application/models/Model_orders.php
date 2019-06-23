@@ -35,6 +35,15 @@ class Model_orders extends CI_Model
 
 	public function create()
 	{
+		$name_mesa = $this->input->post('id_mesa');
+
+		$this->load->model('model_mesas');
+
+		$mesa = $this->model_mesas->getMesaforName($name_mesa) ;
+
+		
+
+
 		$user_id = $this->session->userdata('id');
 		$bill_no = 'FISI-'.strtoupper(substr(md5(uniqid(mt_rand(), true)), 0, 4));
     	$data = array(
@@ -52,7 +61,7 @@ class Model_orders extends CI_Model
     		'discount' => $this->input->post('discount'),
     		'paid_status' => 2,
 			'user_id' => $user_id,
-			'id_mesa' =>  $this->input->post('id_mesa'),
+			'id_mesa' => $mesa['id'],
     		'estado_orden' => 0
 			
     	);
@@ -86,6 +95,7 @@ class Model_orders extends CI_Model
 
 		return ($order_id) ? $order_id : false;
 	}
+
 
 	public function countOrderItem($order_id)
 	{

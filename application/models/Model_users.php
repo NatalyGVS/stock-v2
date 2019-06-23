@@ -19,6 +19,18 @@ class Model_users extends CI_Model
 		$query = $this->db->query($sql, array(1));
 		return $query->result_array();
 	}
+	public function getUserName($userId = null) 
+	{
+		if($userId) {
+			$sql = "SELECT username FROM users WHERE id = ?";
+			$query = $this->db->query($sql, array($userId));
+			return $query->row_array();
+		}
+
+		$sql = "SELECT * FROM users WHERE id != ?";
+		$query = $this->db->query($sql, array(1));
+		return $query->result_array();
+	}
 
 	public function getUserGroup($userId = null) 
 	{

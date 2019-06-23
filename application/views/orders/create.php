@@ -85,47 +85,43 @@
               <div class="box-body">
 
                 <?php echo validation_errors(); ?>
-                 <input type="text" class="form-control input-lg text-white bg-dark" id="id_mesa" name="id_mesa"     autocomplete="off"
-            
-                 style="background-color: #FF6467 ;  font-weight: bold; font-size: 30px; text-align: center;" disabled> 
-               
-                 <!-- <div class="form-group">
-                    <label for="gross_amount" class="col-sm-5 control-label">Cantidad bruta</label>
-                    <div class="col-sm-7">
-                      <input type="text" class="form-control" id="id_mesa" name="id_mesa" disabled autocomplete="off">
-                      <input type="hidden" class="form-control" id="id_mesa_value" name="id_mesa_value" autocomplete="off">
-                    </div>
-                  </div> -->
 
-                 
 
-                 <!-- value="<?php echo $order_data['order']['id_mesa'] ?>"  -->
+             
+                 <!-- mesa -->
 
-                <div class="form-group">
+                 <div class="form-group">
+                    <div class="col-sm-12">
+                       <input type="text" class="form-control input-lg" id="id_mesa" name="id_mesa"  autocomplete="off"  style="background-color: #FF6467 ;  font-weight: bold; font-size: 30px; text-align: center;" />
+                     </div>
+                  </div>  
+               <!-- fecha -->
+                  <div class="form-group">
                    <label for="gross_amount" class="col-sm-12 control-label">Fecha: <?php date_default_timezone_set("America/Lima"); 
                                                                                            echo date("d/m/Y  , h:i a" ) ?></label> 
                 </div>
 
-                <div class="col-md-4 col-xs-12 pull pull-left">
-
+                <div class="col-md-6 col-xs-12 pull pull-left">
+               
+                      
                   <div class="form-group">
                     <label for="gross_amount" class="col-sm-5 control-label" style="text-align:left;">Nombre del cliente</label>
                     <div class="col-sm-7">
-                      <input type="text" class="form-control" id="customer_name" name="customer_name" placeholder="Enter Customer Name" autocomplete="off" />
+                      <input type="text" class="form-control" id="customer_name" name="customer_name" placeholder="Ingresa Nombre del cliente" autocomplete="off" />
                     </div>
                   </div>
 
                   <div class="form-group">
                     <label for="gross_amount" class="col-sm-5 control-label" style="text-align:left;">Dirección del cliente</label>
                     <div class="col-sm-7">
-                      <input type="text" class="form-control" id="customer_address" name="customer_address" placeholder="Enter Customer Address" autocomplete="off">
+                      <input type="text" class="form-control" id="customer_address" name="customer_address" placeholder="Ingresa Direccion del Cliente" autocomplete="off">
                     </div>
                   </div>
 
                   <div class="form-group">
                     <label for="gross_amount" class="col-sm-5 control-label" style="text-align:left;">Telefono del cliente</label>
                     <div class="col-sm-7">
-                      <input type="text" class="form-control" id="customer_phone" name="customer_phone" placeholder="Enter Customer Phone" autocomplete="off">
+                      <input type="text" class="form-control" id="customer_phone" name="customer_phone" placeholder="Ingresa Telefono del cliente" autocomplete="off">
                     </div>
                   </div>
                 </div>
@@ -136,9 +132,9 @@
                   <thead>
                     <tr>
                       <th style="width:50%">Producto</th>
-                      <th style="width:10%">Qty</th>
-                      <th style="width:10%">Rate</th>
-                      <th style="width:20%">Cantidad</th>
+                      <th style="width:10%">Cantidad</th>
+                      <th style="width:10%">Precio Unitario</th>
+                      <th style="width:20%">Monto</th>
                       <th style="width:10%"><button type="button" id="add_row" class="btn btn-default"><i class="fa fa-plus"></i></button></th>
                     </tr>
                   </thead>
@@ -178,6 +174,7 @@
                       <input type="hidden" class="form-control" id="gross_amount_value" name="gross_amount_value" autocomplete="off">
                     </div>
                   </div>
+
                   <?php if($is_service_enabled == true): ?>
                   <div class="form-group">
                     <label for="service_charge" class="col-sm-5 control-label">S de carga<?php echo $company_data['service_charge_value'] ?> %</label>
@@ -187,6 +184,7 @@
                     </div>
                   </div>
                   <?php endif; ?>
+
                   <?php if($is_vat_enabled == true): ?>
                   <div class="form-group">
                     <label for="vat_charge" class="col-sm-5 control-label">Vat <?php echo $company_data['vat_charge_value'] ?> %</label>
@@ -196,12 +194,14 @@
                     </div>
                   </div>
                   <?php endif; ?>
+
                   <div class="form-group">
                     <label for="discount" class="col-sm-5 control-label">Descuento</label>
                     <div class="col-sm-7">
                       <input type="text" class="form-control" id="discount" name="discount" placeholder="Descuento" onkeyup="subAmount()" autocomplete="off">
                     </div>
                   </div>
+
                   <div class="form-group">
                     <label for="net_amount" class="col-sm-5 control-label">Importe neto</label>
                     <div class="col-sm-7">
@@ -210,6 +210,7 @@
                     </div>
                   </div>
 
+
                 </div>
               </div> 
               <!-- /.box-body -->
@@ -217,6 +218,7 @@
                <div class="box-footer">
                 <input type="hidden" name="service_charge_rate" value="<?php echo $company_data['service_charge_value'] ?>" autocomplete="off">
                 <input type="hidden" name="vat_charge_rate" value="<?php echo $company_data['vat_charge_value'] ?>" autocomplete="off">
+                
                 <button type="submit" class="btn btn-primary">Crear orden</button>
                 <a href="<?php echo base_url('orders/') ?>" class="btn btn-warning">Atras</a>
               </div>
@@ -263,7 +265,7 @@
 <script type="text/javascript">
   var base_url = "<?php echo base_url(); ?>";
   var manageTable;
-
+  var valor_mesa;
   $(document).ready(function() {
     $(".select_group").select2();
     // $("#description").wysihtml5();
@@ -325,6 +327,7 @@
 
  
 // edit function
+
 function editFunc(id)
 { 
   $.ajax({
@@ -334,15 +337,12 @@ function editFunc(id)
     success:function(response) {
 
       $("#id_mesa").val(response.name);
-     $("#id_mesa_value").val(response.name);
+       $("#id_mesa_value").val(response.name);
 
 
-      var valor_mesa = response.name;   
-        //  alert(valor_mesa);              
-               
-                       
-      
-
+       valor_mesa = response.name;   
+          // alert(valor_mesa);              
+     
     }
   });
 };
@@ -403,6 +403,10 @@ function editFunc(id)
 
   // calculate the total amount of the order
   function subAmount() {
+//  alert(valor_mesa); 
+     $("#id_mesa").val(valor_mesa);
+      $("#id_mesa_value").val(valor_mesa);
+
     var service_charge = <?php echo ($company_data['service_charge_value'] > 0) ? $company_data['service_charge_value']:0; ?>;
     var vat_charge = <?php echo ($company_data['vat_charge_value'] > 0) ? $company_data['vat_charge_value']:0; ?>;
 

@@ -50,15 +50,15 @@
               <thead>
               <tr>
                  <th> no Cuenta  </th>
+                 <th> id Mesa </th>
+                 <th> id Usuario </th>
                  <th> Nombre del cliente </th>
-                 <th> Teléfono del cliente </th>
                  <th> Fecha y hora </th>
                  <th> Total de productos </th>
                  <th> Cantidad total </th>
                  <th> Estado de pago </th>
-                  <th> id User </th>
-                  <th> Estado Pedido </th>
-                  <th> id Mesa </th>
+                 <th> Estado Pedido </th>
+                  
                 <?php if(in_array('updateOrder', $user_permission) || in_array('viewOrder', $user_permission) || in_array('deleteOrder', $user_permission)): ?>
                   <th>Acción</th>
                 <?php endif; ?>
