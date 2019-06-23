@@ -32,7 +32,7 @@
                 </li>
             <?php endif;?>
 
-            <?php //if(in_array('createMesas', $user_permission) || in_array('updateMesas', $user_permission) || in_array('viewCategory', $user_permission) || in_array('deleteMesas', $user_permission)): ?>
+            <!-- <?php //if(in_array('createMesas', $user_permission) || in_array('updateMesas', $user_permission) || in_array('viewCategory', $user_permission) || in_array('deleteMesas', $user_permission)): ?>
                 <li id="ordenesNav" class="activar">
                     <a href="<?php echo base_url('ordenes/') ?>">
                       <img class="fa" src="/stock-v2/assets/images/icons/table.png">
@@ -41,7 +41,7 @@
                       </span>
                     </a>
                 </li>
-            <?php //endif;?>
+            <?php //endif;?> -->
            
 
 
