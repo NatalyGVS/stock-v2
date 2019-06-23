@@ -68,7 +68,7 @@ modelo de mesas y devuelve los datos en formato json.
 			//}
 				
 
-			$status = ($value['active'] == 1) ? '<span class="label label-success">Active</span>' : '<span class="label label-warning">Inactive</span>';
+			$status = ($value['active'] == 1) ? '<span class="label label-success">Libre</span>' : '<span class="label label-danger">Ocupado</span>';
 
 			$result['data'][$key] = array(
 				$value['name'],
@@ -147,7 +147,7 @@ Comprueba la validación del formulario de mesas y si la validación se realiza
 	        if ($this->form_validation->run() == TRUE) {
 	        	$data = array(
 	        		'name' => $this->input->post('edit_mesas_name'),
-	        		// 'active' => $this->input->post('edit_active'),	
+	        		'active' => $this->input->post('edit_active'),	
 	        	);
 
 	        	$update = $this->model_mesas->update($data, $id);

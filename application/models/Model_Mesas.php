@@ -12,16 +12,28 @@ class Model_mesas extends CI_Model
 		$query = $this->db->query($sql, array(1));
 		return $query->result_array();
 	}
-	public function getMesasData($id = null)
+	public function getMesasData($id = null) // MESAS DEL RESTAURANTE
 	{
 		if($id) {
 			$sql = "SELECT * FROM mesas WHERE id = ?";
 			$query = $this->db->query($sql, array($id));
 			return $query->row_array();
 		}
-		// $sql = "SELECT * FROM mesas";
-		// $query = $this->db->query($sql);
-		// return $query->result_array();
+		  $sql = "SELECT * FROM mesas";
+		  $query = $this->db->query($sql);
+		  return $query->result_array();
+	}
+
+	public function getMesasData_PyO($id = null)  // PEDIDOS Y ORDENES
+	{
+		if($id) {
+			$sql = "SELECT * FROM mesas WHERE id = ?";
+			$query = $this->db->query($sql, array($id));
+			return $query->row_array();
+		}
+		//  $sql = "SELECT * FROM mesas";
+		//  $query = $this->db->query($sql);
+		//  return $query->result_array();
 	}
 
 	public function getMesaforName($nameM)

@@ -32,7 +32,7 @@ class Orders extends Admin_Controller
 	public function fetchMesasDataById($id) 
 	{
 		if($id) {
-			$data = $this->model_mesas->getMesasData($id);
+			$data = $this->model_mesas->getMesasData_PyO($id);
 			echo json_encode($data);
 		}
 
@@ -43,7 +43,7 @@ class Orders extends Admin_Controller
 	{
 		$result = array('data' => array());
 
-		$data = $this->model_mesas->getMesasData();
+		$data = $this->model_mesas->getMesasData_PyO();
 
 		foreach ($data as $key => $value) {
 
@@ -119,7 +119,7 @@ class Orders extends Admin_Controller
 			   }
 			}
 
-            $mesa = $this->model_mesas->getMesasData($value['id_mesa']) ;
+            $mesa = $this->model_mesas->getMesasData_PyO($value['id_mesa']) ;
 
 			$usuario = $this->model_users->getUserData($value['user_id']) ;
 
@@ -362,7 +362,7 @@ class Orders extends Admin_Controller
 			$orders_items = $this->model_orders->getOrdersItemData($id);
 			$company_info = $this->model_company->getCompanyData(1);
 			$order_date = date('d/m/Y', $order_data['date_time']);
-			$paid_status = ($order_data['paid_status'] == 1) ? "Paid" : "Unpaid";
+			$paid_status = ($order_data['paid_status'] == 1) ? "Pagado" : "No Pagado";
 			$html = '<!-- Main content -->
 			<!DOCTYPE html>
 			<html>
@@ -384,7 +384,7 @@ class Orders extends Admin_Controller
 			  <section class="invoice">
 			    <!-- title row -->
 			    <div class="row">
-			      <div class="col-xs-12">
+			      <div class="col-xs-12" >
 			        <h2 class="page-header">
 			          '.$company_info['company_name'].'
 			          <small class="pull-right">Date: '.$order_date.'</small>
@@ -397,10 +397,10 @@ class Orders extends Admin_Controller
 			      
 			      <div class="col-sm-4 invoice-col">
 			        
-			        <b>Bill ID:</b> '.$order_data['bill_no'].'<br>
-			        <b>Name:</b> '.$order_data['customer_name'].'<br>
-			        <b>Address:</b> '.$order_data['customer_address'].' <br />
-			        <b>Phone:</b> '.$order_data['customer_phone'].'
+			        <b>Nº Cuenta:</b> '.$order_data['bill_no'].'<br>
+			        <b>Nombre:</b> '.$order_data['customer_name'].'<br>
+			        <b>Direccion:</b> '.$order_data['customer_address'].' <br />
+			        <b>Celular:</b> '.$order_data['customer_phone'].'
 			      </div>
 			      <!-- /.col -->
 			    </div>
@@ -411,10 +411,10 @@ class Orders extends Admin_Controller
 			        <table class="table table-striped">
 			          <thead>
 			          <tr>
-			            <th>Product name</th>
-			            <th>Price</th>
-			            <th>Qty</th>
-			            <th>Amount</th>
+			            <th>Lista de Productos</th>
+			            <th>Precio</th>
+			            <th>Cantidad</th>
+			            <th>Monto</th>
 			          </tr>
 			          </thead>
 			          <tbody>'; 
@@ -441,7 +441,7 @@ class Orders extends Admin_Controller
 			        <div class="table-responsive">
 			          <table class="table">
 			            <tr>
-			              <th style="width:50%">Gross Amount:</th>
+			              <th style="width:50%">Cantidad Bruta:</th>
 			              <td>'.$order_data['gross_amount'].'</td>
 			            </tr>';
 			            if($order_data['service_charge'] > 0) {
@@ -459,15 +459,15 @@ class Orders extends Admin_Controller
 			            
 			            
 			            $html .=' <tr>
-			              <th>Discount:</th>
+			              <th>Descuento:</th>
 			              <td>'.$order_data['discount'].'</td>
 			            </tr>
 			            <tr>
-			              <th>Net Amount:</th>
+			              <th>Importe Neto:</th>
 			              <td>'.$order_data['net_amount'].'</td>
 			            </tr>
 			            <tr>
-			              <th>Paid Status:</th>
+			              <th>Estado de Pago:</th>
 			              <td>'.$paid_status.'</td>
 			            </tr>
 			          </table>

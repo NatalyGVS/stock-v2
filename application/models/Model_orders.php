@@ -40,8 +40,23 @@ class Model_orders extends CI_Model
 		$this->load->model('model_mesas');
 
 		$mesa = $this->model_mesas->getMesaforName($name_mesa) ;
+			  
+		// ****** MODIFICAR ESTADO DE MESA
+			   
+				if( $mesa['active']==1) { //LIBRE
+					$data = array( 'active' => 2 );
+					$update = $this->model_mesas->update($data, $mesa['id']);
+					
+				}
+				else {  // $mesa['active']==2  // OCUPADO
+//// No se puede crear orden 
+// MANDAR A EDIT MESA 
 
-		
+
+
+				}
+
+
 
 
 		$user_id = $this->session->userdata('id');
@@ -66,6 +81,9 @@ class Model_orders extends CI_Model
 			
     	);
 
+ 
+
+		// ******
 		$insert = $this->db->insert('orders', $data);
 		$order_id = $this->db->insert_id();
 

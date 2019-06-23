@@ -95,8 +95,8 @@
           <div class="form-group">
             <label for="active">Estado</label>
             <select class="form-control" id="active" name="active">
-              <option value="1">Activo</option>
-              <option value="2">Inactivo</option>
+              <option value="1">Libre</option>
+              <option value="2">Ocupado</option>
             </select>
           </div>
           
@@ -138,8 +138,8 @@
           <div class="form-group">
             <label for="edit_active">Estado</label>
             <select class="form-control" id="edit_active" name="edit_active">
-              <option value="1">Activo</option>
-              <option value="2">Inactivo</option>
+              <option value="1">Libre</option>
+              <option value="2">Ocupado</option>
             </select>
           </div>
         </div>
