@@ -176,8 +176,6 @@
         <h4 class="modal-title">Registrar Usuario</h4>
       </div>
 
-      <form role="form" action="<?php echo base_url('mesas/create') ?>" method="post" id="createForm">
-
         <div class="modal-body">
 
           <div class="form-group">
@@ -187,11 +185,8 @@
         </div>
 
         <div class="modal-footer">
-          <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="window.location.href = '../registrar.html';">Cerrar</button>
         </div>
-
-      </form>
-
 
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
