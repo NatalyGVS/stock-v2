@@ -1,7 +1,7 @@
 
 --
 -- Host: localhost:8889
--- Generation Time: Feb 24, 2018 at 06:00 PM
+-- Generation Time: Jun 24, 2019 at 06:00 PM
 -- Server version: 5.6.35
 -- PHP Version: 5.6.31
 
@@ -43,10 +43,6 @@ CREATE TABLE `company` (
 --
 -- Dumping data for table `company`
 --
-
-INSERT INTO `company` (`id`, `company_name`, `service_charge_value`, `vat_charge_value`, `address`, `phone`, `country`, `message`, `currency`) VALUES
-(1, 'Infosys private', '13', '10', 'Madrid', '758676851', 'Spain', 'hello everyone one', 'USD');
-
 -- --------------------------------------------------------
 
 --
@@ -208,7 +204,7 @@ ALTER TABLE `orders_item`
 --
 -- Indexes for table `products`
 --
-ALTER TABLE `s`
+ALTER TABLE `products`
   ADD PRIMARY KEY (`id`);
 
 
