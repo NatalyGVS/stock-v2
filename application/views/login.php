@@ -69,7 +69,7 @@
      </div>
     </form>
 
-    <a class="btn btn-block bg-green" href="<?php echo base_url('cliente/')?>">Ir a la Página Principal</a>
+    <a class="btn btn-block bg-green" href="../application/views/cliente/">Ir a la Página Principal</a>
 
   </div>
   <!-- /.login-box-body -->
