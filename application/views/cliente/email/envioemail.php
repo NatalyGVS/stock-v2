@@ -13,7 +13,7 @@
 
   require 'vendor/autoload.php';
 
-  $mail = new PHPMailer(true);                              // Passing `true` enables exceptions
+  /*$mail = new PHPMailer(true);                              // Passing `true` enables exceptions
                                 // Enable verbose debug output
    $mail->isSMTP();                                      // Set mailer to use SMTP
       $mail->Host = 'smtp.gmail.com';  // Specify main and backup SMTP servers
@@ -41,7 +41,11 @@
       $mail->Body .= "</ul><p>Esperamos que puedas disfrutar de una gran experiencia pidiendo tus platos favoritos!. Recuerda que en nuestra p&aacute;gina web puedes ver más informaci&oacute;n sobre los productos que ofrecemos.</p>";
       $mail->Body .=" --<br>Saludos.</p>";
       $mail->Body .=" <p style='font-weight: bold; font-size: 80%;'>Unidad de Inform&aacute;tica<br>Restaurante La Reserva<br>FISI - UNMSM</p>";
-
-      $mail->send();
-      echo "<script>location.href = 'http://localhost/stock-v2/application/views/cliente/';</script>";
+*/
+      //if($mail->send()){
+      //  echo "<script>location.href = 'http://localhost/stock-v2/application/views/cliente/';</script>";
+      //}else{
+        echo "<script>location.href = 'http://localhost/stock-v2/application/views/cliente/';</script>";
+      //}
+      
   ?>

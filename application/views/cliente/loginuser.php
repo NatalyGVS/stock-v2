@@ -1,6 +1,6 @@
 <?php
 
-	session_start();
+	
 	include ('ClientUser.php');
 
 	$username = "sin nickname";
@@ -20,8 +20,10 @@
 	if(strcmp($listar, "false")){
 		echo "Contraseña o Email incorrectos";
 	}else{
-		$_SESSION['email']  = $email;
-		echo "<script>location.href='http://localhost/stock-v2/application/views/cliente/category.php';</script>";
+		session_start();
+		$_SESSION['email']  = $listar['email'];
+		$_SESSION['username'] = $listar['username'];
+		header("Location: index.php");
 	}
 
 

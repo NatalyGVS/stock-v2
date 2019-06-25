@@ -1,4 +1,12 @@
-<?php session_start();?>
+<?php 
+	session_start();
+	$username = $_SESSION['username'];
+	$email = $_SESSION['email'];
+	if(!strcmp($email, "")){
+		echo "<script>location.href='http://localhost/stock-v2/application/views/cliente/';</script>";
+	}
+	 
+?>
 
 <!DOCTYPE html>
 <html lang="zxx">
@@ -120,7 +128,7 @@
 					</div>
 					<div class="col-xl-6 col-lg-5">
 						<form class="header-search-form">
-							<input type="text" placeholder="Search on divisima ....">
+							<input type="text" placeholder="Buscar productos....">
 							<button><i class="flaticon-search"></i></button>
 						</form>
 					</div>
@@ -128,14 +136,14 @@
 						<div class="user-panel">
 							<div class="up-item">
 								<i class="flaticon-profile"></i>
-								<p><?php $email = $_SESSION['email']; echo "$email";?></p>
+								<span><?php echo "$username";?></span>
 							</div>
 							<div class="up-item">
 								<div class="shopping-card">
 									<i class="flaticon-bag"></i>
 									<span>0</span>
 								</div>
-								<a href="cart.html">Shopping Cart</a>
+								<a href="cart.html">Carrito de compras</a>
 							</div>
 						</div>
 					</div>

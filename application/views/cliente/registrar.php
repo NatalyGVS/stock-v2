@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Registro Restaurant La Reserva</title>
 
@@ -54,34 +54,55 @@
 
                 <form class="col-12" action="backend/registraruser.php" method="post">
                     <div class="row">
-                    <div class="col-sm-5">
-                     <div class="wrap-input100 validate-input" data-validate="Datos requeridos" align="left">
-                        <label class="label-input100" for="name">Nombres (requerido)</label>
-                        <input type="text" class="input100" id="nombre" placeholder="* Nombres" name="firstname" required />
-                        <span class="focus-input100"></span>
-                     
+                        <div class="col-sm-5">
+                            <div class="wrap-input100 validate-input" data-validate="Datos requeridos" align="left">
+                                <label class="label-input100" for="name">Nombres (requerido)</label>
+                                <input type="text" class="input100" id="nombre" placeholder="* Nombres" name="firstname" required />
+                                <span class="focus-input100"></span>
+                         
+                            </div>
+                        </div>
+                       
+                       <div class="col-sm-7">
+                            <div class="wrap-input100 validate-input" data-validate="Datos requeridos" align="left">
+                        
+                                <label class="label-input100" for="name">Apellidos (requerido)</label>
+                                <input type="text" id="apellidos" class="input100" placeholder="* Apellidos completos" name="lastname"/>
+                        
+                                <span class="focus-input100"></span>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                   
-                   <div class="col-sm-7">
-                   <div class="wrap-input100 validate-input" data-validate="Datos requeridos" align="left">
-                    
-                            <label class="label-input100" for="name">Apellidos (requerido)</label>
-                            <input type="text" id="apellidos" class="input100" placeholder="* Apellidos completos" name="lastname"/>
-                    
-                        <span class="focus-input100"></span>
+
+                    <div class="row">
+                        <div class="col-sm-5">
+                            <div class="wrap-input100 validate-input" data-validate="Datos requeridos" align="left">
+                                <label class="label-input100" for="name">Username (requerido)</label>
+                                <input type="text" class="input100" id="nombre" placeholder="* Username" name="username" required autocomplete="off"/>
+                                <span class="focus-input100"></span>
+                         
+                            </div>
+                        </div>
+                       
+                       <div class="col-sm-7">
+                            <div class="wrap-input100 validate-input" data-validate="Datos requeridos" align="left">
+                        
+                                <label class="label-input100" for="name">Número de celular (requerido)</label>
+                                <input type="tel" id="phone" class="input100" placeholder="* Número de celular" name="phone"/>
+                        
+                                <span class="focus-input100"></span>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
 
                     <div class="wrap-input100 validate-input" data-validate = "Ingresa un correo válido: juan@correo.com" align="left">
                         <label class="label-input100" for="email">Email (requerido)</label>
-                            <input type="email" class="input100" id="email" placeholder="example@example.com" name="email" required/>
+                            <input type="email" class="input100" id="email" placeholder="example@example.com" name="email" required autocomplete="false"/>
                             <span class="focus-input100"></span>
                     </div>
                     <div class="wrap-input100 validate-input" data-validate = "Ingresa un correo válido" align="left">
                         <label class="label-input100" for="password">Password (requerido)</label>
-                        <input type="password" class="input100" id="password" placeholder="********" name="password" required />
+                        <input type="password" class="input100" id="password" placeholder="********" name="password" required autocomplete="false"/>
 
                     </div>
     
