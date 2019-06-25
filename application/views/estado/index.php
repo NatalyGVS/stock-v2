@@ -19,6 +19,9 @@
     <div class="row">
       <div class="col-md-12 col-xs-12">
 
+      <div id="messages"></div>
+
+
         <?php if($this->session->flashdata('success')): ?>
           <div class="alert alert-success alert-dismissible" role="alert">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -35,33 +38,27 @@
 
         <div class="box">
           <div class="box-header">
-            <h3 class="box-title">Gestionar pedidos</h3>
+            <h3 class="box-title">Pedidos Pendientes</h3>
           </div>
-
-          <?php if(in_array('createOrder', $user_permission)): ?>
-          <a href="<?php echo base_url('orders/create') ?>" class="btn btn-primary">Añadir orden</a>
-          <br /> <br />
-        <?php endif; ?>
-
-
-          <!-- /.box-header -->
+          <div class="form-group">
+                   <label for="gross_amount" class="col-sm-12 control-label">Fecha: <?php date_default_timezone_set("America/Lima"); 
+                                                                                           echo date("d/m/Y  , h:i a" ) ?></label> 
+                </div>
+            <!-- /.box-header -->
           <div class="box-body">
             <table id="manageTable" class="table table-bordered table-striped">
               <thead>
               <tr>
-                 <th> no Cuenta  </th>
                  <th> id Mesa </th>
                  <th> id Usuario </th>
                  <th> Nombre del cliente </th>
                  <th> Fecha y hora </th>
                  <th> Total de productos </th>
-                 <th> Cantidad total </th>
-                 <th> Estado de pago </th>
                  <th> Estado Pedido </th>
                   
-                <?php if(in_array('updateOrder', $user_permission) || in_array('viewOrder', $user_permission) || in_array('deleteOrder', $user_permission)): ?>
+                 <?php if(in_array('updateOrder', $user_permission) || in_array('viewOrder', $user_permission) || in_array('deleteOrder', $user_permission)): ?> -->
                   <th>Acción</th>
-                <?php endif; ?>
+                 <?php endif; ?> 
               </tr>
               </thead>
 
@@ -90,26 +87,62 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title">Eliminar pedido</h4>
       </div>
-
-      <form role="form" action="<?php echo base_url('orders/remove') ?>" method="post" id="removeForm">
+      <form role="form" action="<?php echo base_url('estado/remove') ?>" method="post" id="removeForm">
         <div class="modal-body">
           <p>¿Realmente quieres eliminar?</p>
-          
         </div>
-         
-
-
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
           <button type="submit" class="btn btn-primary">Guardar cambios</button>
         </div>
       </form>
-
-
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 <?php endif; ?>
+                                     <!-- FORMULARIO ACTUALIZAR PEDIDO -->
+
+<!--<?php //if(in_array('updateMesas', $user_permission)): ?>-->
+<!-- edit brand modal -->
+<div class="modal fade" tabindex="-1" role="dialog" id="editModal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Editar mesa</h4>
+      </div>
+
+         <form role="form" action="<?php echo base_url('estado/update') ?>" method="post" id="updateForm">
+           <div class="modal-body">
+            <div id="messages"></div>
+
+            <div class="form-group">
+               
+            <p>Se actualizara a estado "EN PREPARACION" </p>
+            </div>
+            
+        
+
+         </div>
+
+
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+          <button type="submit" class="btn btn-primary">Aceptar</button>
+        </div>
+      </form>
+
+      
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<!--<?php //endif; ?>-->
+
+
+
+
+
 
 
 
@@ -119,12 +152,13 @@ var base_url = "<?php echo base_url(); ?>";
 
 $(document).ready(function() {
 
+  $("#mainEstadoNav").addClass('active');
   $("#mainOrdersNav").addClass('active');
   $("#manageOrdersNav").addClass('active');
 
   // initialize the datatable 
   manageTable = $('#manageTable').DataTable({
-    'ajax': base_url + 'orders/fetchOrdersData',
+    'ajax': base_url + 'estado/fetchOrdersDataEstado',
     'order': [],
     "language": {
             "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
@@ -176,6 +210,66 @@ function removeFunc(id)
     });
   }
 }
+
+
+// actualizar estado Pedido 
+function actualizarFunc(id)
+{  
+  if(id) {
+    $("#updateForm").on('submit', function() {
+ 
+      var form = $(this);
+
+   
+      // remove the text-danger
+      $(".text-danger").remove();
+     
+      $.ajax({
+        url: form.attr('action')  + '/' + id,
+        type: form.attr('method'),
+        data: form.serialize(),
+        //  data: { order_id:id }, 
+        dataType: 'json',
+        success:function(response) {
+
+          manageTable.ajax.reload(null, false); 
+          
+          if(response.success === true) {
+        
+            $("#messages").html('<div class="alert alert-success alert-dismissible" role="alert">'+
+              '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>'+
+              '<strong> <span class="glyphicon glyphicon-ok-sign"></span> </strong>'+response.messages+
+            '</div>');
+         
+            // hide the modal
+            $("#editModal").modal('hide');
+            $("#updateForm .form-group").removeClass('has-error').removeClass('has-success');
+      
+          
+          } else {
+     
+            $("#messages").html('<div class="alert alert-warning alert-dismissible" role="alert">'+
+              '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>'+
+              '<strong> <span class="glyphicon glyphicon-exclamation-sign"></span> </strong>'+response.messages+
+            '</div>'); 
+
+            
+          }
+
+
+
+
+        }
+      }); 
+       
+      return false;
+    });
+
+
+
+  }
+}
+
 
 
 </script>

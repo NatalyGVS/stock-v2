@@ -1,11 +1,11 @@
+
+
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
   <section class="content-header">
     <h1>
-      Gestionar
-
-      <small>Pedidos</small>
+      Gestionar Estado
     </h1>
     <ol class="breadcrumb">
       <li><a href="#"><i class="fa fa-dashboard"></i> Inicio</a></li>
@@ -36,10 +36,17 @@
 
         <div class="box">
           <div class="box-header">
-            <h3 class="box-title">Editar Ordennn</h3>
+            <h3 class="box-title">Editar Estado Pedido</h3>
           </div>
           <!-- /.box-header -->
-          <form role="form" action="<?php base_url('orders/create') ?>" method="post" class="form-horizontal">
+
+
+
+
+
+
+
+          <form role="form" action="<?php base_url('estado/create') ?>" method="post" class="form-horizontal">
               <div class="box-body">
 
                 <?php echo validation_errors(); ?>
@@ -55,52 +62,80 @@
                   <div class="form-group">
                     <label for="gross_amount" class="col-sm-5 control-label" style="text-align:left;" >Nombre de Mesa</label>
                     <div class="col-sm-7">
-                      <input type="text" class="form-control" id="id_mesa" name="id_mesa"  value="<?php echo $order_data['order']['id_mesa'] ?>" autocomplete="off" disabled/>
+                    <?php 
+                    $id_mesa= $order_data['order']['id_mesa'];
+                    $mesa = $this->model_mesas->getMesasData($id_mesa) ;                   
+                    ?>
+
+                      <input type="text" class="form-control" id="id_mesa" name="id_mesa"  value="<?php echo  $mesa['name']   ?>" autocomplete="off" disabled/>
                     </div>
                   </div>
 
 
 
                   <div class="form-group">
-                    <label for="estado_orden" class="col-sm-5 control-label">Estado pagado</label>
+                  <label for="gross_amount" class="col-sm-5 control-label" style="text-align:left;">Estado Pedido Actual</label>
+                
                     <div class="col-sm-7">
-                      <select type="text" class="form-control" id="estado_orden" name="estado_orden" disabled>
+
+                    <?php 
+                    $id_Estado= $order_data['order']['estado_orden'];
+                    $id_EstadoSig;
+                    if($id_Estado== '0' ){
+                      $nom_Estado= "En Espera";
+                      $nom_EstadoSig= "En Preparacion";
+                      $id_EstadoSig= '1';
+                    }
+                    if($id_Estado== '1' ){
+                      $nom_Estado= "En Preparacion";
+                      $nom_EstadoSig= "Despachado";
+                      $id_EstadoSig= '2';
+                    }
+                               
+                    ?>
+                    <input type="text"disabled class="form-control" id="nom_Estado" name="nom_Estado" placeholder="Enter Customer Name" value="<?php echo   $nom_Estado ?>" autocomplete="off"/>
+             
+                             
+                  </div>
+                  </div>
+
+                  <div class="form-group">
+                  <label for="gross_amount" class="col-sm-5 control-label" style="text-align:left;">Estado Pedido Siguiente</label>
+            
+                    <div class="col-sm-7">
+            
+             
+                    <input type="text" disabled class="form-control" id="nom_EstadoSig" name="nom_EstadoSig" placeholder="Enter Customer Name" value="<?php echo  $nom_EstadoSig ?>" autocomplete="off"/>
+                    <input type="text" class="form-control" id="estado_orden" name="estado_orden" placeholder="Enter Customer Name" value="<?php echo  $id_EstadoSig ?>" autocomplete="off"  />
+
+                      <!-- <select type="text" class="form-control" id="estado_orden" name="estado_orden" >
                         <option value="0">En espera</option>
                         <option value="1">En Preparacion</option>
-                        <option value="1">Despachado</option>
-                      </select>
+                        <option value="2">Despachado</option>
+                      </select> -->
                     </div>
                   </div>
 
-
-                  <!-- <div class="form-group">
-                    <label for="gross_amount" class="col-sm-5 control-label" style="text-align:left;">Nombre de Mesa</label>
-                    <div class="col-sm-7">
-                      <input type="text" class="form-control" id="estado_orden" name="estado_orden" placeholder="Enter Customer Name" value="<?php //echo $order_data['order']['estado_orden'] ?>" autocomplete="off"/>
-                    </div>
-                  </div> -->
-
-
-                  <div class="form-group">
+                   <!-- <div class="form-group">
                     <label for="gross_amount" class="col-sm-5 control-label" style="text-align:left;">Nombre del cliente</label>
                     <div class="col-sm-7">
                       <input type="text" class="form-control" id="customer_name" name="customer_name" placeholder="Enter Customer Name" value="<?php echo $order_data['order']['customer_name'] ?>" autocomplete="off"/>
                     </div>
-                  </div>
-
+                  </div> -->
+                  <!--
                   <div class="form-group">
                     <label for="gross_amount" class="col-sm-5 control-label" style="text-align:left;">Dirección del cliente</label>
                     <div class="col-sm-7">
                       <input type="text" class="form-control" id="customer_address" name="customer_address" placeholder="Enter Customer Address" value="<?php echo $order_data['order']['customer_address'] ?>" autocomplete="off">
                     </div>
-                  </div>
+                  </div> -->
 
-                  <div class="form-group">
+                  <!-- <div class="form-group">
                     <label for="gross_amount" class="col-sm-5 control-label" style="text-align:left;">Telefono del cliente</label>
                     <div class="col-sm-7">
                       <input type="text" class="form-control" id="customer_phone" name="customer_phone" placeholder="Enter Customer Phone" value="<?php echo $order_data['order']['customer_phone'] ?>" autocomplete="off">
                     </div>
-                  </div>
+                  </div> -->
                 </div>
                 
                 
@@ -109,10 +144,10 @@
                   <thead>
                     <tr>
                       <th style="width:50%">Producto</th>
-                      <th style="width:10%">Qty</th>
-                      <th style="width:10%">Tarifa</th>
-                      <th style="width:20%">Cantidad</th>
-                      <th style="width:10%"><button type="button" id="add_row" class="btn btn-default"><i class="fa fa-plus"></i></button></th>
+                      <th style="width:10%">Cantidad</th>
+                      <th style="width:10%">Precio Unitario</th>
+                      <th style="width:20%">Monto</th>
+                      <!-- <th style="width:10%"><button type="button" id="add_row" class="btn btn-default"><i class="fa fa-plus"></i></button></th> -->
                     </tr>
                   </thead>
 
@@ -140,7 +175,7 @@
                             <input type="text" name="amount[]" id="amount_<?php echo $x; ?>" class="form-control" disabled value="<?php echo $val['amount'] ?>" autocomplete="off">
                             <input type="hidden" name="amount_value[]" id="amount_value_<?php echo $x; ?>" class="form-control" value="<?php echo $val['amount'] ?>" autocomplete="off">
                           </td>
-                          <td><button type="button" class="btn btn-default" onclick="removeRow('<?php echo $x; ?>')"><i class="fa fa-close"></i></button></td>
+                          <!-- <td><button type="button" class="btn btn-default" onclick="removeRow('<?php echo $x; ?>')"><i class="fa fa-close"></i></button></td> -->
                        </tr>
                        <?php $x++; ?>
                      <?php endforeach; ?>
@@ -152,14 +187,14 @@
 
                 <div class="col-md-6 col-xs-12 pull pull-right">
 
-                  <div class="form-group">
+                  <!-- <div class="form-group">
                     <label for="gross_amount" class="col-sm-5 control-label">Cantidad bruta</label>
                     <div class="col-sm-7">
                       <input type="text" class="form-control" id="gross_amount" name="gross_amount" disabled value="<?php echo $order_data['order']['gross_amount'] ?>" autocomplete="off">
                       <input type="hidden" class="form-control" id="gross_amount_value" name="gross_amount_value" value="<?php echo $order_data['order']['gross_amount'] ?>" autocomplete="off">
                     </div>
-                  </div>
-                  <?php if($is_service_enabled == true): ?>
+                  </div> -->
+                  <!-- <?php if($is_service_enabled == true): ?>
                   <div class="form-group">
                     <label for="service_charge" class="col-sm-5 control-label">S de carga <?php echo $company_data['service_charge_value'] ?> %</label>
                     <div class="col-sm-7">
@@ -189,17 +224,17 @@
                       <input type="text" class="form-control" id="net_amount" name="net_amount" disabled value="<?php echo $order_data['order']['net_amount'] ?>" autocomplete="off">
                       <input type="hidden" class="form-control" id="net_amount_value" name="net_amount_value" value="<?php echo $order_data['order']['net_amount'] ?>" autocomplete="off">
                     </div>
-                  </div>
+                  </div> -->
 
-                  <div class="form-group">
+                  <!-- <div class="form-group">
                     <label for="paid_status" class="col-sm-5 control-label">Estado pagado</label>
                     <div class="col-sm-7">
-                      <select type="text" class="form-control" id="paid_status" name="paid_status" disabled>
+                      <select type="text" class="form-control" id="paid_status" name="paid_status" >
                         <option value="1">Pagado</option>
                         <option value="2">No pagado</option>
                       </select>
                     </div>
-                  </div>
+                  </div> -->
 
                 </div>
               </div>
@@ -210,11 +245,17 @@
                 <input type="hidden" name="service_charge_rate" value="<?php echo $company_data['service_charge_value'] ?>" autocomplete="off">
                 <input type="hidden" name="vat_charge_rate" value="<?php echo $company_data['vat_charge_value'] ?>" autocomplete="off">
 
-                <a target="__blank" href="<?php echo base_url() . 'orders/printDiv/'.$order_data['order']['id'] ?>" class="btn btn-default" >Impresión</a>
-                <button type="submit" class="btn btn-primary">Guardar cambios</button>
-                <a href="<?php echo base_url('orders/') ?>" class="btn btn-warning">Atras</a>
+               <button type="submit" class="btn btn-primary">Guardar cambios</button>
+                <a href="<?php echo base_url('estado/') ?>" class="btn btn-warning">Atras</a>
               </div>
             </form>
+
+
+
+
+
+
+
           <!-- /.box-body -->
         </div>
         <!-- /.box -->
@@ -231,26 +272,6 @@
 
 <script type="text/javascript">
   var base_url = "<?php echo base_url(); ?>";
-  // function printOrder(id)
-  // {
-  //   if(id) {
-  //     $.ajax({
-  //       url: base_url + 'orders/printDiv/' + id,
-  //       type: 'post',
-  //       success:function(response) {
-  //         var mywindow = window.open('', 'new div', 'height=400,width=600');
-  //         // mywindow.document.write('<html><head><title></title>');
-  //         // mywindow.document.write('<link rel="stylesheet" href="<?php //echo base_url('assets/bower_components/bootstrap/dist/css/bootstrap.min.css') ?>" type="text/css" />');
-  //         // mywindow.document.write('</head><body >');
-  //         mywindow.document.write(response);
-  //         // mywindow.document.write('</body></html>');
-  //         mywindow.print();
-  //         mywindow.close();
-  //         return true;
-  //       }
-  //     });
-  //   }
-  // }
 
   $(document).ready(function() {
     $(".select_group").select2();
@@ -267,28 +288,28 @@
       var row_id = count_table_tbody_tr + 1;
 
       $.ajax({
-          url: base_url + '/orders/getTableProductRow/',
+          url: base_url + '/updateEs/getTableProductRow/',
           type: 'post',
           dataType: 'json',
           success:function(response) {
             
 
               // console.log(reponse.x);
-               var html = '<tr id="row_'+row_id+'">'+
-                   '<td>'+ 
-                    '<select class="form-control select_group product" data-row-id="'+row_id+'" id="product_'+row_id+'" name="product[]" style="width:100%;" onchange="getProductData('+row_id+')">'+
-                        '<option value=""></option>';
-                        $.each(response, function(index, value) {
-                          html += '<option value="'+value.id+'">'+value.name+'</option>';             
-                        });
+              //  var html = '<tr id="row_'+row_id+'">'+
+              //      '<td>'+ 
+              //       '<select class="form-control select_group product" data-row-id="'+row_id+'" id="product_'+row_id+'" name="product[]" style="width:100%;" onchange="getProductData('+row_id+')">'+
+              //           '<option value=""></option>';
+              //           $.each(response, function(index, value) {
+              //             html += '<option value="'+value.id+'">'+value.name+'</option>';             
+              //           });
                         
-                      html += '</select>'+
-                    '</td>'+ 
-                    '<td><input type="number" name="qty[]" id="qty_'+row_id+'" class="form-control" onkeyup="getTotal('+row_id+')"></td>'+
-                    '<td><input type="text" name="rate[]" id="rate_'+row_id+'" class="form-control" disabled><input type="hidden" name="rate_value[]" id="rate_value_'+row_id+'" class="form-control"></td>'+
-                    '<td><input type="text" name="amount[]" id="amount_'+row_id+'" class="form-control" disabled><input type="hidden" name="amount_value[]" id="amount_value_'+row_id+'" class="form-control"></td>'+
-                    '<td><button type="button" class="btn btn-default" onclick="removeRow(\''+row_id+'\')"><i class="fa fa-close"></i></button></td>'+
-                    '</tr>';
+              //         html += '</select>'+
+              //       '</td>'+ 
+              //       '<td><input type="number" name="qty[]" id="qty_'+row_id+'" class="form-control" onkeyup="getTotal('+row_id+')"></td>'+
+              //       '<td><input type="text" name="rate[]" id="rate_'+row_id+'" class="form-control" disabled><input type="hidden" name="rate_value[]" id="rate_value_'+row_id+'" class="form-control"></td>'+
+              //       '<td><input type="text" name="amount[]" id="amount_'+row_id+'" class="form-control" disabled><input type="hidden" name="amount_value[]" id="amount_value_'+row_id+'" class="form-control"></td>'+
+              //       '<td><button type="button" class="btn btn-default" onclick="removeRow(\''+row_id+'\')"><i class="fa fa-close"></i></button></td>'+
+              //       '</tr>';
 
                 if(count_table_tbody_tr >= 1) {
                 $("#product_info_table tbody tr:last").after(html);  
@@ -307,134 +328,134 @@
 
   }); // /document
 
-  function getTotal(row = null) {
-    if(row) {
-      var total = Number($("#rate_value_"+row).val()) * Number($("#qty_"+row).val());
-      total = total.toFixed(2);
-      $("#amount_"+row).val(total);
-      $("#amount_value_"+row).val(total);
+  // function getTotal(row = null) {
+  //   if(row) {
+  //     var total = Number($("#rate_value_"+row).val()) * Number($("#qty_"+row).val());
+  //     total = total.toFixed(2);
+  //     $("#amount_"+row).val(total);
+  //     $("#amount_value_"+row).val(total);
       
-      subAmount();
+  //     subAmount();
 
-    } else {
-      alert('no row !! please refresh the page');
-    }
-  }
+  //   } else {
+  //     alert('no row !! please refresh the page');
+  //   }
+  // }
 
   // get the product information from the server
-  function getProductData(row_id)
-  {
-    var product_id = $("#product_"+row_id).val();    
-    if(product_id == "") {
-      $("#rate_"+row_id).val("");
-      $("#rate_value_"+row_id).val("");
+  // function getProductData(row_id)
+  // {
+  //   var product_id = $("#product_"+row_id).val();    
+  //   if(product_id == "") {
+  //     $("#rate_"+row_id).val("");
+  //     $("#rate_value_"+row_id).val("");
 
-      $("#qty_"+row_id).val("");           
+  //     $("#qty_"+row_id).val("");           
 
-      $("#amount_"+row_id).val("");
-      $("#amount_value_"+row_id).val("");
+  //     $("#amount_"+row_id).val("");
+  //     $("#amount_value_"+row_id).val("");
 
-    } else {
-      $.ajax({
-        url: base_url + 'orders/getProductValueById',
-        type: 'post',
-        data: {product_id : product_id},
-        dataType: 'json',
-        success:function(response) {
-          // setting the rate value into the rate input field
+  //   } else {
+  //     $.ajax({
+  //       url: base_url + 'estado/getProductValueById',
+  //       type: 'post',
+  //       data: {product_id : product_id},
+  //       dataType: 'json',
+  //       success:function(response) {
+  //         // setting the rate value into the rate input field
           
-          $("#rate_"+row_id).val(response.price);
-          $("#rate_value_"+row_id).val(response.price);
+  //         $("#rate_"+row_id).val(response.price);
+  //         $("#rate_value_"+row_id).val(response.price);
 
-          $("#qty_"+row_id).val(1);
-          $("#qty_value_"+row_id).val(1);
+  //         $("#qty_"+row_id).val(1);
+  //         $("#qty_value_"+row_id).val(1);
 
-          var total = Number(response.price) * 1;
-          total = total.toFixed(2);
-          $("#amount_"+row_id).val(total);
-          $("#amount_value_"+row_id).val(total);
+  //         var total = Number(response.price) * 1;
+  //         total = total.toFixed(2);
+  //         $("#amount_"+row_id).val(total);
+  //         $("#amount_value_"+row_id).val(total);
           
-          subAmount();
-        } // /success
-      }); // /ajax function to fetch the product data 
-    }
-  }
+  //         subAmount();
+  //       } // /success
+  //     }); // /ajax function to fetch the product data 
+  //   }
+  // }
 
-  // calculate the total amount of the order
-  function subAmount() {
-    var service_charge = <?php echo ($company_data['service_charge_value'] > 0) ? $company_data['service_charge_value']:0; ?>;
-    var vat_charge = <?php echo ($company_data['vat_charge_value'] > 0) ? $company_data['vat_charge_value']:0; ?>;
+  // // calculate the total amount
+  // function subAmount() {
+  //   var service_charge = <?php echo ($company_data['service_charge_value'] > 0) ? $company_data['service_charge_value']:0; ?>;
+  //   var vat_charge = <?php echo ($company_data['vat_charge_value'] > 0) ? $company_data['vat_charge_value']:0; ?>;
 
-    var tableProductLength = $("#product_info_table tbody tr").length;
-    var totalSubAmount = 0;
-    for(x = 0; x < tableProductLength; x++) {
-      var tr = $("#product_info_table tbody tr")[x];
-      var count = $(tr).attr('id');
-      count = count.substring(4);
+  //   var tableProductLength = $("#product_info_table tbody tr").length;
+  //   var totalSubAmount = 0;
+  //   for(x = 0; x < tableProductLength; x++) {
+  //     var tr = $("#product_info_table tbody tr")[x];
+  //     var count = $(tr).attr('id');
+  //     count = count.substring(4);
 
-      totalSubAmount = Number(totalSubAmount) + Number($("#amount_"+count).val());
-    } // /for
+  //     totalSubAmount = Number(totalSubAmount) + Number($("#amount_"+count).val());
+  //   } // /for
 
-    totalSubAmount = totalSubAmount.toFixed(2);
+  //   totalSubAmount = totalSubAmount.toFixed(2);
 
-    // sub total
-    $("#gross_amount").val(totalSubAmount);
-    $("#gross_amount_value").val(totalSubAmount);
+  //   // sub total
+  //   $("#gross_amount").val(totalSubAmount);
+  //   $("#gross_amount_value").val(totalSubAmount);
 
-    // vat
-    var vat = (Number($("#gross_amount").val())/100) * vat_charge;
-    vat = vat.toFixed(2);
-    $("#vat_charge").val(vat);
-    $("#vat_charge_value").val(vat);
+  //   // vat
+  //   var vat = (Number($("#gross_amount").val())/100) * vat_charge;
+  //   vat = vat.toFixed(2);
+  //   $("#vat_charge").val(vat);
+  //   $("#vat_charge_value").val(vat);
 
-    // service
-    var service = (Number($("#gross_amount").val())/100) * service_charge;
-    service = service.toFixed(2);
-    $("#service_charge").val(service);
-    $("#service_charge_value").val(service);
+  //   // service
+  //   var service = (Number($("#gross_amount").val())/100) * service_charge;
+  //   service = service.toFixed(2);
+  //   $("#service_charge").val(service);
+  //   $("#service_charge_value").val(service);
     
-    // total amount
-    var totalAmount = (Number(totalSubAmount) + Number(vat) + Number(service));
-    totalAmount = totalAmount.toFixed(2);
-    // $("#net_amount").val(totalAmount);
-    // $("#totalAmountValue").val(totalAmount);
+  //   // total amount
+  //   var totalAmount = (Number(totalSubAmount) + Number(vat) + Number(service));
+  //   totalAmount = totalAmount.toFixed(2);
+  //   // $("#net_amount").val(totalAmount);
+  //   // $("#totalAmountValue").val(totalAmount);
 
-    var discount = $("#discount").val();
-    if(discount) {
-      var grandTotal = Number(totalAmount) - Number(discount);
-      grandTotal = grandTotal.toFixed(2);
-      $("#net_amount").val(grandTotal);
-      $("#net_amount_value").val(grandTotal);
-    } else {
-      $("#net_amount").val(totalAmount);
-      $("#net_amount_value").val(totalAmount);
+  //   var discount = $("#discount").val();
+  //   if(discount) {
+  //     var grandTotal = Number(totalAmount) - Number(discount);
+  //     grandTotal = grandTotal.toFixed(2);
+  //     $("#net_amount").val(grandTotal);
+  //     $("#net_amount_value").val(grandTotal);
+  //   } else {
+  //     $("#net_amount").val(totalAmount);
+  //     $("#net_amount_value").val(totalAmount);
       
-    } // /else discount 
+  //   } // /else discount 
 
-    var paid_amount = Number($("#paid_amount").val());
-    if(paid_amount) {
-      var net_amount_value = Number($("#net_amount_value").val());
-      var remaning = net_amount_value - paid_amount;
-      $("#remaining").val(remaning.toFixed(2));
-      $("#remaining_value").val(remaning.toFixed(2));
-    }
+  //   var paid_amount = Number($("#paid_amount").val());
+  //   if(paid_amount) {
+  //     var net_amount_value = Number($("#net_amount_value").val());
+  //     var remaning = net_amount_value - paid_amount;
+  //     $("#remaining").val(remaning.toFixed(2));
+  //     $("#remaining_value").val(remaning.toFixed(2));
+  //   }
 
-  } // /sub total amount
+  // } // /sub total amount
 
-  function paidAmount() {
-    var grandTotal = $("#net_amount_value").val();
+  // function paidAmount() {
+  //   var grandTotal = $("#net_amount_value").val();
 
-    if(grandTotal) {
-      var dueAmount = Number($("#net_amount_value").val()) - Number($("#paid_amount").val());
-      dueAmount = dueAmount.toFixed(2);
-      $("#remaining").val(dueAmount);
-      $("#remaining_value").val(dueAmount);
-    } // /if
-  } // /paid amoutn function
+  //   if(grandTotal) {
+  //     var dueAmount = Number($("#net_amount_value").val()) - Number($("#paid_amount").val());
+  //     dueAmount = dueAmount.toFixed(2);
+  //     $("#remaining").val(dueAmount);
+  //     $("#remaining_value").val(dueAmount);
+  //   } // /if
+  // } // /paid amoutn function
 
-  function removeRow(tr_id)
-  {
-    $("#product_info_table tbody tr#row_"+tr_id).remove();
-    subAmount();
-  }
+  // function removeRow(tr_id)
+  // {
+  //   $("#product_info_table tbody tr#row_"+tr_id).remove();
+  //   subAmount();
+  // }
 </script>

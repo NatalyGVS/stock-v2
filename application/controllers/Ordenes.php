@@ -120,7 +120,6 @@ modelo de mesas y devuelve los datos en formato json.
 		echo json_encode($result);
 	}
 
-
 	/*
 Comprueba la validación de la forma de mesas y si la validación se realiza 
 correctamente, inserta los datos en la base de datos y devuelve los mensajes de

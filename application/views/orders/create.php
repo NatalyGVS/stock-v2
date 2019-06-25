@@ -1,5 +1,4 @@
 
-
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
@@ -36,26 +35,21 @@
         <?php endif; ?>
 
         <div class="box">
-          <div class="box-header">
-            <h3 class="box-title">Añadir orden</h3>
-          </div>
-          <!-- /.box-header -->
-          <div class="box-header">
-           
-          </div>
-          
+            <div class="box-header">
+              <h3 class="box-title">Añadir orden</h3>
+            </div>
 
 
-          <?php foreach ($mesas as $k => $v): ?>
+       <?php foreach ($mesas as $k => $v): ?>
       <?php
-        if($v['active']==1){
+        if($v['active']==1){  //LIBRE
           
            echo 
-           '<button onclick="editFunc('.$v['id'].')" class="btn btn-success btn-lg " style= " margin: 15px;" data-toggle="modal" data-target="#editModal" > <h3 > '.$v['name'].' </h3> </button >       ';
+           '<button onclick="editFunc('.$v['id'].')" class="btn btn-success btn-lg " style= " margin: 15px;" data-toggle="modal" data-target="#createModal" > <h3 > '.$v['name'].' </h3> </button >       ';
            
-        }else{
+        }else{  //OCUPADO
            echo 
-           '<button onclick="editFunc('.$v['id'].')" class="btn btn-danger btn-lg" style= "margin: 15px;" data-toggle="modal" data-target="#editModal">  <h3 > '.$v['name'].' </h3> </button > ';
+           '<button class="btn btn-danger btn-lg" style= "margin: 15px;" data-toggle="modal" data-target="#editModal">  <h3 > '.$v['name'].' </h3> </button > ';
       
         }?>
         <?php endforeach ?>
@@ -63,24 +57,23 @@
 
 
 
-
-   <div class="modal fade" id="editModal">
+  <!-- ============================================================================================================================================================  -->    
+  <!-- FORMULARIO CREAR ORDEN  --> 
+  <div class="modal fade" id="createModal">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
        
-        <!-- Modal Header -->
+       
         <div class="modal-header">
                  <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div> 
         
-        <!-- Modal body -->
-       <div class="modal-body">
+
+   <div class="modal-body">
         <div class="form-group">
         
             
-          </div> 
-
-          
+          </div>     
          <form role="form" action="<?php base_url('orders/create') ?>" method="post" class="form-horizontal" id="updateForm">
               <div class="box-body">
 
@@ -88,14 +81,13 @@
 
 
              
-                 <!-- mesa -->
+             
 
                  <div class="form-group">
                     <div class="col-sm-12">
-                       <input type="text" class="form-control input-lg" id="id_mesa" name="id_mesa"  autocomplete="off"  style="background-color: #FF6467 ;  font-weight: bold; font-size: 30px; text-align: center;" />
-                     </div>
+                        <input type="text" class="form-control input-lg" id="id_mesa" name="id_mesa"  autocomplete="off"  style="background-color: #FF6467 ;  font-weight: bold; font-size: 30px; text-align: center;" />                      </div>
                   </div>  
-               <!-- fecha -->
+             
                   <div class="form-group">
                    <label for="gross_amount" class="col-sm-12 control-label">Fecha: <?php date_default_timezone_set("America/Lima"); 
                                                                                            echo date("d/m/Y  , h:i a" ) ?></label> 
@@ -213,36 +205,36 @@
 
                 </div>
               </div> 
-              <!-- /.box-body -->
+             
 
                <div class="box-footer">
                 <input type="hidden" name="service_charge_rate" value="<?php echo $company_data['service_charge_value'] ?>" autocomplete="off">
                 <input type="hidden" name="vat_charge_rate" value="<?php echo $company_data['vat_charge_value'] ?>" autocomplete="off">
                 
                 <button type="submit" class="btn btn-primary">Crear orden</button>
-                <a href="<?php echo base_url('orders/') ?>" class="btn btn-warning">Atras</a>
+                <a href="<?php echo base_url('orders/create') ?>" class="btn btn-warning">Atras</a>
               </div>
             </form> 
 
-
-
-
-
-
-
-
-
-
          </div> 
         
-        <!-- Modal footer -->
+     
        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
         </div>
         
       </div>
     </div>
-  </div> 
+  </div>  
+
+<!-- ///////  FIN  CREATE MODEL   -->
+<!-- ============================================================================================================================================================  -->    
+
+
+
+
+
+
 
 
 
@@ -262,17 +254,19 @@
 </div>
 <!-- /.content-wrapper -->
 
+
 <script type="text/javascript">
   var base_url = "<?php echo base_url(); ?>";
   var manageTable;
   var valor_mesa;
+
   $(document).ready(function() {
     $(".select_group").select2();
     // $("#description").wysihtml5();
 
     $("#mainOrdersNav").addClass('active');
     $("#addOrderNav").addClass('active');
-
+    $("#manageOrdersNav").addClass('active');
 
     var btnCust = '<button type="button" class="btn btn-secondary" title="Add picture tags" ' + 
         'onclick="alert(\'Call your custom code here.\')">' +
@@ -406,6 +400,8 @@ function editFunc(id)
 //  alert(valor_mesa); 
      $("#id_mesa").val(valor_mesa);
       $("#id_mesa_value").val(valor_mesa);
+
+     
 
     var service_charge = <?php echo ($company_data['service_charge_value'] > 0) ? $company_data['service_charge_value']:0; ?>;
     var vat_charge = <?php echo ($company_data['vat_charge_value'] > 0) ? $company_data['vat_charge_value']:0; ?>;
