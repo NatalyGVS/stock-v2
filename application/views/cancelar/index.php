@@ -5,11 +5,11 @@
   <!-- Content Header (Page header) -->
   <section class="content-header">
     <h1>
-      Gestionar Pedidos
+      Cancelar Pedidos
     </h1>
     <ol class="breadcrumb">
       <li><a href="#"><i class="fa fa-dashboard"></i> Inicio</a></li>
-      <li class="active">Pedidos</li>
+      <li class="active">Cancelar</li>
     </ol>
 
  
@@ -38,7 +38,7 @@
 
         <div class="box">
           <div class="box-header">
-            <h3 class="box-title">Pedidos Pendientes</h3>
+            <h3 class="box-title">Por Cobrar</h3>
           </div>
           <div class="form-group">
                    <label for="gross_amount" class="col-sm-12 control-label">Fecha: <?php date_default_timezone_set("America/Lima"); 
@@ -48,14 +48,15 @@
           <div class="box-body">
             <table id="manageTable" class="table table-bordered table-striped">
               <thead>
-              <tr>
-                 <th> id Mesa </th>
-                 <th> id Usuario </th>
+              <tr>            
+                 <th> no Cuenta  </th>
+                 <th> Mesa </th>
+                 <th> Usuario </th>
                  <th> Nombre del cliente </th>
                  <th> Fecha y hora </th>
-                 <th> Total de productos </th>
-                 <th> Estado Pedido </th>
-                  
+                 <th> Estado de pago </th>
+              
+
                  <?php if(in_array('updateOrder', $user_permission) || in_array('viewOrder', $user_permission) || in_array('deleteOrder', $user_permission)): ?> -->
                   <th>Acción</th>
                  <?php endif; ?> 
@@ -87,7 +88,7 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title">Eliminar pedido</h4>
       </div>
-      <form role="form" action="<?php echo base_url('estado/remove') ?>" method="post" id="removeForm">
+      <form role="form" action="<?php echo base_url('cancelar/remove') ?>" method="post" id="removeForm">
         <div class="modal-body">
           <p>¿Realmente quieres eliminar?</p>
         </div>
@@ -112,7 +113,7 @@
         <h4 class="modal-title">Editar mesa</h4>
       </div>
 
-         <form role="form" action="<?php echo base_url('estado/update') ?>" method="post" id="updateForm">
+         <form role="form" action="<?php echo base_url('cancelar/update') ?>" method="post" id="updateForm">
            <div class="modal-body">
             <div id="messages"></div>
 
@@ -152,13 +153,13 @@ var base_url = "<?php echo base_url(); ?>";
 
 $(document).ready(function() {
 
-  $("#mainEstadoNav").addClass('active');
+  $("#mainCancelarNav").addClass('active');
   $("#mainOrdersNav").addClass('active');
   $("#manageOrdersNav").addClass('active');
 
   // initialize the datatable 
   manageTable = $('#manageTable').DataTable({
-    'ajax': base_url + 'estado/fetchOrdersDataEstado',
+    'ajax': base_url + 'cancelar/fetchOrdersDataEstado',
     'order': [],
     "language": {
             "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"

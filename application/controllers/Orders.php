@@ -89,7 +89,7 @@ class Orders extends Admin_Controller
 			// button
 			$buttons = '';
 			if(in_array('viewOrder', $this->permission)) {
-				$buttons .= '<a target="__blank" href="'.base_url('orders/printDiv/'.$value['id']).'" class="btn btn-default"><i class="fa fa-print"></i></a>';
+				// $buttons .= '<a target="__blank" href="'.base_url('orders/printDiv/'.$value['id']).'" class="btn btn-default"><i class="fa fa-print"></i></a>';
 			}
 			if(in_array('updateOrder', $this->permission)) {
 				$buttons .= ' <a href="'.base_url('orders/update/'.$value['id']).'" class="btn btn-default"><i class="fa fa-pencil"></i></a>';

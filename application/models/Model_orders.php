@@ -30,6 +30,20 @@ class Model_orders extends CI_Model
 		$query = $this->db->query($sql);
 		return $query->result_array();
 	}
+
+	public function getOrdersData3($id = null)
+	{
+		if($id) {
+			$sql = "SELECT * FROM orders WHERE  id = ? and(  estado_orden='3' and   paid_status='2') ";
+			$query = $this->db->query($sql, array($id));
+			return $query->row_array();
+		}
+
+		$sql = "SELECT * FROM orders WHERE estado_orden='2' and   paid_status='2'  ORDER BY id DESC";
+		$query = $this->db->query($sql);
+		return $query->result_array();
+	}
+
 	// get the orders item data
 	public function getOrdersItemData($order_id = null)
 	{
@@ -232,6 +246,68 @@ class Model_orders extends CI_Model
 		}
 	}
 
+
+
+	public function updateCancelar($id)
+	{
+		if($id) {
+			$user_id = $this->session->userdata('id');
+			// fetch the order data 
+			$data = array(
+				// 'estado_orden'=>$this->input->post('estado_orden'),
+				// 'customer_name' => $this->input->post('customer_name'),
+	    		// 'customer_address' => $this->input->post('customer_address'),
+	    		// 'customer_phone' => $this->input->post('customer_phone'),
+	    		// 'gross_amount' => $this->input->post('gross_amount_value'),
+	    		// 'service_charge_rate' => $this->input->post('service_charge_rate'),
+	    		// 'service_charge' => ($this->input->post('service_charge_value') > 0) ? $this->input->post('service_charge_value'):0,
+	    		// 'vat_charge_rate' => $this->input->post('vat_charge_rate'),
+	    		// 'vat_charge' => ($this->input->post('vat_charge_value') > 0) ? $this->input->post('vat_charge_value') : 0,
+	    		// 'net_amount' => $this->input->post('net_amount_value'),
+	    		// 'discount' => $this->input->post('discount'),
+	    		 'paid_status' => $this->input->post('paid_status'),
+	    		// 'user_id' => $user_id
+	    	);
+			$this->db->where('id', $id);
+			$update = $this->db->update('orders', $data);
+			// now the order item 
+			// first we will replace the product qty to original and subtract the qty again
+			$this->load->model('model_products');
+			$get_order_item = $this->getOrdersItemData($id);
+			foreach ($get_order_item as $k => $v) {
+				$product_id = $v['product_id'];
+				$qty = $v['qty'];
+				// get the product 
+				$product_data = $this->model_products->getProductData($product_id);
+				$update_qty = $qty + $product_data['qty'];
+				$update_product_data = array('qty' => $update_qty);
+				
+				// update the product qty
+				$this->model_products->update($update_product_data, $product_id);
+			}
+			// now remove the order item data 
+			$this->db->where('order_id', $id);
+			$this->db->delete('orders_item');
+			// now decrease the product qty
+			$count_product = count($this->input->post('product'));
+	    	for($x = 0; $x < $count_product; $x++) {
+	    		$items = array(
+	    			'order_id' => $id,
+	    			'product_id' => $this->input->post('product')[$x],
+	    			'qty' => $this->input->post('qty')[$x],
+	    			'rate' => $this->input->post('rate_value')[$x],
+	    			'amount' => $this->input->post('amount_value')[$x],
+	    		);
+	    		$this->db->insert('orders_item', $items);
+	    		// now decrease the stock from the product
+	    		$product_data = $this->model_products->getProductData($this->input->post('product')[$x]);
+	    		$qty = (int) $product_data['qty'] - (int) $this->input->post('qty')[$x];
+	    		$update_product = array('qty' => $qty);
+	    		$this->model_products->update($update_product, $this->input->post('product')[$x]);
+	    	}
+			return true;
+		}
+	}
 
 	public function remove($id)
 	{

@@ -5,11 +5,11 @@
   <!-- Content Header (Page header) -->
   <section class="content-header">
     <h1>
-      Gestionar Estado
+      Gestionar Cobro de Pedido
     </h1>
     <ol class="breadcrumb">
       <li><a href="#"><i class="fa fa-dashboard"></i> Inicio</a></li>
-      <li class="active">Pedidos</li>
+      <li class="active">Cancelar</li>
     </ol>
   </section>
 
@@ -36,17 +36,14 @@
 
         <div class="box">
           <div class="box-header">
-            <h3 class="box-title">Editar Estado Pedido</h3>
+            <h3 class="box-title">Registrar Cancelacion de Pedido</h3>
           </div>
           <!-- /.box-header -->
 
 
 
 
-
-
-
-          <form role="form" action="<?php base_url('estado/create') ?>" method="post" class="form-horizontal">
+          <form role="form" action="<?php base_url('cancelar/create') ?>" method="post" class="form-horizontal">
               <div class="box-body">
 
                 <?php echo validation_errors(); ?>
@@ -74,39 +71,34 @@
 
 
                   <div class="form-group">
-                  <label for="gross_amount" class="col-sm-5 control-label" style="text-align:left;">Estado Pedido Actual</label>
+                  <label for="gross_amount" class="col-sm-5 control-label" style="text-align:left;">Estado Pago Actual</label>
                 
                     <div class="col-sm-7">
 
                     <?php 
-                    $id_Estado= $order_data['order']['estado_orden'];
-                    $id_EstadoSig;
-                    if($id_Estado== '0' ){
-                      $nom_Estado= "En Espera";
-                      $nom_EstadoSig= "En Preparacion";
-                      $id_EstadoSig= '1';
+                    $paid_status= $order_data['order']['paid_status'];
+                    $id_paid_statusSig;
+                    if($paid_status== '2' ){
+                      $nom_paid_status= "No Pagado";
+                      $nom_paid_statusSig= "Pagado";
+                      $id_paid_statusSig= '1';
                     }
-                    if($id_Estado== '1' ){
-                      $nom_Estado= "En Preparacion";
-                      $nom_EstadoSig= "Despachado";
-                      $id_EstadoSig= '2';
-                    }
-                               
+                                                   
                     ?>
-                    <input type="text"disabled class="form-control" id="nom_Estado" name="nom_Estado" placeholder="Enter Customer Name" value="<?php echo   $nom_Estado ?>" autocomplete="off"/>
+                    <input type="text"disabled class="form-control" id="nom_Estado" name="nom_Estado" placeholder="Enter Customer Name" value="<?php echo   $nom_paid_status ?>" autocomplete="off"/>
              
                              
                   </div>
                   </div>
 
                   <div class="form-group">
-                  <label for="gross_amount" class="col-sm-5 control-label" style="text-align:left;">Estado Pedido Siguiente</label>
+                  <label for="gross_amount" class="col-sm-5 control-label" style="text-align:left;">Estado Pago Siguiente</label>
             
                     <div class="col-sm-7">
-            
-             
-                    <input type="text" disabled class="form-control" id="nom_EstadoSig" name="nom_EstadoSig" placeholder="Enter Customer Name" value="<?php echo  $nom_EstadoSig ?>" autocomplete="off"/>
-                    <input type="text" class="form-control" id="estado_orden" name="estado_orden" placeholder="Enter Customer Name" value="<?php echo  $id_EstadoSig ?>" autocomplete="off"  />
+                   
+                    <input type="text" disabled class="form-control" id="nom_paid_statusSig" name="nom_paid_statusSig" placeholder="Enter Customer Name" value="<?php echo  $nom_paid_statusSig ?>" autocomplete="off"/>
+                  
+                    <input type="text" class="form-control" id="paid_status" name="paid_status" placeholder="Enter Customer Name"value="<?php echo  $id_paid_statusSig ?>" autocomplete="off"  />
 
                       <!-- <select type="text" class="form-control" id="estado_orden" name="estado_orden" >
                         <option value="0">En espera</option>
@@ -116,12 +108,12 @@
                     </div>
                   </div>
 
-                   <!-- <div class="form-group">
+                  <div class="form-group">
                     <label for="gross_amount" class="col-sm-5 control-label" style="text-align:left;">Nombre del cliente</label>
                     <div class="col-sm-7">
                       <input type="text" class="form-control" id="customer_name" name="customer_name" placeholder="Enter Customer Name" value="<?php echo $order_data['order']['customer_name'] ?>" autocomplete="off"/>
                     </div>
-                  </div> -->
+                  </div> 
                   <!--
                   <div class="form-group">
                     <label for="gross_amount" class="col-sm-5 control-label" style="text-align:left;">Dirección del cliente</label>
@@ -187,14 +179,14 @@
 
                 <div class="col-md-6 col-xs-12 pull pull-right">
 
-                  <!-- <div class="form-group">
+                   <div class="form-group">
                     <label for="gross_amount" class="col-sm-5 control-label">Cantidad bruta</label>
                     <div class="col-sm-7">
                       <input type="text" class="form-control" id="gross_amount" name="gross_amount" disabled value="<?php echo $order_data['order']['gross_amount'] ?>" autocomplete="off">
                       <input type="hidden" class="form-control" id="gross_amount_value" name="gross_amount_value" value="<?php echo $order_data['order']['gross_amount'] ?>" autocomplete="off">
                     </div>
-                  </div> -->
-                  <!-- <?php if($is_service_enabled == true): ?>
+                  </div> 
+                  < <?php if($is_service_enabled == true): ?>
                   <div class="form-group">
                     <label for="service_charge" class="col-sm-5 control-label">S de carga <?php echo $company_data['service_charge_value'] ?> %</label>
                     <div class="col-sm-7">
@@ -224,7 +216,7 @@
                       <input type="text" class="form-control" id="net_amount" name="net_amount" disabled value="<?php echo $order_data['order']['net_amount'] ?>" autocomplete="off">
                       <input type="hidden" class="form-control" id="net_amount_value" name="net_amount_value" value="<?php echo $order_data['order']['net_amount'] ?>" autocomplete="off">
                     </div>
-                  </div> -->
+                  </div> 
 
                   <!-- <div class="form-group">
                     <label for="paid_status" class="col-sm-5 control-label">Estado pagado</label>

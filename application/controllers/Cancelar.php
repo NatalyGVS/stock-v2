@@ -6,7 +6,7 @@ class Cancelar extends Admin_Controller
 	{
 		parent::__construct();
 		$this->not_logged_in();
-		$this->data['page_title'] = 'estado';
+		$this->data['page_title'] = 'cancelar';
 		$this->load->model('model_mesas');
 		$this->load->model('model_orders');
 		$this->load->model('model_products');
@@ -22,8 +22,8 @@ class Cancelar extends Admin_Controller
 		if(!in_array('viewOrder', $this->permission)) {
             redirect('dashboard', 'refresh');
         }
-		$this->data['page_title'] = 'Manage estado';
-		$this->render_template('estado/index', $this->data);		
+		$this->data['page_title'] = 'Manage cancelar';
+		$this->render_template('cancelar/index', $this->data);		
 	}
 
 
@@ -31,11 +31,10 @@ class Cancelar extends Admin_Controller
 	{   
 
 		$result = array('data' => array());
-		$data = $this->model_orders->getOrdersData2();
+		$data = $this->model_orders->getOrdersData3();
 		// $data = $this->model_orders->getOrdersData_NotPago_Despachado();
 		foreach ($data as $key => $value) {
-			$count_total_item = $this->model_orders->countOrderItem($value['id']);
-
+			
 			date_default_timezone_set("America/Lima");   
 			$date = date('d-m-Y', $value['date_time']);
 			$time = date('h:i a', $value['date_time']);
@@ -43,7 +42,11 @@ class Cancelar extends Admin_Controller
 			// button
 			$buttons = '';
 			if(in_array('updateOrder', $this->permission)) {
-				$buttons .= ' <a href="'.base_url('estado/updateEs/'.$value['id']).'" class="btn btn-default"><i class="fa fa-pencil"></i></a>';
+				$buttons .= ' <a href="'.base_url('cancelar/updateEs/'.$value['id']).'" class="btn btn-default"><i class="fa fa-pencil"></i></a>';
+			}
+
+			if(in_array('viewOrder', $this->permission)) {
+				$buttons .= '<a target="__blank" href="'.base_url('orders/printDiv/'.$value['id']).'" class="btn btn-default"><i class="fa fa-print"></i></a>';
 			}
 
 			// if(in_array('deleteOrder', $this->permission)) {
@@ -53,37 +56,30 @@ class Cancelar extends Admin_Controller
 			if(in_array('deleteOrder', $this->permission)) {
 				// $buttons .= ' <button type="button" class="btn btn-default" onclick="removeFunc('.$value['id'].')" data-toggle="modal" data-target="#removeModal"><i class="fa fa-trash"></i></button>';
 			}
-			
 
-			if($value['estado_orden'] == 0) {
-				// $estado_orden = '<span class="label label-default">En Espera</span>';	
-				$estado_orden = '<span class="label label-default"  style=" font-weight: bold; font-size: 20px; text-align: center;" >En Espera</span>';	
-				}
-			else  
-
-			{
-				if($value['estado_orden'] == 1) {
-					$estado_orden = '<span    style=" font-weight: bold; font-size: 20px; text-align: center;"   class="label label-warning">En Preparacion</span>';	
-				}
-			   else {
-				if($value['estado_orden'] == 2) {
-					$estado_orden = '<span  style=" font-weight: bold; font-size: 20px; text-align: center;"  class="label label-primary">En Despacho</span>';	
-				} else  {
-					$estado_orden = '<span style=" font-weight: bold; font-size: 20px; text-align: center;"  class="label label-danger">NO IDENTIFICADO</span>';	
-				}
-			   }
+			if($value['paid_status'] == 1) {
+				$paid_status = '<span class="label label-success">Pagado</span>';	
 			}
+			else {
+				if ($value['paid_status'] == 2){
+					$paid_status = '<span class="label label-warning">No Pagado</span>';
+				}else{
+					$paid_status = '<span class="label label-danger">ERROR</span>';
+				}	
+
+			}
+
 
             $mesa = $this->model_mesas->getMesasData_PyO($value['id_mesa']) ;
 			$usuario = $this->model_users->getUserData($value['user_id']) ;
 
 			$result['data'][$key] = array(
+				$value['bill_no'],
 				$mesa['name'],
 				$usuario['username'],
 				$value['customer_name'],
 				$date_time,
-				$count_total_item,
-				$estado_orden ,
+				$paid_status ,
 				$buttons
 			);
 		} // /foreach
@@ -113,11 +109,11 @@ class Cancelar extends Admin_Controller
         	
         	if($order_id) {
 				$this->session->set_flashdata('success', 'Successfully created');
-				redirect('estado', 'refresh');
+				redirect('cancelar', 'refresh');
         	}
         	else {
         		$this->session->set_flashdata('errors', 'Error occurred!!');
-        		redirect('estado/create/', 'refresh');
+        		redirect('cancelar/create/', 'refresh');
         	}
         }
         else {
@@ -128,7 +124,7 @@ class Cancelar extends Admin_Controller
         	$this->data['is_service_enabled'] = ($company['service_charge_value'] > 0) ? true : false;
 			$this->data['products'] = $this->model_products->getActiveProductData();   
 			$this->data['mesas'] = $this->model_mesas->getActiveMesas();   	
-            $this->render_template('estado/create', $this->data);
+            $this->render_template('cancelar/create', $this->data);
         }	
 	}
 
@@ -167,7 +163,7 @@ class Cancelar extends Admin_Controller
 		// echo json_encode($mesas);
 	}
 	/*
-	* If the validation is not valid, then it redirects to the edit estado page 
+	* If the validation is not valid, then it redirects to the edit cancelar page 
 	* If the validation is successfully then it updates the data into the database 
 	* and it stores the operation message into the session flashdata and display on the manage group page
 	*/
@@ -187,15 +183,15 @@ class Cancelar extends Admin_Controller
          if ($this->form_validation->run() == TRUE) {        	
 
         	// $update = $this->model_orders->update($id);
-            $updateEs = $this->model_orders->updateEs($id);
+            $updateEs = $this->model_orders->updateCancelar($id);
         	
          	if($updateEs == true) {
          		$this->session->set_flashdata('success', 'Successfully updated');
-         		redirect('estado', 'refresh');
+         		redirect('cancelar', 'refresh');
          	}
          	else {
          		$this->session->set_flashdata('errors', 'Error occurred!!');
-         		redirect('estado/updateEs/'.$id, 'refresh');
+         		redirect('cancelar/updateEs/'.$id, 'refresh');
          	}
          }
          else {
@@ -213,7 +209,7 @@ class Cancelar extends Admin_Controller
      		}
      		$this->data['order_data'] = $result;
 	 		$this->data['products'] =  $this->model_products->getActiveProductData();   
-             $this->render_template('estado/edit', $this->data);
+             $this->render_template('cancelar/edit', $this->data);
          }
 	 }
 
