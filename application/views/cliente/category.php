@@ -1,3 +1,5 @@
+<?php session_start();?>
+
 <!DOCTYPE html>
 <html lang="zxx">
 <head>
@@ -126,7 +128,7 @@
 						<div class="user-panel">
 							<div class="up-item">
 								<i class="flaticon-profile"></i>
-								<a href="#">Sign</a> In or <a href="#">Create Account</a>
+								<p><?php $email = $_SESSION['email']; echo "$email";?></p>
 							</div>
 							<div class="up-item">
 								<div class="shopping-card">

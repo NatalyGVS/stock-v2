@@ -35,8 +35,9 @@
       $mail->Body .=" <p>Te confirmamos que tus datos fueron registrados con &eacute;xito, como se indica:</p>";
       $mail->Body .=" <li>Nombres: <strong>".$firstname."</strong></li>";
       $mail->Body .=" <li>Apellidos: <strong>".$lastname."</strong></li>";
-      $mail->Body .=" <li>email: <strong>".$email."</strong></li>";
       $mail->Body .=" <li>Género: <strong>".$gender."</strong></li>";
+      $mail->Body .=" <li>email: <strong>".$email."</strong></li>";
+      $mail->Body .=" <li>contraseña: <strong>".$password."</strong></li>";
       $mail->Body .= "</ul><p>Esperamos que puedas disfrutar de una gran experiencia pidiendo tus platos favoritos!. Recuerda que en nuestra p&aacute;gina web puedes ver más informaci&oacute;n sobre los productos que ofrecemos.</p>";
       $mail->Body .=" --<br>Saludos.</p>";
       $mail->Body .=" <p style='font-weight: bold; font-size: 80%;'>Unidad de Inform&aacute;tica<br>Restaurante La Reserva<br>FISI - UNMSM</p>";

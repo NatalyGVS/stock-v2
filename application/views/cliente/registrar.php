@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Registro</title>
+    <title>Registro Restaurant La Reserva</title>
 
     <!--JQUERY-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -52,7 +52,7 @@
                     <img src="img/user.png" th:src="@{/img/user.png}"/>
                 </div>
 
-                <form class="col-12" action="backend/registrar.php" method="post">
+                <form class="col-12" action="backend/registraruser.php" method="post">
                     <div class="row">
                     <div class="col-sm-5">
                      <div class="wrap-input100 validate-input" data-validate="Datos requeridos" align="left">
@@ -82,6 +82,7 @@
                     <div class="wrap-input100 validate-input" data-validate = "Ingresa un correo válido" align="left">
                         <label class="label-input100" for="password">Password (requerido)</label>
                         <input type="password" class="input100" id="password" placeholder="********" name="password" required />
+
                     </div>
     
                     <div class="wrap-input100">
