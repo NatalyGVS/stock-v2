@@ -106,7 +106,7 @@ CREATE TABLE `orders_item` (
 CREATE TABLE `products` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
-  `sku  ` varchar(255) NOT NULL,
+  `sku` varchar(255) NOT NULL,
   `price` varchar(255) NOT NULL,
   `qty` varchar(255) NOT NULL,
   `image` text NOT NULL,
@@ -311,9 +311,6 @@ ALTER TABLE `mesas`
 
 ALTER TABLE `caja`
   ADD PRIMARY KEY (`id`);
-
-ALTER TABLE orders ADD id_mesa int(11) NOT NULL;
-ALTER TABLE orders ADD estado_orden int(11) NOT NULL;
  
 
  CREATE TABLE `customers` (
